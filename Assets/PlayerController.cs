@@ -1,48 +1,110 @@
+using Unity.Physics;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool drawGizmo;
 
-    public float moveSpeed = 1f;
+    [HideInInspector]
+    private GameObject m_owner;
 
-    // private -----
+    [Header("AttractRange")]
+    private float attractRange;
+    public float maxAttractRange = 10f;
+    public float attractAcceleration = 10f;
 
-    private bool m_isGrounded;
-    
+    private LayerMask m_layerEncounter;
+
     private Rigidbody m_rigidbody;
+    private PlayerInput m_playerinput;
+    private PlayerInputController m_playerInputCtrl;
 
-    void Awake()
+    // -----
+
+
+    // -----
+
+    private void Awake()
     {
+        m_playerinput = GetComponent<PlayerInput>();
         m_rigidbody = GetComponent<Rigidbody>();
+
+        m_layerEncounter = LayerMask.GetMask("Encounter");
     }
 
-    void Update()
+    private void Start()
     {
+        m_playerInputCtrl = PlayerInputController.Instance;
+    }
 
-        float xInput = Input.GetAxisRaw("Horizontal");
-        float yInput = Input.GetAxisRaw("Vertical");
-
-        if(Mathf.Abs(m_rigidbody.linearVelocity.x) < 8f)
-            m_rigidbody.AddRelativeForce(Vector3.right * xInput * Time.deltaTime * moveSpeed);
-
-        if (Input.GetButton("Jump") == true && m_isGrounded == true)
-        {
-            m_rigidbody.AddRelativeForce(Vector3.up * 50f);
-        }
-
-        if(m_isGrounded != false)
-        {
-            m_rigidbody.AddRelativeForce(Vector3.down * 50f * Time.deltaTime);
-        }
+    private void Update()
+    {
+        Attaract();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        m_isGrounded = true;
+        //TEST
+        LayerMask mask = LayerMask.GetMask("Encounter");
+        if ((mask.value & (1 << collision.gameObject.layer)) != 0)
+        {
+            var encounterCtrl = collision.gameObject.GetComponent<EncounterController>();
+            if (encounterCtrl != null)
+            {
+                encounterCtrl.enabled = true;
+                m_owner = encounterCtrl.gameObject;
+                encounterCtrl.Equip(this);
+                m_playerinput.SwitchCurrentActionMap("Encounter");
+                attractRange = 0f;
+                m_rigidbody.isKinematic = true;
+            }
+        }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnDrawGizmos()
     {
-        m_isGrounded = false;
+        if (drawGizmo == false)
+            return;
+
+        Gizmos.color = new Color(0.5f, 0, 0.5f, 0.5f);
+        Gizmos.DrawWireSphere(transform.position, attractRange);
+    }
+
+    // -----
+
+    private void Attaract()
+    {
+        if (m_playerInputCtrl.IsAttract)
+        {
+            // 매 프레임마다 attractRange를 증가시킴
+            if (attractRange < maxAttractRange)
+            {
+                attractRange += Time.deltaTime * attractAcceleration;
+            }
+            else
+            {
+                attractRange = maxAttractRange;
+            }
+
+            //TEST
+            // Attract Encounter
+            UnityEngine.Collider[] hitColliders = Physics.OverlapSphere(transform.position, attractRange);
+            foreach (var hitCollider in hitColliders)
+            {
+                var navMeshAgent = hitCollider.GetComponent<NavMeshAgent>();
+                if (navMeshAgent != null)
+                {
+                    navMeshAgent.SetDestination(transform.position);
+                }
+            }
+
+        }
+        else
+        {
+            // 매 프레임마다 attractRange를 감소시킴
+            attractRange = Mathf.Max(0f, attractRange - Time.deltaTime * attractAcceleration);
+        }
     }
 }
