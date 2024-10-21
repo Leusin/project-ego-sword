@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
                 encounterCtrl.enabled = true;
                 m_owner = encounterCtrl.gameObject;
                 encounterCtrl.Equip(this);
-                m_playerinput.SwitchCurrentActionMap("Encounter");
+                m_playerinput.SwitchCurrentActionMap("Man");
                 attractRange = 0f;
                 m_rigidbody.isKinematic = true;
             }
