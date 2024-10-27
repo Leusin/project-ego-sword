@@ -1,113 +1,80 @@
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-[DefaultExecutionOrder(-100)]
 public class PlayerInputController : MonoBehaviour
 {
-    public static PlayerInputController Instance
-    {
-        get { return s_instance; }
-    }
+    public static PlayerInputController Instance { get; private set; }
 
-    private static PlayerInputController s_instance;
-
-    // -----
-
-    public void OnAttract(InputAction.CallbackContext context)
-    {
-        switch (context.phase)
-        {
-
-            case InputActionPhase.Started:
-                {
-                    m_isAttract = true;
-                }
-                break;
-
-            case InputActionPhase.Canceled:
-                {
-                    m_isAttract = false;
-                }
-                break;
-        }
-    }
-
-    public bool IsAttract 
-    { 
-        get 
-        { 
-            return m_isAttract; 
-        } 
-    }
-
-    public Vector2 MoveInput
-    {
-        get
-        {
-            return m_movement;
-        }
-    }
-
-    private bool m_isAttract;
-    private Vector2 m_movement;
-    private bool m_isAttack;
-    private bool m_isTnteract;
-
-    public UnityEvent Crounch;
+    // Karl
+    public Action<InputAction.CallbackContext> Attaract;
+    // Man
+    public Action<InputAction.CallbackContext> AttackMain, AttackAlt, Crounch, Dash, Interact, Jump, Look, Move, Sprint;
 
     // -----
 
-    public void OnMove(InputAction.CallbackContext context)
+    public void OnAttaract(InputAction.CallbackContext context)
     {
-        m_movement = context.ReadValue<Vector2>();
+        Attaract?.Invoke(context);
     }
 
-    public void OnLook(InputAction.CallbackContext context)
+    public void OnMainAttack(InputAction.CallbackContext context)
     {
+        AttackMain?.Invoke(context);
     }
 
-    public void OnAttack(InputAction.CallbackContext context)
+    public void OnAltAttack(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-        }
+        AttackAlt?.Invoke(context);
+    }
+    
+    public void OnCrounch(InputAction.CallbackContext context)
+    {
+        Crounch?.Invoke(context);
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        Dash?.Invoke(context);
     }
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-        }
+        Interact?.Invoke(context);
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        Jump?.Invoke(context);
+    }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        Look?.Invoke(context);
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        Move?.Invoke(context);
     }
 
     public void OnSprint(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-        }
-    }
-
-    public void OnCrounch(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            Crounch.Invoke();
-        }
+        Sprint?.Invoke(context);
     }
 
     // -----
-
-    void Awake()
+    private void Awake()
     {
         // 싱글턴 패턴 초기화
-        if (s_instance == null)
+        if (Instance != null && Instance != this)
         {
-            s_instance = this;
+            Destroy(gameObject); // 이미 인스턴스가 존재하면 파괴
+            Debug.Log("There cannot be more than one PlayerInput script.  The instances are " + Instance.name + " and " + name + ".");
+
+            return;
         }
-        else if (s_instance != this)
-        {
-            throw new UnityException("There cannot be more than one PlayerInput script.  The instances are " + s_instance.name + " and " + name + ".");
-        }
+
+        Instance = this;
     }
 }
