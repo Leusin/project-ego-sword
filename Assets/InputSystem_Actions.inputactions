@@ -15,15 +15,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Look",
-                    "type": "Value",
-                    "id": "6b444451-8a00-4d00-a97e-f47457f736a8",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Attack",
                     "type": "Button",
                     "id": "6c2ab1b8-8984-453a-af3d-a3c78ae1679a",
@@ -217,39 +208,6 @@
                     "processors": "",
                     "groups": "Joystick",
                     "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c1f7a91b-d0fd-4a62-997e-7fb9b69bf235",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8c8e490b-c610-4785-884f-f04217b23ca4",
-                    "path": "<Pointer>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse;Touch",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3e5f5442-8668-4b27-a940-df99bad7e831",
-                    "path": "<Joystick>/{Hatswitch}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Joystick",
-                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -487,6 +445,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "cdedd115-01d3-4276-8d61-41f10dd766a0",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -575,6 +542,39 @@
                     "processors": "",
                     "groups": ";Gamepad;Touch",
                     "action": "Attract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2cf79383-df7f-447c-8c56-a9f6d06ceee7",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "InvertVector2(invertY=false),ScaleVector2(x=0.1,y=0.1)",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bc3352de-2cf8-4122-a540-f4438bf70f9c",
+                    "path": "<XInputController>/rightStick",
+                    "interactions": "",
+                    "processors": "InvertVector2(invertY=false)",
+                    "groups": ";Gamepad",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "94012b77-c6d3-4fb7-bad2-8f42deae181e",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Touch",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -1097,22 +1097,13 @@
             ]
         },
         {
-            "name": "Man",
+            "name": "Humanoid",
             "id": "c0e62ed4-dd78-4825-ac41-1bc8a0d80c87",
             "actions": [
                 {
                     "name": "Move",
                     "type": "Value",
                     "id": "e42953c2-f3d8-47d6-881b-734e2134b9b8",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Look",
-                    "type": "Value",
-                    "id": "4543f09f-ae1e-4c28-9f88-71c9da0115ac",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -1261,28 +1252,6 @@
                 },
                 {
                     "name": "",
-                    "id": "f5caa302-496e-4488-a99a-9e769dcd65bf",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "198959cc-9513-4d73-ad99-a9e58a2c7abd",
-                    "path": "<Pointer>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse;Touch",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "8e41b7b2-8fc0-4efd-ab98-e6e2adfd6f55",
                     "path": "<Keyboard>/s",
                     "interactions": "",
@@ -1295,7 +1264,7 @@
                 {
                     "name": "",
                     "id": "e3682b87-a196-44a5-823c-15b7bddbe4c8",
-                    "path": "<Keyboard>/upArrow",
+                    "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
@@ -1317,7 +1286,29 @@
                 {
                     "name": "",
                     "id": "043e93ea-f3ab-49f4-ade5-29bfbbdde94f",
-                    "path": "",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ebdc67f7-5057-4433-9e80-9546abc99fb3",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "56ec118b-db6f-4740-8e0b-192d9bd01fa4",
+                    "path": "<XInputController>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

@@ -1,4 +1,5 @@
-using Unity.Physics;
+using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
@@ -17,12 +18,29 @@ public class PlayerController : MonoBehaviour
     public float attaractDeceleration = 8f;
 
     private bool m_isAttaract;
+    private bool m_isLook;
+
+    [SerializeField] private float m_timer;
+
+    private Vector2 m_lookPosition;
 
     private Rigidbody m_rigidbody;
     private LayerMask m_layerEncounter;
 
     private PlayerInput m_playerinput;
     private PlayerInputController m_playerInputCtrl;
+
+    [Header("Cinemachine")]
+    public CinemachinePositionComposer cinemachinePositionComposer;
+    private Vector2 m_screenPosition;
+
+    [Header("Look")]
+    [SerializeField] private float m_cameraMoveSpeed = 0.5f; // 카메라 이동 속도
+    [SerializeField] private float m_resetCameraTime = 2f;
+    private float m_LookTimer;
+
+    [SerializeField] private Vector2 m_moveRangeMax = new Vector2(0.2f, 0.15f);
+    [SerializeField] private Vector2 m_moveRangeMin = new Vector2(-0.2f, -0.1f);
 
     // -----
 
@@ -34,9 +52,36 @@ public class PlayerController : MonoBehaviour
 
         m_playerinput = GetComponent<PlayerInput>();
         m_playerInputCtrl = GetComponent<PlayerInputController>();
+
+        m_screenPosition = cinemachinePositionComposer.Composition.ScreenPosition;
     }
 
+    private void Start()
+    {
+        if (m_playerinput.currentActionMap.name == "Karl")
+        {
+            cinemachinePositionComposer.Composition.DeadZone.Enabled = false;
+        }
+    }
 
+    private void OnEnable()
+    {
+        m_playerInputCtrl.Attaract += OnAttaract;
+        m_playerInputCtrl.Look += OnLook;
+    }
+
+    public void OnDisable()
+    {
+        m_playerInputCtrl.Look -= OnLook;
+        m_playerInputCtrl.Attaract -= OnAttaract;
+    }
+
+    private void Update()
+    {
+        Attract();
+        // TEST - Look
+        Look();
+    }
     private void OnGUI()
     {
         if (m_playerinput != null && m_playerinput.currentActionMap != null)
@@ -49,32 +94,71 @@ public class PlayerController : MonoBehaviour
             Vector2 controlSchemeSize = GUI.skin.label.CalcSize(new GUIContent(controlSchemeName));
 
             // 화면의 우상단에 위치 설정
-            float x = Screen.width - actionMapSize.x - 200; // 오른쪽 여백 10 픽셀
-            float y = 10; // 위쪽 여백 10 픽셀
+            float x = Screen.width - actionMapSize.x - 200f; // 오른쪽 여백 10 픽셀
+            float y = 50f; // 위쪽 여백 10 픽셀
 
             // 라벨을 화면에 표시
             GUI.Label(new Rect(x, y, actionMapSize.x, actionMapSize.y), actionMapName);
-            GUI.Label(new Rect(x, y + actionMapSize.y + 5, controlSchemeSize.x, controlSchemeSize.y), controlSchemeName);
+            GUI.Label(new Rect(x, y + actionMapSize.y + 5f, controlSchemeSize.x, controlSchemeSize.y), controlSchemeName);
         }
         else
         {
-            GUI.Label(new Rect(10, 10, 300, 20), "PlayerInput or Action Map is not set.");
+            GUI.Label(new Rect(10f, 10f, 300f, 20f), "PlayerInput or Action Map is not set.");
         }
     }
 
-    private void OnEnable()
+    private void OnCollisionEnter(Collision collision)
     {
-        m_playerInputCtrl.Attaract += Attaract;
+        //TEST
+        LayerMask mask = LayerMask.GetMask("Encounter");
+        if ((mask.value & (1 << collision.gameObject.layer)) != 0)
+        {
+            var humanoidCtrl = collision.gameObject.GetComponent<HumanoidController>();
+            if (humanoidCtrl != null)
+            {
+                humanoidCtrl.enabled = true;
+                humanoidCtrl.Equip(this);
+
+                m_owner = humanoidCtrl.gameObject;
+                m_rigidbody.isKinematic = true;
+                m_playerinput.SwitchCurrentActionMap("Humanoid");
+
+                // Attrack 초기화
+                attractRange = 0f;
+
+                // Look 초기화
+                m_isLook = false;
+                cinemachinePositionComposer.Composition.DeadZone.Enabled = true;
+            }
+        }
     }
 
-    public void OnDisable()
+    private void OnDrawGizmos()
     {
-        m_playerInputCtrl.Attaract -= Attaract;
+        if (drawGizmo == false)
+            return;
+
+        Gizmos.color = new Color(0.5f, 0, 0.5f, 0.5f);
+        Gizmos.DrawWireSphere(transform.position, attractRange);
     }
 
-    private void Update()
+    // -----
+
+    private void OnAttaract(InputAction.CallbackContext context)
     {
-        if(m_isAttaract)
+        if (context.performed)
+        {
+            m_isAttaract = true;
+        }
+        else if (context.canceled)
+        {
+            m_isAttaract = false;
+        }
+    }
+
+    private void Attract()
+    {
+        if (m_isAttaract)
         {
             if (attractRange < maxAttaractRange)
             {
@@ -103,45 +187,45 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnLook(InputAction.CallbackContext context)
     {
-        //TEST
-        LayerMask mask = LayerMask.GetMask("Encounter");
-        if ((mask.value & (1 << collision.gameObject.layer)) != 0)
-        {
-            var encounterCtrl = collision.gameObject.GetComponent<EncounterController>();
-            if (encounterCtrl != null)
-            {
-                encounterCtrl.enabled = true;
-                m_owner = encounterCtrl.gameObject;
-                encounterCtrl.Equip(this);
-                m_playerinput.SwitchCurrentActionMap("Man");
-                attractRange = 0f;
-                m_rigidbody.isKinematic = true;
-            }
-        }
-    }
+        m_lookPosition = context.ReadValue<Vector2>();
 
-    private void OnDrawGizmos()
-    {
-        if (drawGizmo == false)
-            return;
-
-        Gizmos.color = new Color(0.5f, 0, 0.5f, 0.5f);
-        Gizmos.DrawWireSphere(transform.position, attractRange);
-    }
-
-    // -----
-
-    private void Attaract(InputAction.CallbackContext context)
-    {
         if (context.performed)
         {
-            m_isAttaract = true;
+            m_isLook = true;
+            m_LookTimer = m_resetCameraTime;
         }
-        else if (context.canceled)
+    }
+
+    private void Look()
+    {
+        if (m_LookTimer < 0f)
         {
-            m_isAttaract = false;
+            m_isLook = false;
         }
+        else
+        {
+            m_LookTimer -= Time.deltaTime;
+        }
+
+        float scaledMoveSpeed = m_cameraMoveSpeed * Time.deltaTime;
+
+        if (m_isLook)
+        {
+            m_screenPosition = cinemachinePositionComposer.Composition.ScreenPosition;
+
+            m_screenPosition += m_lookPosition * scaledMoveSpeed;
+
+            m_screenPosition.x = Mathf.Clamp(m_screenPosition.x, m_moveRangeMin.x, m_moveRangeMax.x);
+            m_screenPosition.y = Mathf.Clamp(m_screenPosition.y, m_moveRangeMin.y, m_moveRangeMax.y);
+
+        }
+        else
+        {
+            m_screenPosition = Vector2.zero;
+        }
+
+        cinemachinePositionComposer.Composition.ScreenPosition = Vector2.MoveTowards(cinemachinePositionComposer.Composition.ScreenPosition, m_screenPosition, scaledMoveSpeed);
     }
 }
