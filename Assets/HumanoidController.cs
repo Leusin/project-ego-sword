@@ -1,11 +1,9 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 
-public class EncounterController : MonoBehaviour
+public class HumanoidController : MonoBehaviour
 {
     public Transform WeaponMountPosition;
 
@@ -83,7 +81,7 @@ public class EncounterController : MonoBehaviour
         // 이동하기
         if (m_isRotating == false)
         {
-            var scaledMoveSpeed = moveSpeed * Time.deltaTime;
+            float scaledMoveSpeed = moveSpeed * Time.deltaTime;
             transform.position += move * scaledMoveSpeed;
         }
     }
