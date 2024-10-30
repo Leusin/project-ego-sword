@@ -1211,7 +1211,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 60.000004
+    FieldOfView: 60
     OrthographicSize: 20
     NearClipPlane: 0.01
     FarClipPlane: 1000
@@ -1422,7 +1422,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 60.000004
+  field of view: 60
   orthographic: 0
   orthographic size: 20
   m_Depth: -1
@@ -2790,8 +2790,8 @@ Transform:
   m_GameObject: {fileID: 901279282}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.49, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.6, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 966204513}
@@ -4405,7 +4405,7 @@ Transform:
   m_GameObject: {fileID: 1541388139}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5878,6 +5878,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2063723594090619493, guid: f562b0b964a78784ebc055483fd6d283, type: 3}
+      propertyPath: m_AngularXDrive.positionSpring
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2063723594090619493, guid: f562b0b964a78784ebc055483fd6d283, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2284429708272680894, guid: f562b0b964a78784ebc055483fd6d283, type: 3}
       propertyPath: m_Layer
       value: 30
@@ -5898,9 +5906,21 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 3328521270268533970, guid: f562b0b964a78784ebc055483fd6d283, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3648514048289825460, guid: f562b0b964a78784ebc055483fd6d283, type: 3}
       propertyPath: m_Layer
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3659473993274828387, guid: f562b0b964a78784ebc055483fd6d283, type: 3}
+      propertyPath: m_AngularXDrive.positionSpring
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3659473993274828387, guid: f562b0b964a78784ebc055483fd6d283, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4260124966921586636, guid: f562b0b964a78784ebc055483fd6d283, type: 3}
       propertyPath: m_Layer
@@ -5912,7 +5932,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5096569625448359641, guid: f562b0b964a78784ebc055483fd6d283, type: 3}
       propertyPath: m_Constraints
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5096569625448359641, guid: f562b0b964a78784ebc055483fd6d283, type: 3}
       propertyPath: m_IsKinematic
@@ -5929,6 +5949,14 @@ PrefabInstance:
     - target: {fileID: 5756606017258759434, guid: f562b0b964a78784ebc055483fd6d283, type: 3}
       propertyPath: m_Layer
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6119994963547108725, guid: f562b0b964a78784ebc055483fd6d283, type: 3}
+      propertyPath: m_AngularXDrive.positionSpring
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6119994963547108725, guid: f562b0b964a78784ebc055483fd6d283, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6428107446424240406, guid: f562b0b964a78784ebc055483fd6d283, type: 3}
       propertyPath: m_Layer
@@ -5949,6 +5977,14 @@ PrefabInstance:
     - target: {fileID: 7622642810754822801, guid: f562b0b964a78784ebc055483fd6d283, type: 3}
       propertyPath: m_Layer
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840166432493601061, guid: f562b0b964a78784ebc055483fd6d283, type: 3}
+      propertyPath: m_AngularXDrive.positionSpring
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840166432493601061, guid: f562b0b964a78784ebc055483fd6d283, type: 3}
+      propertyPath: m_AngularYZDrive.positionSpring
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8732935838419689980, guid: f562b0b964a78784ebc055483fd6d283, type: 3}
       propertyPath: m_Layer
