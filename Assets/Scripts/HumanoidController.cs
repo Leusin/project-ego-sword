@@ -3,119 +3,76 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
-public class HumanoidController : MonoBehaviour
+namespace ProjectEgoSword
 {
-    public Transform WeaponMountPosition;
 
-    // -----
-
-    [SerializeField] private float moveSpeed = 1f;
-    [SerializeField] private float rotateSpeed = 1f;
-
-    private bool m_isRotating;
-    private bool m_isMoving;
-    private float m_direction;
-
-    private NavMeshAgent m_navMeshAgent;
-
-    private PlayerInputController m_playerInputCtrl;
-
-    // -----
-
-    public void Equip(PlayerController playerController)
+    public class HumanoidController : MonoBehaviour
     {
-        playerController.transform.SetParent(WeaponMountPosition.transform);
-        playerController.transform.localPosition = Vector3.zero; ;
-        playerController.transform.localRotation = Quaternion.identity;
-        m_navMeshAgent.enabled = false;
-    }
+        public Transform WeaponMountPosition;
 
-    public void Unequip()
-    {
-        m_navMeshAgent.enabled = true;
-        transform.SetParent(null);
-        this.enabled = false;
-    }
+        // -----
 
-    // -----
+        [SerializeField] private float moveSpeed = 10f;
+        [SerializeField] private float rotateSpeed = 1f;
 
-    private void Awake()
-    {
-        m_navMeshAgent = GetComponent<NavMeshAgent>();
+        [Header("Setup")]
+        public Animator animator;
 
-        this.enabled = false;
-    }
+        private NavMeshAgent _navMeshAgent;
 
+        private readonly int _hashMoveSpeed = Animator.StringToHash("move_speed");
 
-    private void OnEnable()
-    {
-        m_playerInputCtrl = PlayerInputController.Instance;
+        // -----
 
-        if (m_playerInputCtrl)
+        public void Equip(PlayerController playerController)
         {
-            m_playerInputCtrl.Move += Move;
-        }
-    }
-
-    private void OnDisable()
-    {
-        if (m_playerInputCtrl)
-        {
-            m_playerInputCtrl.Move -= Move;
-        }
-    }
-
-    private void Update()
-    {
-        // 이동 방향
-        Vector3 move = new Vector3(m_direction, 0f, 0f);
-
-        m_isMoving = move.sqrMagnitude > 0f;
-
-        // 바라보기(회전하기)
-        if (m_isMoving)
-        {
-            StartCoroutine(RotateTowards(move));
+            playerController.transform.SetParent(WeaponMountPosition.transform);
+            playerController.transform.localPosition = Vector3.zero;
+            playerController.transform.localRotation = Quaternion.identity;
+            _navMeshAgent.enabled = false;
         }
 
-        // 이동하기
-        if (m_isRotating == false)
+        public void Unequip()
         {
-            float scaledMoveSpeed = moveSpeed * Time.deltaTime;
-            transform.position += move * scaledMoveSpeed;
+            _navMeshAgent.enabled = true;
+            transform.SetParent(null);
+            this.enabled = false;
         }
-    }
 
-    // -----
+        // -----
 
-    private void Move(InputAction.CallbackContext context)
-    {
-        m_direction = context.ReadValue<Vector2>().x;
-    }
-
-    private IEnumerator RotateTowards(Vector3 targetDirection)
-    {
-        while (true)
+        private void Awake()
         {
-            // 현재 방향과 목표 방향 사이의 각도 차이 계산
-            float angleDifference = Vector3.Angle(transform.forward, targetDirection);
+            _navMeshAgent = GetComponent<NavMeshAgent>();
+        }
 
-            // 각도 차이가 5도 이내로 줄어들면 회전을 멈추고 종료
-            if (angleDifference <= 5f)
+        private void Update()
+        {
+            Vector2 move = PlayerInputController.Instance.MoveInput;
+
+            Vector3 direction = Vector3.forward;
+            Quaternion rotate = Quaternion.identity;
+            var animSpeed = 0;
+
+            if (move.x > 0)
             {
-                transform.forward = targetDirection; // 목표 방향으로 설정
-                m_isRotating = false;
-                yield break; // 코루틴 종료
+                rotate = Quaternion.Euler(0f, 90f, 0f);
+            }
+            else if (move.x < 0)
+            {
+                rotate = Quaternion.Euler(0f, -90f, 0f);
             }
 
-            m_isRotating = true;
+            if (move.magnitude > 0)
+            {
+                transform.Translate(direction * Time.deltaTime * moveSpeed);
+                transform.rotation = rotate;
+                animSpeed = 2;
+            }
 
-            // 회전 속도에 따라 일정 각도로 회전
-            float scaledRotateSpeed = rotateSpeed * Time.deltaTime;
-            transform.Rotate(Vector3.up, scaledRotateSpeed);
+            animator.SetFloat(_hashMoveSpeed, animSpeed);
 
-            // 다음 프레임까지 대기
-            yield return null;
+            Debug.Log($"휴머노이드는 업데이트중: {move}, {animSpeed}");
         }
     }
 }
