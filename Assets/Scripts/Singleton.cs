@@ -10,8 +10,7 @@ namespace ProjectEgoSword
         {
             get
             {
-                _instance = (T)FindFirstObjectByType(typeof(T));
-
+                //_instance = (T)FindFirstObjectByType(typeof(T));
                 if (_instance == null)
                 {
                     GameObject obj = new GameObject();
