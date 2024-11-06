@@ -12,7 +12,7 @@ namespace ProjectEgoSword
 
         // -----
 
-        [SerializeField] private float moveSpeed = 10f;
+        public float moveSpeed = 10f;
         [SerializeField] private float rotateSpeed = 1f;
 
         [Header("Setup")]
@@ -20,7 +20,8 @@ namespace ProjectEgoSword
 
         private NavMeshAgent _navMeshAgent;
 
-        private readonly int _hashMoveSpeed = Animator.StringToHash("move_speed");
+        [HideInInspector]
+        public readonly int hashMove = Animator.StringToHash("Move");
 
         // -----
 
@@ -46,13 +47,17 @@ namespace ProjectEgoSword
             _navMeshAgent = GetComponent<NavMeshAgent>();
         }
 
+        private void Start()
+        {
+            SceneLinkedSMB<HumanoidController>.Initialise(animator, this);
+        }
+
         private void Update()
         {
             Vector2 move = PlayerInputController.Instance.MoveInput;
 
             Vector3 direction = Vector3.forward;
             Quaternion rotate = Quaternion.identity;
-            var animSpeed = 0;
 
             if (move.x > 0)
             {
@@ -67,12 +72,14 @@ namespace ProjectEgoSword
             {
                 transform.Translate(direction * Time.deltaTime * moveSpeed);
                 transform.rotation = rotate;
-                animSpeed = 2;
+                animator.SetBool(hashMove, true);
+            }
+            else
+            {
+                animator.SetBool(hashMove, false);
             }
 
-            animator.SetFloat(_hashMoveSpeed, animSpeed);
-
-            Debug.Log($"휴머노이드는 업데이트중: {move}, {animSpeed}");
+            Debug.Log($"휴머노이드는 업데이트중: {move}");
         }
     }
 }

@@ -14,7 +14,7 @@ namespace ProjectEgoSword
     public class SceneLinkedSMB<TMonoBehaviour> : SealedSMB
             where TMonoBehaviour : MonoBehaviour
     {
-        protected TMonoBehaviour _monoBehaviour;
+        protected TMonoBehaviour _monobehaviour;
 
         bool _firstFrameHappened;
         bool _lastFrameHappened;
@@ -31,7 +31,7 @@ namespace ProjectEgoSword
 
         protected void InternalInitialise(Animator animator, TMonoBehaviour monoBehaviour)
         {
-            _monoBehaviour = monoBehaviour;
+            _monobehaviour = monoBehaviour;
             OnStart(animator);
         }
 
