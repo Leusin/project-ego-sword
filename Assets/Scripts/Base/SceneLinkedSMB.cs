@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 
@@ -19,6 +21,8 @@ namespace ProjectEgoSword
         bool _firstFrameHappened;
         bool _lastFrameHappened;
 
+        public List<StateData<TMonoBehaviour>> abilityStateDatas = new List<StateData<TMonoBehaviour>>();
+
         public static void Initialise(Animator animator, TMonoBehaviour monoBehaviour)
         {
             SceneLinkedSMB<TMonoBehaviour>[] sceneLinkedSMBs = animator.GetBehaviours<SceneLinkedSMB<TMonoBehaviour>>();
@@ -35,6 +39,14 @@ namespace ProjectEgoSword
             OnStart(animator);
         }
 
+        public void UpdateAll(SceneLinkedSMB<TMonoBehaviour> sceneLinkedSMB, Animator animator)
+        {
+            foreach(StateData<TMonoBehaviour> data in abilityStateDatas)
+            {
+                data.UpdateAbility(_monobehaviour, animator);
+            }
+        }
+
         public sealed override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, AnimatorControllerPlayable controller)
         {
             _firstFrameHappened = false;
@@ -47,6 +59,8 @@ namespace ProjectEgoSword
         {
             if (!animator.gameObject.activeSelf)
                 return;
+
+            UpdateAll(this, animator);
 
             if (animator.IsInTransition(layerIndex) && animator.GetNextAnimatorStateInfo(layerIndex).fullPathHash == stateInfo.fullPathHash)
             {

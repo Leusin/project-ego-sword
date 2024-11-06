@@ -51,35 +51,5 @@ namespace ProjectEgoSword
         {
             SceneLinkedSMB<HumanoidController>.Initialise(animator, this);
         }
-
-        private void Update()
-        {
-            Vector2 move = PlayerInputController.Instance.MoveInput;
-
-            Vector3 direction = Vector3.forward;
-            Quaternion rotate = Quaternion.identity;
-
-            if (move.x > 0)
-            {
-                rotate = Quaternion.Euler(0f, 90f, 0f);
-            }
-            else if (move.x < 0)
-            {
-                rotate = Quaternion.Euler(0f, -90f, 0f);
-            }
-
-            if (move.magnitude > 0)
-            {
-                transform.Translate(direction * Time.deltaTime * moveSpeed);
-                transform.rotation = rotate;
-                animator.SetBool(hashMove, true);
-            }
-            else
-            {
-                animator.SetBool(hashMove, false);
-            }
-
-            Debug.Log($"휴머노이드는 업데이트중: {move}");
-        }
     }
 }
