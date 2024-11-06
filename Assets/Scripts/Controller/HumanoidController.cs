@@ -20,8 +20,10 @@ namespace ProjectEgoSword
 
         private NavMeshAgent _navMeshAgent;
 
-        [HideInInspector]
-        public readonly int hashMove = Animator.StringToHash("Move");
+        // FSM 전이 매개 변수(Transition Parameter)
+        [HideInInspector] public readonly int hashMove = Animator.StringToHash("Move");
+        [HideInInspector] public readonly int hashJump = Animator.StringToHash("Jump");
+        [HideInInspector] public readonly int hashForceTransition = Animator.StringToHash("ForceTransition");
 
         // -----
 

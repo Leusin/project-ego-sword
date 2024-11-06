@@ -15,10 +15,12 @@ namespace ProjectEgoSword
         [Header("Humanoid")]
 
         [SerializeField] private Vector2 _move;
+        [SerializeField] private bool _jump;
 
         public bool AttractInput { get { return _attract; } }
         public Vector2 LookInput { get { return _look; } }
         public Vector2 MoveInput { get { return _move; } }
+        public bool JumpInput { get { return _jump; } }
 
         // -----
 
@@ -93,6 +95,14 @@ namespace ProjectEgoSword
 
         public void Jump(InputAction.CallbackContext context)
         {
+            if (context.phase == InputActionPhase.Performed)
+            {
+                _jump = true;
+            }
+            else
+            {
+                _jump = false;
+            }
         }
 
         public void Move(InputAction.CallbackContext context)

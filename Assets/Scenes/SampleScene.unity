@@ -416,7 +416,7 @@ GameObject:
   m_Component:
   - component: {fileID: 89930864}
   - component: {fileID: 89930863}
-  - component: {fileID: 89930862}
+  - component: {fileID: 89930865}
   m_Layer: 0
   m_Name: PlayerInput
   m_TagString: Untagged
@@ -424,21 +424,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &89930862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 89930861}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc336eeb25b65a945a156849f9d306cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _attract: 0
-  _look: {x: 0, y: 0}
-  _move: {x: 0, y: 0}
 --- !u!114 &89930863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,8 +451,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 89930862}
-        m_TargetAssemblyTypeName: ProjectEgoSword.PlayerInputController, Assembly-CSharp
+      - m_Target: {fileID: 89930865}
+        m_TargetAssemblyTypeName: ProjectEgoSword.InputController, Assembly-CSharp
         m_MethodName: Attract
         m_Mode: 0
         m_Arguments:
@@ -482,8 +467,8 @@ MonoBehaviour:
     m_ActionName: 'Karl/Attract[/Mouse/leftButton,/Keyboard/ctrl,/Keyboard/z,/Keyboard/e,/Keyboard/enter,/XInputControllerWindows/leftShoulder,/XInputControllerWindows/rightShoulder,/XInputControllerWindows/buttonWest]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 89930862}
-        m_TargetAssemblyTypeName: ProjectEgoSword.PlayerInputController, Assembly-CSharp
+      - m_Target: {fileID: 89930865}
+        m_TargetAssemblyTypeName: ProjectEgoSword.InputController, Assembly-CSharp
         m_MethodName: Look
         m_Mode: 0
         m_Arguments:
@@ -498,8 +483,8 @@ MonoBehaviour:
     m_ActionName: 'Karl/Look[/Mouse/delta,/XInputControllerWindows/rightStick,/XInputControllerWindows/leftStick]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 89930862}
-        m_TargetAssemblyTypeName: ProjectEgoSword.PlayerInputController, Assembly-CSharp
+      - m_Target: {fileID: 89930865}
+        m_TargetAssemblyTypeName: ProjectEgoSword.InputController, Assembly-CSharp
         m_MethodName: Move
         m_Mode: 0
         m_Arguments:
@@ -517,7 +502,19 @@ MonoBehaviour:
     m_ActionId: 2127863f-984a-481e-8f9d-37a27fd834bd
     m_ActionName: 'Humanoid/Crouch[/Keyboard/s,/Keyboard/downArrow,/XInputControllerWindows/buttonEast]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 89930865}
+        m_TargetAssemblyTypeName: ProjectEgoSword.InputController, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: ea425fcc-2e11-49a9-b162-2986974c7556
     m_ActionName: 'Humanoid/Jump[/Keyboard/w,/Keyboard/upArrow,/XInputControllerWindows/buttonSouth]'
   m_NeverAutoSwitchControlSchemes: 0
@@ -540,6 +537,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &89930865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89930861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3321e974a49fbdf4aae49c8ed6b42a71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attract: 0
+  _look: {x: 0, y: 0}
+  _move: {x: 0, y: 0}
+  _jump: 0
 --- !u!1 &101221450
 GameObject:
   m_ObjectHideFlags: 0
@@ -2087,7 +2100,7 @@ Transform:
   m_GameObject: {fileID: 435714200}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4299,6 +4312,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 77203140da6dc074cb50a2fa3c7941c5, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 0f7886ba8501fec4f90c567ba4036372, type: 3}
+      propertyPath: m_AnimatePhysics
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 0f7886ba8501fec4f90c567ba4036372, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0

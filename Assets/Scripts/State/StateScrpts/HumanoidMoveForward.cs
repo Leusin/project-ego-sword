@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace ProjectEgoSword
 {
@@ -9,7 +7,11 @@ namespace ProjectEgoSword
     {
         public float speed;
 
-        public override void UpdateAbility(HumanoidController monoBehaviour, Animator animator)
+        public override void OnEnter(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo)
+        {
+        }
+
+        public override void UpdateAbility(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo)
         {
             Vector2 move = InputController.Instance.MoveInput;
 
@@ -29,6 +31,10 @@ namespace ProjectEgoSword
             {
                 animator.SetBool(monoBehaviour.hashMove, false);
             }
+        }
+
+        public override void OnExit(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo)
+        {
         }
     }
 }

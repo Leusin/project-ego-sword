@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Animations;
 
@@ -37,13 +38,18 @@ namespace ProjectEgoSword
         {
             _monobehaviour = monoBehaviour;
             OnStart(animator);
+
+            foreach (StateData<TMonoBehaviour> data in abilityStateDatas)
+            {
+                data.OnStart(animator);
+            }
         }
 
-        public void UpdateAll(SceneLinkedSMB<TMonoBehaviour> sceneLinkedSMB, Animator animator)
+        public void UpdateAll(SceneLinkedSMB<TMonoBehaviour> sceneLinkedSMB, Animator animator, AnimatorStateInfo stateInfo)
         {
             foreach(StateData<TMonoBehaviour> data in abilityStateDatas)
             {
-                data.UpdateAbility(_monobehaviour, animator);
+                data.UpdateAbility(_monobehaviour, animator, stateInfo);
             }
         }
 
@@ -53,14 +59,17 @@ namespace ProjectEgoSword
 
             OnSLStateEnter(animator, stateInfo, layerIndex);
             OnSLStateEnter(animator, stateInfo, layerIndex, controller);
+
+            foreach (StateData<TMonoBehaviour> data in abilityStateDatas)
+            {
+                data.OnEnter(_monobehaviour, animator, stateInfo);
+            }
         }
 
         public sealed override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, AnimatorControllerPlayable controller)
         {
             if (!animator.gameObject.activeSelf)
                 return;
-
-            UpdateAll(this, animator);
 
             if (animator.IsInTransition(layerIndex) && animator.GetNextAnimatorStateInfo(layerIndex).fullPathHash == stateInfo.fullPathHash)
             {
@@ -95,6 +104,8 @@ namespace ProjectEgoSword
                 OnSLTransitionFromStateUpdate(animator, stateInfo, layerIndex);
                 OnSLTransitionFromStateUpdate(animator, stateInfo, layerIndex, controller);
             }
+
+            UpdateAll(this, animator, stateInfo);
         }
 
         public sealed override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, AnimatorControllerPlayable controller)
@@ -103,6 +114,11 @@ namespace ProjectEgoSword
 
             OnSLStateExit(animator, stateInfo, layerIndex);
             OnSLStateExit(animator, stateInfo, layerIndex, controller);
+
+            foreach (StateData<TMonoBehaviour> data in abilityStateDatas)
+            {
+                data.OnExit(_monobehaviour, animator, stateInfo);
+            }
         }
 
         /// <summary>
