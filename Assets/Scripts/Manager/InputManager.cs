@@ -5,7 +5,7 @@ using UnityEngine.InputSystem.Interactions;
 
 namespace ProjectEgoSword
 {
-    public class PlayerInputController : MonoBehaviour
+    public class InputManager : MonoBehaviour
     {
         [Header("Karl")]
 
@@ -106,8 +106,8 @@ namespace ProjectEgoSword
 
         // -----
 
-        public static PlayerInputController s_instance;
-        public static PlayerInputController Instance { get { return s_instance; } }
+        public static InputManager s_instance;
+        public static InputManager Instance { get { return s_instance; } }
 
         void Awake()
         {

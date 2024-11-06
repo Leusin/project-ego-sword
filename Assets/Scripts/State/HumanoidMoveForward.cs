@@ -11,7 +11,7 @@ namespace ProjectEgoSword
 
         public override void UpdateAbility(HumanoidController monoBehaviour, Animator animator)
         {
-            Vector2 move = PlayerInputController.Instance.MoveInput;
+            Vector2 move = InputManager.Instance.MoveInput;
 
             if (move.magnitude > 0)
             {
