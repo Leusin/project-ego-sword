@@ -31,7 +31,7 @@ namespace ProjectEgoSword
         private LayerMask m_layerEncounter;
 
         private PlayerInput m_playerinput;
-        private InputManager m_playerInputCtrl;
+        private InputController m_playerInputCtrl;
 
         [Header("Cinemachine")]
         public CinemachinePositionComposer cinemachinePositionComposer;
@@ -54,7 +54,7 @@ namespace ProjectEgoSword
             m_layerEncounter = LayerMask.GetMask("Encounter");
 
             m_playerinput = GetComponent<PlayerInput>();
-            m_playerInputCtrl = GetComponent<InputManager>();
+            m_playerInputCtrl = GetComponent<InputController>();
 
             m_screenPosition = cinemachinePositionComposer.Composition.ScreenPosition;
         }
