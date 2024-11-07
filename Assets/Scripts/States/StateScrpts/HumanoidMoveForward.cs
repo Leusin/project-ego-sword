@@ -21,7 +21,6 @@ namespace ProjectEgoSword
             if (controller.JumpInput)
             {
                 animator.SetBool(monoBehaviour.hashJump, true);
-                Debug.Log("Keep Jump!");
                 return;
             }
 
