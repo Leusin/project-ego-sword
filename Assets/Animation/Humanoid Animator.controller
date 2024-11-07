@@ -382,6 +382,7 @@ MonoBehaviour:
   abilityStateDatas:
   - {fileID: 11400000, guid: 439b012697a098d449b42b232764a225, type: 2}
   - {fileID: 11400000, guid: 50a05d43125219a49885383cadc40702, type: 2}
+  - {fileID: 11400000, guid: bd4347acf70c4c94786346c6f8101efa, type: 2}
 --- !u!1102 &4383543850797028145
 AnimatorState:
   serializedVersion: 6

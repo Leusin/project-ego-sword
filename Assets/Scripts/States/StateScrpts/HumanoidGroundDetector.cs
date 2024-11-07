@@ -6,6 +6,7 @@ namespace ProjectEgoSword
     [CreateAssetMenu(fileName = "StateData", menuName = "ProjectEgoSword/AbilityData/HumanoidGroundDetector")]
     public class HumanoidGroundDetector : StateData<HumanoidController>
     {
+        [Range(0.01f, 1f)]
         public float checkTime;
         public float distance;
 
@@ -15,8 +16,11 @@ namespace ProjectEgoSword
 
         public override void UpdateAbility(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo)
         {
-            bool isGrounded = IsGrounded(monoBehaviour);
-            animator.SetBool(monoBehaviour.hashGrounded, isGrounded);
+            if (stateInfo.normalizedTime >= checkTime)
+            {
+                bool isGrounded = IsGrounded(monoBehaviour);
+                animator.SetBool(monoBehaviour.hashGrounded, isGrounded);
+            }
         }
 
         public override void OnExit(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo)
@@ -27,20 +31,23 @@ namespace ProjectEgoSword
 
         private bool IsGrounded(HumanoidController monoBehaviour)
         {
-            if (monoBehaviour.RigidbodyComponent.linearVelocity.y > -0.01f &&
+            if (monoBehaviour.RigidbodyComponent.linearVelocity.y > -0.001f &&
                 monoBehaviour.RigidbodyComponent.linearVelocity.y <= 0f)
             {
                 return true;
             }
 
-            foreach (GameObject obj in monoBehaviour.BottomSpheres)
+            if (monoBehaviour.RigidbodyComponent.linearVelocity.y < 0f)
             {
-                Debug.DrawRay(obj.transform.position, -Vector3.up * 0.7f, Color.yellow);
-
-                RaycastHit hit;
-                if (Physics.Raycast(obj.transform.position, -Vector3.up, out hit, distance))
+                foreach (GameObject obj in monoBehaviour.BottomSpheres)
                 {
-                    return true;
+                    Debug.DrawRay(obj.transform.position, -Vector3.up * 0.7f, Color.yellow);
+
+                    RaycastHit hit;
+                    if (Physics.Raycast(obj.transform.position, -Vector3.up, out hit, distance))
+                    {
+                        return true;
+                    }
                 }
             }
 

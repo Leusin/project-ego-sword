@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static System.Collections.Specialized.BitVector32;
 
 namespace ProjectEgoSword
 {
@@ -18,6 +19,7 @@ namespace ProjectEgoSword
 
         [SerializeField]
         public List<GameObject> BottomSpheres = new List<GameObject>();
+        public List<GameObject> FrontSpheres = new List<GameObject>();
 
         public Rigidbody RigidbodyComponent
         {
@@ -85,23 +87,23 @@ namespace ProjectEgoSword
 
             GameObject bottomFront = CreateEdgeSphere(new Vector3(0f, bottom, front));
             GameObject bottomBack = CreateEdgeSphere(new Vector3(0f, bottom, back));
+            GameObject topFront = CreateEdgeSphere(new Vector3(0f, top, front));
 
             bottomFront.transform.parent = transform;
             bottomBack.transform.parent = transform;
+            topFront.transform.parent = transform;
 
             BottomSpheres.Add(bottomFront);
             BottomSpheres.Add(bottomBack);
 
-            float section = (bottomFront.transform.position - bottomBack.transform.position).magnitude * 0.2f; // magnitude / 5f
+            FrontSpheres.Add(bottomFront);
+            FrontSpheres.Add(topFront);
 
-            for (int i = 0; i < 4; i++)
-            {
-                Vector3 position = bottomBack.transform.position + (Vector3.forward * section * (i + 1));
-                GameObject newobj = CreateEdgeSphere(position);
+            float horizontalSection = (bottomFront.transform.position - bottomBack.transform.position).magnitude * 0.2f; // magnitude / 5f
+            CreateMiddleSpheres(bottomBack, transform.forward, horizontalSection, 4, BottomSpheres);
 
-                newobj.transform.parent = transform;
-                BottomSpheres.Add(newobj);
-            }
+            float varticalSection = (topFront.transform.position - bottomFront.transform.position).magnitude * 0.1f; // magnitude / 10f
+            CreateMiddleSpheres(bottomFront, transform.up, varticalSection, 9, FrontSpheres);
         }
 
         private void Start()
@@ -110,6 +112,18 @@ namespace ProjectEgoSword
         }
 
         // -----
+
+        public void CreateMiddleSpheres(GameObject start, Vector3 direction, float section, int interactions, List<GameObject> spheresList)
+        {
+            for (int i = 0; i < interactions; i++)
+            {
+                Vector3 position = start.transform.position + (direction * section * (i + 1));
+                GameObject newobj = CreateEdgeSphere(position);
+
+                newobj.transform.parent = transform;
+                spheresList.Add(newobj);
+            }
+        }
 
         public GameObject CreateEdgeSphere(Vector3 position)
         {

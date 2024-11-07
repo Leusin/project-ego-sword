@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8025b0213f0df2640a187a3cb8868b23, type: 3}
   m_Name: Sample_HumanoidGroundDetector
   m_EditorClassIdentifier: 
+  checkTime: 0.1
   distance: 0.025
