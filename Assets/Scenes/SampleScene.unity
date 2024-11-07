@@ -2081,9 +2081,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 435714203}
-  - component: {fileID: 435714208}
   - component: {fileID: 435714207}
-  - component: {fileID: 435714205}
+  - component: {fileID: 435714210}
+  - component: {fileID: 435714211}
+  - component: {fileID: 435714209}
   m_Layer: 10
   m_Name: Humanoid
   m_TagString: Untagged
@@ -2107,22 +2108,6 @@ Transform:
   - {fileID: 410854163}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &435714205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 435714200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c72d8a19acd0b9343846d5c661b11755, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WeaponMountPosition: {fileID: 432670728}
-  moveSpeed: 5
-  rotateSpeed: 60
-  animator: {fileID: 1029439553}
 --- !u!195 &435714207
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2130,7 +2115,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 435714200}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -2145,8 +2130,50 @@ NavMeshAgent:
   m_BaseOffset: -0.1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!136 &435714208
-CapsuleCollider:
+--- !u!114 &435714209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435714200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c72d8a19acd0b9343846d5c661b11755, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponMountPosition: {fileID: 0}
+  animator: {fileID: 1029439553}
+  ColliderEdgePrefab: {fileID: 2875485982597503087, guid: dc9bc34ef6b83844b96a8215a4db5c32, type: 3}
+--- !u!54 &435714210
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435714200}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!65 &435714211
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2163,11 +2190,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  serializedVersion: 3
+  m_Size: {x: 0.4, y: 1.84, z: 0.4}
+  m_Center: {x: 0, y: 0.92, z: 0}
 --- !u!1 &468953687 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3135921509060577837, guid: 0f7886ba8501fec4f90c567ba4036372, type: 3}
@@ -3495,7 +3520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6b129fdafea159488a1af63b5e3e814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawGizmo: 1
+  drawGizmo: 0
   maxAttaractRange: 10
   attaractAcceleration: 10
   attaractDeceleration: 8
