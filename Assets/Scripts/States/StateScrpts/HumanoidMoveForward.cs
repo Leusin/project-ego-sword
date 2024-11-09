@@ -10,6 +10,8 @@ namespace ProjectEgoSword
         public float speed;
         public float blockDistance;
 
+        private bool _self;
+
         public override void OnEnter(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo)
         {
         }
@@ -59,12 +61,25 @@ namespace ProjectEgoSword
             {
                 foreach (GameObject obj in monoBehaviour.FrontSpheres)
                 {
-                    Debug.DrawRay(obj.transform.position, monoBehaviour.transform.forward * 0.3f, Color.yellow);
+                    _self = false;
 
+                    Debug.DrawRay(obj.transform.position, monoBehaviour.transform.forward * 0.3f, Color.yellow);
                     RaycastHit hit;
                     if (Physics.Raycast(obj.transform.position, monoBehaviour.transform.forward, out hit, blockDistance))
                     {
-                        return true;
+                        foreach (Collider c in monoBehaviour.RagdollParts)
+                        {
+                            if (c.gameObject == hit.collider.gameObject)
+                            {
+                                _self = true;
+                                break;
+                            }
+                        }
+
+                        if (!_self)
+                        {
+                            return true;
+                        }
                     }
                 }
             }

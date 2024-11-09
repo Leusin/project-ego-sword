@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -22,6 +23,7 @@ namespace ProjectEgoSword
 
         [HideInInspector] public List<GameObject> BottomSpheres = new List<GameObject>();
         [HideInInspector] public List<GameObject> FrontSpheres = new List<GameObject>();
+        [HideInInspector] public List<Collider> RagdollParts = new List<Collider>();
 
         [HideInInspector] public float gravityMultiplier;
         [HideInInspector] public float pullMultiplier;
@@ -57,10 +59,10 @@ namespace ProjectEgoSword
         // FSM 전이 매개 변수(Transition Parameter)
         //
 
-        [HideInInspector] public readonly int hashMove = Animator.StringToHash("Move");
-        [HideInInspector] public readonly int hashJump = Animator.StringToHash("Jump");
-        [HideInInspector] public readonly int hashForceTransition = Animator.StringToHash("ForceTransition");
-        [HideInInspector] public readonly int hashGrounded = Animator.StringToHash("Grounded");
+        public readonly int hashMove = Animator.StringToHash("Move");
+        public readonly int hashJump = Animator.StringToHash("Jump");
+        public readonly int hashForceTransition = Animator.StringToHash("ForceTransition");
+        public readonly int hashGrounded = Animator.StringToHash("Grounded");
 
         // -----
 
@@ -83,37 +85,21 @@ namespace ProjectEgoSword
 
         private void Awake()
         {
-            BoxCollider box = GetComponent<BoxCollider>();
-
-            float top = box.bounds.center.y + box.bounds.extents.y;
-            float bottom = box.bounds.center.y - box.bounds.extents.y;
-            float front = box.bounds.center.z + box.bounds.extents.z;
-            float back = box.bounds.center.z - box.bounds.extents.z;
-
-            GameObject bottomFront = CreateEdgeSphere(new Vector3(0f, bottom, front));
-            GameObject bottomBack = CreateEdgeSphere(new Vector3(0f, bottom, back));
-            GameObject topFront = CreateEdgeSphere(new Vector3(0f, top, front));
-
-            bottomFront.transform.parent = transform;
-            bottomBack.transform.parent = transform;
-            topFront.transform.parent = transform;
-
-            BottomSpheres.Add(bottomFront);
-            BottomSpheres.Add(bottomBack);
-
-            FrontSpheres.Add(bottomFront);
-            FrontSpheres.Add(topFront);
-
-            float horizontalSection = (bottomFront.transform.position - bottomBack.transform.position).magnitude * 0.2f; // magnitude / 5f
-            CreateMiddleSpheres(bottomBack, transform.forward, horizontalSection, 4, BottomSpheres);
-
-            float varticalSection = (topFront.transform.position - bottomFront.transform.position).magnitude * 0.1f; // magnitude / 10f
-            CreateMiddleSpheres(bottomFront, transform.up, varticalSection, 9, FrontSpheres);
+            SetRagdollParts();
+            SetColliderSphere();
         }
 
         private void Start()
         {
             SceneLinkedSMB<HumanoidController>.Initialise(animator, this);
+        }
+
+        private IEnumerator RagdollTest()
+        {
+            yield return new WaitForSeconds(5f);
+            RigidbodyComponent.AddForce(200f * Vector3.up);
+            yield return new WaitForSeconds(0.5f);
+            TurnOnRagdoll();
         }
 
         private void FixedUpdate()
@@ -147,6 +133,68 @@ namespace ProjectEgoSword
         {
             GameObject obj = Instantiate(ColliderEdgePrefab, position, Quaternion.identity);
             return obj;
+        }
+
+        public void TurnOnRagdoll()
+        {
+            RigidbodyComponent.useGravity = false;
+            RigidbodyComponent.linearVelocity = Vector3.zero;
+            GetComponent<BoxCollider>().enabled = false;
+            animator.enabled = false;
+            animator.avatar = null;
+
+            foreach (Collider c in RagdollParts)
+            {
+                if (c.gameObject != gameObject)
+                {
+                    c.isTrigger = false;
+                    c.attachedRigidbody.linearVelocity = Vector3.zero;
+                }
+            }
+        }
+
+        private void SetRagdollParts()
+        {
+            Collider[] colliders = GetComponentsInChildren<Collider>();
+
+            foreach (Collider c in colliders)
+            {
+                if(c.gameObject != gameObject)
+                {
+                    c.isTrigger = true;
+                    RagdollParts.Add(c);
+                }
+            }
+        }
+
+        private void SetColliderSphere()
+        {
+            BoxCollider box = GetComponent<BoxCollider>();
+
+            float top = box.bounds.center.y + box.bounds.extents.y;
+            float bottom = box.bounds.center.y - box.bounds.extents.y;
+            float front = box.bounds.center.z + box.bounds.extents.z;
+            float back = box.bounds.center.z - box.bounds.extents.z;
+
+            GameObject bottomFront = CreateEdgeSphere(new Vector3(0f, bottom, front));
+            GameObject bottomBack = CreateEdgeSphere(new Vector3(0f, bottom, back));
+            GameObject topFront = CreateEdgeSphere(new Vector3(0f, top, front));
+
+            bottomFront.transform.parent = transform;
+            bottomBack.transform.parent = transform;
+            topFront.transform.parent = transform;
+
+            BottomSpheres.Add(bottomFront);
+            BottomSpheres.Add(bottomBack);
+
+            FrontSpheres.Add(bottomFront);
+            FrontSpheres.Add(topFront);
+
+            float horizontalSection = (bottomFront.transform.position - bottomBack.transform.position).magnitude * 0.2f; // magnitude / 5f
+            CreateMiddleSpheres(bottomBack, transform.forward, horizontalSection, 4, BottomSpheres);
+
+            float varticalSection = (topFront.transform.position - bottomFront.transform.position).magnitude * 0.1f; // magnitude / 10f
+            CreateMiddleSpheres(bottomFront, transform.up, varticalSection, 9, FrontSpheres);
         }
     }
 }
