@@ -17,9 +17,14 @@ namespace ProjectEgoSword
         public Animator animator;
         public GameObject ColliderEdgePrefab;
 
-        [SerializeField]
-        public List<GameObject> BottomSpheres = new List<GameObject>();
-        public List<GameObject> FrontSpheres = new List<GameObject>();
+        [Header("Input")]
+        public bool jump;
+
+        [HideInInspector] public List<GameObject> BottomSpheres = new List<GameObject>();
+        [HideInInspector] public List<GameObject> FrontSpheres = new List<GameObject>();
+
+        [HideInInspector] public float gravityMultiplier;
+        [HideInInspector] public float pullMultiplier;
 
         public Rigidbody RigidbodyComponent
         {
@@ -109,6 +114,19 @@ namespace ProjectEgoSword
         private void Start()
         {
             SceneLinkedSMB<HumanoidController>.Initialise(animator, this);
+        }
+
+        private void FixedUpdate()
+        {
+            if (RigidbodyComponent.linearVelocity.y < 0f) // Player Going Down
+            {
+                RigidbodyComponent.linearVelocity += (-Vector3.up * gravityMultiplier);
+            }
+
+            if (RigidbodyComponent.linearVelocity.y > 0f && InputController.Instance.JumpInput) // Player Goding Up
+            {
+                RigidbodyComponent.linearVelocity += (-Vector3.up * pullMultiplier);
+            }
         }
 
         // -----
