@@ -556,7 +556,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 89930865}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ProjectEgoSword.InputController, Assembly-CSharp
         m_MethodName: Attract
         m_Mode: 0
@@ -572,7 +572,7 @@ MonoBehaviour:
     m_ActionName: 'Karl/Attract[/Mouse/leftButton,/Keyboard/ctrl,/Keyboard/z,/Keyboard/e,/Keyboard/enter,/XInputControllerWindows/leftShoulder,/XInputControllerWindows/rightShoulder,/XInputControllerWindows/buttonWest]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 89930865}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ProjectEgoSword.InputController, Assembly-CSharp
         m_MethodName: Look
         m_Mode: 0
@@ -589,7 +589,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 89930865}
-        m_TargetAssemblyTypeName: ProjectEgoSword.InputController, Assembly-CSharp
+        m_TargetAssemblyTypeName: ProjectEgoSword.VirtualInputController, Assembly-CSharp
         m_MethodName: Move
         m_Mode: 0
         m_Arguments:
@@ -609,7 +609,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 89930865}
-        m_TargetAssemblyTypeName: ProjectEgoSword.InputController, Assembly-CSharp
+        m_TargetAssemblyTypeName: ProjectEgoSword.VirtualInputController, Assembly-CSharp
         m_MethodName: Jump
         m_Mode: 0
         m_Arguments:
@@ -622,6 +622,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ea425fcc-2e11-49a9-b162-2986974c7556
     m_ActionName: 'Humanoid/Jump[/Keyboard/w,/Keyboard/upArrow,/XInputControllerWindows/buttonSouth]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 89930865}
+        m_TargetAssemblyTypeName: ProjectEgoSword.VirtualInputController, Assembly-CSharp
+        m_MethodName: MainAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: edcb1f3c-2932-44b7-ba68-d21f16a8f444
+    m_ActionName: 'Humanoid/Attack[/Mouse/leftButton,/Keyboard/leftCtrl,/Keyboard/z,/Keyboard/e,/Keyboard/enter,/XInputControllerWindows/buttonWest,/XInputControllerWindows/leftShoulder]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Humanoid
@@ -651,13 +667,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 89930861}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3321e974a49fbdf4aae49c8ed6b42a71, type: 3}
+  m_Script: {fileID: 11500000, guid: 38ebfe7293f30044fa1323344b1842d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _attract: 0
   _look: {x: 0, y: 0}
   _move: {x: 0, y: 0}
   _jump: 0
+  _attack: 0
 --- !u!1 &101221450
 GameObject:
   m_ObjectHideFlags: 0
@@ -1493,7 +1510,7 @@ Transform:
   m_GameObject: {fileID: 303946557}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0000000065722436, y: 0.9898965, z: -0.1417921, w: -0.00000004588296}
-  m_LocalPosition: {x: 0.0000013701166, y: 6.1105447, z: 12.207843}
+  m_LocalPosition: {x: -0.999999, y: 4.570545, z: 12.207843}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1703,7 +1720,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000007898758, y: 0.98989534, z: -0.1418002, w: -0.000000055140575}
-  m_LocalPosition: {x: 0.0000013701166, y: 6.1105447, z: 12.207843}
+  m_LocalPosition: {x: -0.999999, y: 4.570545, z: 12.207843}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2245,6 +2262,7 @@ GameObject:
   - component: {fileID: 435714210}
   - component: {fileID: 435714211}
   - component: {fileID: 435714209}
+  - component: {fileID: 435714212}
   m_Layer: 10
   m_Name: Humanoid
   m_TagString: Untagged
@@ -2261,7 +2279,7 @@ Transform:
   m_GameObject: {fileID: 435714200}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.54, z: 0}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2302,13 +2320,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c72d8a19acd0b9343846d5c661b11755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponMountPosition: {fileID: 0}
   animator: {fileID: 1029439553}
   ColliderEdgePrefab: {fileID: 2875485982597503087, guid: dc9bc34ef6b83844b96a8215a4db5c32, type: 3}
+  WeaponMountPosition: {fileID: 0}
+  move: {x: 0, y: 0}
   jump: 0
+  attack: 0
   BottomSpheres: []
   FrontSpheres: []
-  RagdollParts: []
+  ragdollParts: []
   gravityMultiplier: 0
   pullMultiplier: 0
 --- !u!54 &435714210
@@ -2359,6 +2379,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.4, y: 1.84, z: 0.4}
   m_Center: {x: 0, y: 0.92, z: 0}
+--- !u!114 &435714212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435714200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7079548252260c1459c8b86aefc5188e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &436423904 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1781356600409242780, guid: 0f7886ba8501fec4f90c567ba4036372, type: 3}
@@ -2686,7 +2718,7 @@ Transform:
   m_GameObject: {fileID: 502602055}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 0.5, z: 0}
+  m_LocalPosition: {x: -4, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4983,7 +5015,7 @@ Transform:
   m_GameObject: {fileID: 1369442914}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 0}
+  m_LocalPosition: {x: 4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7633,6 +7665,63 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.06
   m_Center: {x: 0, y: 0.1, z: 0.02}
+--- !u!1001 &6703771550106263962
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1783366705162258785, guid: 9d95baa1b7fbb9c4990389c58467a96c, type: 3}
+      propertyPath: m_Name
+      value: Dummy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494402879918869164, guid: 9d95baa1b7fbb9c4990389c58467a96c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494402879918869164, guid: 9d95baa1b7fbb9c4990389c58467a96c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494402879918869164, guid: 9d95baa1b7fbb9c4990389c58467a96c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494402879918869164, guid: 9d95baa1b7fbb9c4990389c58467a96c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494402879918869164, guid: 9d95baa1b7fbb9c4990389c58467a96c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494402879918869164, guid: 9d95baa1b7fbb9c4990389c58467a96c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494402879918869164, guid: 9d95baa1b7fbb9c4990389c58467a96c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494402879918869164, guid: 9d95baa1b7fbb9c4990389c58467a96c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494402879918869164, guid: 9d95baa1b7fbb9c4990389c58467a96c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494402879918869164, guid: 9d95baa1b7fbb9c4990389c58467a96c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9d95baa1b7fbb9c4990389c58467a96c, type: 3}
 --- !u!1001 &7432982494944577101
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7837,6 +7926,7 @@ SceneRoots:
   - {fileID: 303946560}
   - {fileID: 1354600667}
   - {fileID: 435714203}
+  - {fileID: 6703771550106263962}
   - {fileID: 966204513}
   - {fileID: 197657831}
   - {fileID: 23441851}

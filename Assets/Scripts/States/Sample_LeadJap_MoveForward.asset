@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c42a212b912bb7340ab7d4bac8896048, type: 3}
+  m_Name: Sample_LeadJap_MoveForward
+  m_EditorClassIdentifier: 
+  constant: 1
+  speedGraph:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.06849059
+      outSlope: -0.06849059
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.19419211
+    - serializedVersion: 3
+      time: 0.23957501
+      value: 0.8216597
+      inSlope: -2.8484569
+      outSlope: -2.8484569
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.13185595
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.35
+      value: 0
+      inSlope: -7.440886
+      outSlope: -7.440886
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  speed: 4
+  blockDistance: 0.1

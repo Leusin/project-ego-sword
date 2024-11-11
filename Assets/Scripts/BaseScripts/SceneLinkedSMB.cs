@@ -45,11 +45,11 @@ namespace ProjectEgoSword
             }
         }
 
-        public void UpdateAll(SceneLinkedSMB<TMonoBehaviour> sceneLinkedSMB, Animator animator, AnimatorStateInfo stateInfo)
+        public void UpdateAll(SceneLinkedSMB<TMonoBehaviour> sceneLinkedSMB, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             foreach(StateData<TMonoBehaviour> data in abilityStateDatas)
             {
-                data.UpdateAbility(_monobehaviour, animator, stateInfo);
+                data.UpdateAbility(_monobehaviour, animator, stateInfo, layerIndex);
             }
         }
 
@@ -62,7 +62,7 @@ namespace ProjectEgoSword
 
             foreach (StateData<TMonoBehaviour> data in abilityStateDatas)
             {
-                data.OnEnter(_monobehaviour, animator, stateInfo);
+                data.OnEnter(_monobehaviour, animator, stateInfo, layerIndex);
             }
         }
 
@@ -105,7 +105,7 @@ namespace ProjectEgoSword
                 OnSLTransitionFromStateUpdate(animator, stateInfo, layerIndex, controller);
             }
 
-            UpdateAll(this, animator, stateInfo);
+            UpdateAll(this, animator, stateInfo, layerIndex);
         }
 
         public sealed override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, AnimatorControllerPlayable controller)
@@ -117,7 +117,7 @@ namespace ProjectEgoSword
 
             foreach (StateData<TMonoBehaviour> data in abilityStateDatas)
             {
-                data.OnExit(_monobehaviour, animator, stateInfo);
+                data.OnExit(_monobehaviour, animator, stateInfo, layerIndex);
             }
         }
 

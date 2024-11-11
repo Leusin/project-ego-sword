@@ -1,32 +1,33 @@
-using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using static System.Collections.Specialized.BitVector32;
 
 namespace ProjectEgoSword
 {
 
-    public class HumanoidController : MonoBehaviour
+    public class HumanoidController : CharacterContrl
     {
-        public Transform WeaponMountPosition;
-
-        // -----
-
         [Header("Setup")]
         public Animator animator;
         public GameObject ColliderEdgePrefab;
+        public Transform WeaponMountPosition;
 
         [Header("Input")]
+        public Vector2 move;
         public bool jump;
+        public bool attack;
 
         [HideInInspector] public List<GameObject> BottomSpheres = new List<GameObject>();
         [HideInInspector] public List<GameObject> FrontSpheres = new List<GameObject>();
-        [HideInInspector] public List<Collider> RagdollParts = new List<Collider>();
+        [HideInInspector] public List<Collider> ragdollParts = new List<Collider>();
 
         [HideInInspector] public float gravityMultiplier;
         [HideInInspector] public float pullMultiplier;
+
+        //
+        // 캐시된 컴포넌트
+        //
 
         public Rigidbody RigidbodyComponent
         {
@@ -61,6 +62,7 @@ namespace ProjectEgoSword
 
         public readonly int hashMove = Animator.StringToHash("Move");
         public readonly int hashJump = Animator.StringToHash("Jump");
+        public readonly int hashAttack = Animator.StringToHash("Attack");
         public readonly int hashForceTransition = Animator.StringToHash("ForceTransition");
         public readonly int hashGrounded = Animator.StringToHash("Grounded");
 
@@ -109,7 +111,7 @@ namespace ProjectEgoSword
                 RigidbodyComponent.linearVelocity += (-Vector3.up * gravityMultiplier);
             }
 
-            if (RigidbodyComponent.linearVelocity.y > 0f && InputController.Instance.JumpInput) // Player Goding Up
+            if (RigidbodyComponent.linearVelocity.y > 0f && jump) // Player Going Up
             {
                 RigidbodyComponent.linearVelocity += (-Vector3.up * pullMultiplier);
             }
@@ -143,7 +145,7 @@ namespace ProjectEgoSword
             animator.enabled = false;
             animator.avatar = null;
 
-            foreach (Collider c in RagdollParts)
+            foreach (Collider c in ragdollParts)
             {
                 if (c.gameObject != gameObject)
                 {
@@ -162,7 +164,7 @@ namespace ProjectEgoSword
                 if(c.gameObject != gameObject)
                 {
                     c.isTrigger = true;
-                    RagdollParts.Add(c);
+                    ragdollParts.Add(c);
                 }
             }
         }

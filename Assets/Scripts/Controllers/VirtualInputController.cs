@@ -5,7 +5,7 @@ using UnityEngine.InputSystem.Interactions;
 
 namespace ProjectEgoSword
 {
-    public class InputController : MonoBehaviour
+    public class VirtualInputController : Singleton<VirtualInputController>
     {
         [Header("Karl")]
 
@@ -16,11 +16,13 @@ namespace ProjectEgoSword
 
         [SerializeField] private Vector2 _move;
         [SerializeField] private bool _jump;
+        [SerializeField] private bool _attack;
 
         public bool AttractInput { get { return _attract; } }
         public Vector2 LookInput { get { return _look; } }
         public Vector2 MoveInput { get { return _move; } }
         public bool JumpInput { get { return _jump; } }
+        public bool AttackInput { get { return _attack; } }
 
         // -----
 
@@ -75,6 +77,14 @@ namespace ProjectEgoSword
 
         public void MainAttack(InputAction.CallbackContext context)
         {
+            if (context.phase == InputActionPhase.Performed)
+            {
+                _attack = true;
+            }
+            else
+            {
+                _attack = false;
+            }
         }
 
         public void AltAttack(InputAction.CallbackContext context)
@@ -116,15 +126,15 @@ namespace ProjectEgoSword
 
         // -----
 
-        public static InputController s_instance;
-        public static InputController Instance { get { return s_instance; } }
+        //public static VirtualInputController s_instance;
+        //public static VirtualInputController Instance { get { return s_instance; } }
 
-        void Awake()
-        {
-            if (s_instance == null)
-                s_instance = this;
-            else if (s_instance != this)
-                throw new UnityException($"PlayerInputCtroller script 는 하나 보다 많아서는 안됩니다. The instances are " + s_instance.name + " and " + name + ".");
-        }
+        //void Awake()
+        //{
+        //    if (s_instance == null)
+        //        s_instance = this;
+        //    else if (s_instance != this)
+        //        throw new UnityException($"PlayerInputCtroller script 는 하나 보다 많아서는 안됩니다. The instances are " + s_instance.name + " and " + name + ".");
+        //}
     }
 }

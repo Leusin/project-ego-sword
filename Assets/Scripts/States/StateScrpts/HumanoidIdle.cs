@@ -7,32 +7,39 @@ namespace ProjectEgoSword
     {
         public override void OnStart(Animator animator)
         {
-            
+
         }
 
-        public override void OnEnter(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo)
+        public override void OnEnter(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             animator.SetBool(monoBehaviour.hashJump, false);
+            animator.SetBool(monoBehaviour.hashAttack, false);
         }
 
-        public override void UpdateAbility(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo)
+        public override void UpdateAbility(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            InputController controller = InputController.Instance;
-
-            if (controller.JumpInput)
+            if (!animator.IsInTransition(layerIndex))
             {
-                animator.SetBool(monoBehaviour.hashJump, true);
-            }
+                if (monoBehaviour.attack && !animator.GetBool(monoBehaviour.hashAttack))
+                {
+                    animator.SetBool(monoBehaviour.hashAttack, true);
+                }
 
-            Vector2 move = controller.MoveInput;
+                if (monoBehaviour.jump && !animator.GetBool(monoBehaviour.hashJump))
+                {
+                    animator.SetBool(monoBehaviour.hashJump, true);
+                }
 
-            if (move.magnitude > 0)
-            {
-                animator.SetBool(monoBehaviour.hashMove, true);
+                Vector2 move = monoBehaviour.move;
+
+                if (move.magnitude > 0)
+                {
+                    animator.SetBool(monoBehaviour.hashMove, true);
+                }
             }
         }
 
-        public override void OnExit(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo)
+        public override void OnExit(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
         }
     }
