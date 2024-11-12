@@ -31,7 +31,7 @@ namespace ProjectEgoSword
             GameObject obj = Instantiate(Resources.Load("HumanoidAttackInfo", typeof(GameObject))) as GameObject;
             HumanoidAttackInfo info = obj.GetComponent<HumanoidAttackInfo>();
 
-            info.ResetInfo(this);
+            info.ResetInfo(this, monoBehaviour);
 
             if (!_attackManager.currentAttacks.Contains(info))
             {
@@ -67,7 +67,7 @@ namespace ProjectEgoSword
 
                     if (!info.isRegisterd && humanoidAttackInfo.attackAbility == this)
                     {
-                        humanoidAttackInfo.Register(this, monoBehaviour);
+                        humanoidAttackInfo.Register(this);
                     }
                 }
             }

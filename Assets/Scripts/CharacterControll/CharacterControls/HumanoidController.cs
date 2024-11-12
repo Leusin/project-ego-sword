@@ -7,7 +7,7 @@ using UnityEngine.AI;
 namespace ProjectEgoSword
 {
 
-    public class HumanoidController : CharacterContrl
+    public class HumanoidController : CharacterControl
     {
         public Transform WeaponMountPosition;
 
@@ -22,22 +22,6 @@ namespace ProjectEgoSword
         [HideInInspector] public float gravityMultiplier;
         [HideInInspector] public float pullMultiplier;
 
-        //
-        // 캐시된 컴포넌트
-        //
-
-        public Rigidbody RigidbodyComponent
-        {
-            get
-            {
-                if (_cachedrigidbody == null)
-                {
-                    _cachedrigidbody = GetComponent<Rigidbody>();
-                }
-                return _cachedrigidbody;
-            }
-        }
-
         public NavMeshAgent NavMeshAgentComponent
         {
             get
@@ -50,7 +34,6 @@ namespace ProjectEgoSword
             }
         }
 
-        private Rigidbody _cachedrigidbody;
         private NavMeshAgent _cachednavMeshAgent;
 
         //
@@ -125,39 +108,6 @@ namespace ProjectEgoSword
             if (RigidbodyComponent.linearVelocity.y > 0f && jump) // Player Going Up
             {
                 RigidbodyComponent.linearVelocity += (-Vector3.up * pullMultiplier);
-            }
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if(ragdollParts.Contains(other))
-            {
-                return;
-            }
-
-            var controller = other.transform.root.GetComponent<CharacterContrl>();
-
-            if (controller == null)
-            {
-                return;
-            }
-
-            if(other.gameObject == controller.gameObject)
-            {
-                return;
-            }
-
-            if(!collidingParts.Contains(other))
-            {
-                collidingParts.Add(other);
-            }
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            if(collidingParts.Contains(other))
-            {
-                collidingParts.Remove(other);
             }
         }
 
@@ -239,6 +189,7 @@ namespace ProjectEgoSword
                 {
                     c.isTrigger = true;
                     ragdollParts.Add(c);
+                    c.gameObject.AddComponent<TriggerDetector>();
                 }
             }
         }

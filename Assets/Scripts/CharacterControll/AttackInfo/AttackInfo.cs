@@ -6,7 +6,7 @@ namespace ProjectEgoSword
 {
     public class AttackInfo: MonoBehaviour
     {
-        public CharacterContrl attacker;
+        public CharacterControl attacker;
         public List<string> colliderNames = new List<string>();
 
         public bool mustCollide;

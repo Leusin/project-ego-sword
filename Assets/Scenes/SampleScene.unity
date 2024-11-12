@@ -2261,8 +2261,9 @@ GameObject:
   - component: {fileID: 435714207}
   - component: {fileID: 435714210}
   - component: {fileID: 435714211}
-  - component: {fileID: 435714212}
   - component: {fileID: 435714209}
+  - component: {fileID: 435714212}
+  - component: {fileID: 435714213}
   m_Layer: 10
   m_Name: Humanoid
   m_TagString: Untagged
@@ -2320,16 +2321,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c72d8a19acd0b9343846d5c661b11755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ragdollParts: []
   skinedMeshAnimator: {fileID: 1029439553}
   ColliderEdgePrefab: {fileID: 2875485982597503087, guid: dc9bc34ef6b83844b96a8215a4db5c32, type: 3}
+  ragdollParts: []
+  collidingParts: []
   WeaponMountPosition: {fileID: 0}
   move: {x: 0, y: 0}
   jump: 0
   attack: 0
   bottomSpheres: []
   frontSpheres: []
-  collidingParts: []
   gravityMultiplier: 0
   pullMultiplier: 0
 --- !u!54 &435714210
@@ -2390,6 +2391,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7079548252260c1459c8b86aefc5188e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &435714213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435714200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e1427afd3406694cbcb4950da79b208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &436423904 stripped
@@ -6969,23 +6982,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.06
   m_Center: {x: 0, y: 0.1, z: 0.02}
---- !u!1 &1896555883 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1783366705162258785, guid: 9d95baa1b7fbb9c4990389c58467a96c, type: 3}
-  m_PrefabInstance: {fileID: 6703771550106263962}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1896555890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1896555883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e1427afd3406694cbcb4950da79b208, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &1910178381 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224091927000801720, guid: f77f88b14a477764bb65a49d28c02d33, type: 3}
@@ -7783,10 +7779,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1783366705162258785, guid: 9d95baa1b7fbb9c4990389c58467a96c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1896555890}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d95baa1b7fbb9c4990389c58467a96c, type: 3}
 --- !u!1001 &7432982494944577101
 PrefabInstance:

@@ -4,12 +4,12 @@ namespace ProjectEgoSword
 {
     public class DamageDetector : MonoBehaviour
     {
-        private CharacterContrl _control;
+        private CharacterControl _control;
         private AttackManager _attackManager;
 
         private void Awake()
         {
-            _control = GetComponent<CharacterContrl>();
+            _control = GetComponent<CharacterControl>();
         }
 
         private void Start()
@@ -29,14 +29,19 @@ namespace ProjectEgoSword
 
         private void CheckAttacks()
         {
-            foreach(AttackInfo info in _attackManager.currentAttacks)
+            foreach (AttackInfo info in _attackManager.currentAttacks)
             {
-                if(info == null)
+                if (info == null)
                 {
                     continue;
                 }
 
-                if(!info.isRegisterd)
+                if (info.attacker == _control)
+                {
+                    continue;
+                }
+
+                if (!info.isRegisterd)
                 {
                     continue;
                 }
@@ -46,9 +51,14 @@ namespace ProjectEgoSword
                     continue;
                 }
 
-                if(info.mustCollide)
+                //if (info.currentHits >= info.maxHits)
+                //{
+                //    continue;
+                //}
+
+                if (info.mustCollide)
                 {
-                    if(IsCollided(info))
+                    if (IsCollided(info))
                     {
                         TakeDamage(info);
                     }
@@ -58,11 +68,11 @@ namespace ProjectEgoSword
 
         private bool IsCollided(AttackInfo info)
         {
-            foreach(Collider collider in _control.collidingParts)
+            foreach (Collider collider in _control.collidingParts)
             {
-                foreach(string name in info.colliderNames)
+                foreach (string name in info.colliderNames)
                 {
-                    if(name == collider.gameObject.name)
+                    if (name == collider.gameObject.name)
                     {
                         return true;
                     }
@@ -76,13 +86,16 @@ namespace ProjectEgoSword
         {
             Debug.Log(info.attacker.gameObject.name + " hits: " + this.gameObject.name);
 
-            //var humaonidControl = info 
-            //_control.skinedMeshAnimator.runtimeAnimatorController = info.attackAbility.GetDeathAnimator();
-
-            //if ()
-
+            HumanoidAttackInfo humanoidAttackInfo = info as HumanoidAttackInfo;
+            if (humanoidAttackInfo != null)
+            {
+                _control.skinedMeshAnimator.runtimeAnimatorController = humanoidAttackInfo.attackAbility.GetDeathAnimator();
+            }
 
             info.currentHits++;
+
+            _control.GetComponent<Collider>().enabled = false;
+            _control.RigidbodyComponent.useGravity = false;
         }
     }
 }

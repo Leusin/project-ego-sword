@@ -6,16 +6,16 @@ namespace ProjectEgoSword
     {
         public HumanoidAttack attackAbility;
 
-        public void ResetInfo(HumanoidAttack attack)
+        public void ResetInfo(HumanoidAttack attack, CharacterControl attacker)
         {
             base.ResetInfo();
             attackAbility = attack;
+            this.attacker = attacker;
         }
 
-        public void Register(HumanoidAttack attack, HumanoidController attacker)
+        public void Register(HumanoidAttack attack)
         {
             isRegisterd = true;
-            this.attacker = attacker;
 
             attackAbility = attack;
             colliderNames = attack.colliderNames;
