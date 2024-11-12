@@ -12,4 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e0af5338230b6488d02d7a9ba4d7ea, type: 3}
   m_Name: Sample_LeadJap
   m_EditorClassIdentifier: 
-  transitionTiming: 0.01
+  startAttackTime: 0.2
+  endAttackTime: 0.3
+  colliderNames:
+  - mixamorig:RightHand
+  mustCollide: 0
+  mustFaceAttacker: 0
+  lethalRange: 0
+  maxHits: 0
+  DeathAnimators: []

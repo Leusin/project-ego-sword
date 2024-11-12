@@ -9,9 +9,6 @@ namespace ProjectEgoSword
 
     public class HumanoidController : CharacterContrl
     {
-        [Header("Setup")]
-        public Animator skinedMeshAnimator;
-        public GameObject ColliderEdgePrefab;
         public Transform WeaponMountPosition;
 
         [Header("Input")]
@@ -19,10 +16,8 @@ namespace ProjectEgoSword
         public bool jump;
         public bool attack;
 
-        /*[HideInInspector]*/ public List<GameObject> bottomSpheres = new List<GameObject>();
-        /*[HideInInspector]*/ public List<GameObject> frontSpheres = new List<GameObject>();
-        /*[HideInInspector]*/ public List<Collider> ragdollParts = new List<Collider>();
-        /*[HideInInspector]*/ public List<Collider> collidingParts = new List<Collider>();
+        public List<GameObject> bottomSpheres = new List<GameObject>();
+        public List<GameObject> frontSpheres = new List<GameObject>();
 
         [HideInInspector] public float gravityMultiplier;
         [HideInInspector] public float pullMultiplier;
