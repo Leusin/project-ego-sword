@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,7 +10,7 @@ namespace ProjectEgoSword
     public class HumanoidController : CharacterContrl
     {
         [Header("Setup")]
-        public Animator animator;
+        public Animator skinedMeshAnimator;
         public GameObject ColliderEdgePrefab;
         public Transform WeaponMountPosition;
 
@@ -18,9 +19,10 @@ namespace ProjectEgoSword
         public bool jump;
         public bool attack;
 
-        [HideInInspector] public List<GameObject> BottomSpheres = new List<GameObject>();
-        [HideInInspector] public List<GameObject> FrontSpheres = new List<GameObject>();
-        [HideInInspector] public List<Collider> ragdollParts = new List<Collider>();
+        /*[HideInInspector]*/ public List<GameObject> bottomSpheres = new List<GameObject>();
+        /*[HideInInspector]*/ public List<GameObject> frontSpheres = new List<GameObject>();
+        /*[HideInInspector]*/ public List<Collider> ragdollParts = new List<Collider>();
+        /*[HideInInspector]*/ public List<Collider> collidingParts = new List<Collider>();
 
         [HideInInspector] public float gravityMultiplier;
         [HideInInspector] public float pullMultiplier;
@@ -87,22 +89,36 @@ namespace ProjectEgoSword
 
         private void Awake()
         {
+            bool switchBack = false;
+
+            if(IsFacingForward())
+            {
+                switchBack = true;
+            }
+
+            FaceForward(true);
+
             SetRagdollParts();
             SetColliderSphere();
+
+            if(switchBack)
+            {
+                FaceForward(false);
+            }
         }
 
         private void Start()
         {
-            SceneLinkedSMB<HumanoidController>.Initialise(animator, this);
+            SceneLinkedSMB<HumanoidController>.Initialise(skinedMeshAnimator, this);
         }
 
-        private IEnumerator RagdollTest()
-        {
-            yield return new WaitForSeconds(5f);
-            RigidbodyComponent.AddForce(200f * Vector3.up);
-            yield return new WaitForSeconds(0.5f);
-            TurnOnRagdoll();
-        }
+        //private IEnumerator RagdollTest()
+        //{
+        //    yield return new WaitForSeconds(5f);
+        //    RigidbodyComponent.AddForce(200f * Vector3.up);
+        //    yield return new WaitForSeconds(0.5f);
+        //    TurnOnRagdoll();
+        //}
 
         private void FixedUpdate()
         {
@@ -117,6 +133,39 @@ namespace ProjectEgoSword
             }
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if(ragdollParts.Contains(other))
+            {
+                return;
+            }
+
+            var controller = other.transform.root.GetComponent<CharacterContrl>();
+
+            if (controller == null)
+            {
+                return;
+            }
+
+            if(other.gameObject == controller.gameObject)
+            {
+                return;
+            }
+
+            if(!collidingParts.Contains(other))
+            {
+                collidingParts.Add(other);
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if(collidingParts.Contains(other))
+            {
+                collidingParts.Remove(other);
+            }
+        }
+
         // -----
 
         public void CreateMiddleSpheres(GameObject start, Vector3 direction, float section, int interactions, List<GameObject> spheresList)
@@ -127,6 +176,7 @@ namespace ProjectEgoSword
                 GameObject newobj = CreateEdgeSphere(position);
 
                 newobj.transform.parent = transform;
+
                 spheresList.Add(newobj);
             }
         }
@@ -142,8 +192,8 @@ namespace ProjectEgoSword
             RigidbodyComponent.useGravity = false;
             RigidbodyComponent.linearVelocity = Vector3.zero;
             GetComponent<BoxCollider>().enabled = false;
-            animator.enabled = false;
-            animator.avatar = null;
+            skinedMeshAnimator.enabled = false;
+            skinedMeshAnimator.avatar = null;
 
             foreach (Collider c in ragdollParts)
             {
@@ -152,6 +202,35 @@ namespace ProjectEgoSword
                     c.isTrigger = false;
                     c.attachedRigidbody.linearVelocity = Vector3.zero;
                 }
+            }
+        }
+
+        public void MoveForward(float speed, float speedGraph)
+        {
+            transform.Translate(Vector3.forward * Time.deltaTime * speed * speedGraph);
+        }
+
+        public void FaceForward(bool forward)
+        {
+            if(forward)
+            {
+                transform.rotation = Quaternion.identity;
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            }
+        }
+
+        public bool IsFacingForward()
+        {
+            if (transform.forward.z > 0f)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
 
@@ -186,17 +265,21 @@ namespace ProjectEgoSword
             bottomBack.transform.parent = transform;
             topFront.transform.parent = transform;
 
-            BottomSpheres.Add(bottomFront);
-            BottomSpheres.Add(bottomBack);
+            bottomFront.transform.localPosition = transform.InverseTransformPoint(bottomFront.transform.position);
+            bottomBack.transform.localPosition = transform.InverseTransformPoint(bottomBack.transform.position);
+            topFront.transform.localPosition = transform.InverseTransformPoint(topFront.transform.position);
 
-            FrontSpheres.Add(bottomFront);
-            FrontSpheres.Add(topFront);
+            bottomSpheres.Add(bottomFront);
+            bottomSpheres.Add(bottomBack);
+
+            frontSpheres.Add(bottomFront);
+            frontSpheres.Add(topFront);
 
             float horizontalSection = (bottomFront.transform.position - bottomBack.transform.position).magnitude * 0.2f; // magnitude / 5f
-            CreateMiddleSpheres(bottomBack, transform.forward, horizontalSection, 4, BottomSpheres);
+            CreateMiddleSpheres(bottomBack, transform.forward, horizontalSection, 4, bottomSpheres);
 
             float varticalSection = (topFront.transform.position - bottomFront.transform.position).magnitude * 0.1f; // magnitude / 10f
-            CreateMiddleSpheres(bottomFront, transform.up, varticalSection, 9, FrontSpheres);
+            CreateMiddleSpheres(bottomFront, transform.up, varticalSection, 9, frontSpheres);
         }
     }
 }

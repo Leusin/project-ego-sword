@@ -39,7 +39,7 @@ namespace ProjectEgoSword
 
             if (monoBehaviour.RigidbodyComponent.linearVelocity.y < 0f)
             {
-                foreach (GameObject obj in monoBehaviour.BottomSpheres)
+                foreach (GameObject obj in monoBehaviour.bottomSpheres)
                 {
                     Debug.DrawRay(obj.transform.position, -Vector3.up * 0.7f, Color.yellow);
 

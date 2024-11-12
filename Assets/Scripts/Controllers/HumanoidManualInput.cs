@@ -1,7 +1,7 @@
 using ProjectEgoSword;
 using UnityEngine;
 
-public class HumonoidManualInput : ManualInput
+public class HumanoidManualInput : ManualInput
 {
     private HumanoidController _humanoidController;
 

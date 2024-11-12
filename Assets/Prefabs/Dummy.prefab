@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6732867446960170414}
   - component: {fileID: 7624737494205545883}
   - component: {fileID: 6242522687244576180}
+  - component: {fileID: 8761435558080088044}
   m_Layer: 10
   m_Name: Dummy
   m_TagString: Untagged
@@ -118,15 +119,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c72d8a19acd0b9343846d5c661b11755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponMountPosition: {fileID: 0}
-  animator: {fileID: 7540216939694052879}
+  skinedMeshAnimator: {fileID: 7540216939694052879}
   ColliderEdgePrefab: {fileID: 2875485982597503087, guid: dc9bc34ef6b83844b96a8215a4db5c32, type: 3}
+  WeaponMountPosition: {fileID: 0}
+  move: {x: 0, y: 0}
   jump: 0
-  BottomSpheres: []
-  FrontSpheres: []
+  attack: 0
+  bottomSpheres: []
+  frontSpheres: []
   ragdollParts: []
+  collidingParts: []
   gravityMultiplier: 0
   pullMultiplier: 0
+--- !u!114 &8761435558080088044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783366705162258785}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7079548252260c1459c8b86aefc5188e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3344808647715164098
 GameObject:
   m_ObjectHideFlags: 0

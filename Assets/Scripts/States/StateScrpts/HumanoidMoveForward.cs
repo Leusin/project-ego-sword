@@ -42,7 +42,7 @@ namespace ProjectEgoSword
         {
             if (!CheckFront(monoBehaviour))
             {
-                monoBehaviour.transform.Translate(Vector3.forward * Time.deltaTime * speed * speedGraph.Evaluate(stateInfo.normalizedTime));
+                monoBehaviour.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
             }
         }
 
@@ -56,14 +56,14 @@ namespace ProjectEgoSword
 
                     if (monoBehaviour.move.x > 0)
                     {
-                        rotate = Quaternion.Euler(0f, 90f, 0f);
+                        rotate = Quaternion.identity;
                     }
                     else if (monoBehaviour.move.x < 0)
                     {
-                        rotate = Quaternion.Euler(0f, -90f, 0f);
+                        rotate = Quaternion.Euler(0f, 180f, 0f);
                     }
 
-                    monoBehaviour.transform.Translate(Vector3.forward * Time.deltaTime * speed * speedGraph.Evaluate(stateInfo.normalizedTime));
+                    monoBehaviour.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
                     monoBehaviour.transform.rotation = rotate;
                 }
             }
@@ -77,7 +77,7 @@ namespace ProjectEgoSword
         {
             if (monoBehaviour.RigidbodyComponent.linearVelocity.y < 0f)
             {
-                foreach (GameObject obj in monoBehaviour.FrontSpheres)
+                foreach (GameObject obj in monoBehaviour.frontSpheres)
                 {
                     Debug.DrawRay(obj.transform.position, monoBehaviour.transform.forward * 0.3f, Color.yellow);
                     RaycastHit hit;
