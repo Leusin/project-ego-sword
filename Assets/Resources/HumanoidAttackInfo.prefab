@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4808161983429327315}
   - component: {fileID: -1134791622808892144}
+  - component: {fileID: 8078651677167542454}
   m_Layer: 0
   m_Name: HumanoidAttackInfo
   m_TagString: Untagged
@@ -53,4 +54,18 @@ MonoBehaviour:
   currentHits: 0
   isRegisterd: 0
   isFinished: 0
-  AttackAbility: {fileID: 0}
+  attackAbility: {fileID: 0}
+--- !u!114 &8078651677167542454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583030298506657069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d1416323dbe7b40b935474cb6e20a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolObjectType: 0
+  scheduledOffTime: 5

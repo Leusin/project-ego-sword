@@ -22,5 +22,10 @@ namespace ProjectEgoSword
             isRegisterd = false;
             isFinished = false;
         }
+
+        private void OnDisable()
+        {
+            isFinished = true;
+        }
     }
 }

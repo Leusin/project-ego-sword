@@ -17,20 +17,27 @@ namespace ProjectEgoSword
 
         public List<RuntimeAnimatorController> deathAnimators = new List<RuntimeAnimatorController>();
 
+        // -----
+
+        private List<AttackInfo> _finishedAttacks = new List<AttackInfo>();
+
         private AttackManager _attackManager;
+        private PoolManager _poolManager;
 
         public override void OnStart(Animator animator)
         {
             _attackManager = AttackManager.Instance;
+            _poolManager = PoolManager.Instance;
         }
 
         public override void OnEnter(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             animator.SetBool(monoBehaviour.hashAttack, false);
 
-            GameObject obj = Instantiate(Resources.Load("HumanoidAttackInfo", typeof(GameObject))) as GameObject;
+            GameObject obj = _poolManager.GetObject(PoolObjectType.HUMANOID_ATTACKINFO);
             HumanoidAttackInfo info = obj.GetComponent<HumanoidAttackInfo>();
 
+            obj.SetActive(true);
             info.ResetInfo(this, monoBehaviour);
 
             if (!_attackManager.currentAttacks.Contains(info))
@@ -75,7 +82,7 @@ namespace ProjectEgoSword
 
         public void DeregisterAttack(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if(stateInfo.normalizedTime >= endAttackTime)
+            if (stateInfo.normalizedTime >= endAttackTime)
             {
                 foreach (AttackInfo info in _attackManager.currentAttacks)
                 {
@@ -89,7 +96,7 @@ namespace ProjectEgoSword
                     if (humanoidAttackInfo.attackAbility == this && !info.isFinished)
                     {
                         info.isFinished = true;
-                        Destroy(info.gameObject);
+                        info.GetComponent<PoolObject>().TurnOff();
                     }
                 }
             }
@@ -97,9 +104,22 @@ namespace ProjectEgoSword
 
         public void ClearAttack()
         {
-            for (int i =0; i < _attackManager.currentAttacks.Count; i++)
+            _finishedAttacks.Clear();
+
+            foreach (AttackInfo info in _attackManager.currentAttacks)
             {
-                _attackManager.currentAttacks.RemoveAt(i);
+                if (info == null || info.isFinished)
+                {
+                    _finishedAttacks.Add(info);
+                }
+            }
+
+            foreach (AttackInfo info in _finishedAttacks)
+            {
+                if (_attackManager.currentAttacks.Contains(info))
+                {
+                    _attackManager.currentAttacks.Remove(info);
+                }
             }
         }
 
