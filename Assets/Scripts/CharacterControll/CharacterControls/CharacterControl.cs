@@ -15,6 +15,7 @@ public class CharacterControl : MonoBehaviour
 
     [Header("Setup")]
     public Animator skinedMeshAnimator;
+    public Material material;
     public GameObject ColliderEdgePrefab;
 
     public List<Collider> ragdollParts = new List<Collider>();
@@ -68,6 +69,24 @@ public class CharacterControl : MonoBehaviour
                     c.gameObject.AddComponent<TriggerDetector>();
 
                 }
+            }
+        }
+    }
+
+    public void ChangeMaterial()
+    {
+        if(material == null)
+        {
+            Debug.LogError("No material specifies");
+        }
+
+        Renderer[] arrRenderer = GetComponentsInChildren<Renderer>();
+
+        foreach (Renderer r in arrRenderer)
+        {
+            if (r.gameObject != gameObject)
+            {
+                r.material = material;
             }
         }
     }
