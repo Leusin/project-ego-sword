@@ -1,10 +1,21 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectEgoSword
 {
+    public enum GeneralBodyPart
+    {
+        Upper,
+        Lower,
+        Arm,
+        Leg,
+    }
 
     public class TriggerDetector : MonoBehaviour
     {
+        public GeneralBodyPart generalBodyPart;
+        public List<Collider> collidingParts = new List<Collider>();
+
         private CharacterControl _owner;
 
         private void Awake()
@@ -31,17 +42,17 @@ namespace ProjectEgoSword
                 return;
             }
 
-            if (!_owner.collidingParts.Contains(other))
+            if (!collidingParts.Contains(other))
             {
-                _owner.collidingParts.Add(other);
+                collidingParts.Add(other);
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (_owner.collidingParts.Contains(other))
+            if (collidingParts.Contains(other))
             {
-                _owner.collidingParts.Remove(other);
+                collidingParts.Remove(other);
             }
         }
     }

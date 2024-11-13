@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -63,56 +61,6 @@ namespace ProjectEgoSword
             this.enabled = false;
         }
 
-        // -----
-
-        private void Awake()
-        {
-            bool switchBack = false;
-
-            if(IsFacingForward())
-            {
-                switchBack = true;
-            }
-
-            FaceForward(true);
-
-            SetRagdollParts();
-            SetColliderSphere();
-
-            if(switchBack)
-            {
-                FaceForward(false);
-            }
-        }
-
-        private void Start()
-        {
-            SceneLinkedSMB<HumanoidController>.Initialise(skinedMeshAnimator, this);
-        }
-
-        //private IEnumerator RagdollTest()
-        //{
-        //    yield return new WaitForSeconds(5f);
-        //    RigidbodyComponent.AddForce(200f * Vector3.up);
-        //    yield return new WaitForSeconds(0.5f);
-        //    TurnOnRagdoll();
-        //}
-
-        private void FixedUpdate()
-        {
-            if (RigidbodyComponent.linearVelocity.y < 0f) // Player Going Down
-            {
-                RigidbodyComponent.linearVelocity += (-Vector3.up * gravityMultiplier);
-            }
-
-            if (RigidbodyComponent.linearVelocity.y > 0f && jump) // Player Going Up
-            {
-                RigidbodyComponent.linearVelocity += (-Vector3.up * pullMultiplier);
-            }
-        }
-
-        // -----
-
         public void CreateMiddleSpheres(GameObject start, Vector3 direction, float section, int interactions, List<GameObject> spheresList)
         {
             for (int i = 0; i < interactions; i++)
@@ -157,7 +105,7 @@ namespace ProjectEgoSword
 
         public void FaceForward(bool forward)
         {
-            if(forward)
+            if (forward)
             {
                 transform.rotation = Quaternion.identity;
             }
@@ -179,20 +127,55 @@ namespace ProjectEgoSword
             }
         }
 
-        private void SetRagdollParts()
-        {
-            Collider[] colliders = GetComponentsInChildren<Collider>();
+        // -----
 
-            foreach (Collider c in colliders)
+        private void Awake()
+        {
+            bool switchBack = false;
+
+            if(IsFacingForward())
             {
-                if(c.gameObject != gameObject)
-                {
-                    c.isTrigger = true;
-                    ragdollParts.Add(c);
-                    c.gameObject.AddComponent<TriggerDetector>();
-                }
+                switchBack = true;
+            }
+
+            FaceForward(true);
+
+            SetColliderSphere();
+
+            if(switchBack)
+            {
+                FaceForward(false);
             }
         }
+
+        private void Start()
+        {
+            SceneLinkedSMB<HumanoidController>.Initialise(skinedMeshAnimator, this);
+        }
+
+        //private IEnumerator RagdollTest()
+        //{
+        //    yield return new WaitForSeconds(5f);
+        //    RigidbodyComponent.AddForce(200f * Vector3.up);
+        //    yield return new WaitForSeconds(0.5f);
+        //    TurnOnRagdoll();
+        //}
+
+        private void FixedUpdate()
+        {
+            if (RigidbodyComponent.linearVelocity.y < 0f) // Player Going Down
+            {
+                RigidbodyComponent.linearVelocity += (-Vector3.up * gravityMultiplier);
+            }
+
+            if (RigidbodyComponent.linearVelocity.y > 0f && jump) // Player Going Up
+            {
+                RigidbodyComponent.linearVelocity += (-Vector3.up * pullMultiplier);
+            }
+        }
+
+        // -----
+
 
         private void SetColliderSphere()
         {

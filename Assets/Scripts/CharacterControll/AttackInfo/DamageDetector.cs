@@ -5,6 +5,8 @@ namespace ProjectEgoSword
     public class DamageDetector : MonoBehaviour
     {
         private CharacterControl _control;
+        private GeneralBodyPart _damagedPart;
+
         private AttackManager _attackManager;
 
         private void Awake()
@@ -68,13 +70,17 @@ namespace ProjectEgoSword
 
         private bool IsCollided(AttackInfo info)
         {
-            foreach (Collider collider in _control.collidingParts)
+            foreach(TriggerDetector trigger in _control.GetAllTriggers())
             {
-                foreach (string name in info.colliderNames)
+                foreach (Collider collider in trigger.collidingParts)
                 {
-                    if (name == collider.gameObject.name)
+                    foreach (string name in info.colliderNames)
                     {
-                        return true;
+                        if (name == collider.gameObject.name)
+                        {
+                            _damagedPart = trigger.generalBodyPart;
+                            return true;
+                        }
                     }
                 }
             }
@@ -84,7 +90,7 @@ namespace ProjectEgoSword
 
         private void TakeDamage(AttackInfo info)
         {
-            Debug.Log(info.attacker.gameObject.name + " hits: " + this.gameObject.name);
+            Debug.Log(info.attacker.gameObject.name + " hits: " + this.gameObject.name + "(" + _damagedPart.ToString() + ")");
 
             HumanoidAttackInfo humanoidAttackInfo = info as HumanoidAttackInfo;
             if (humanoidAttackInfo != null)
