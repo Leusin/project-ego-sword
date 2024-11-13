@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a603787206e660640939166f9fafa314, type: 3}
-  m_Name: Sample_HumanoidForceTransition_JumpDown
+  m_Script: {fileID: 11500000, guid: 8025b0213f0df2640a187a3cb8868b23, type: 3}
+  m_Name: Sample_GroundDetector
   m_EditorClassIdentifier: 
-  transitionTiming: 1
+  checkTime: 0.1
+  distance: 0.05

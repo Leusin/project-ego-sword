@@ -4,7 +4,7 @@ namespace ProjectEgoSword
 {
     public enum PoolObjectType
     {
-        HUMANOID_ATTACKINFO = 0,
+        ATTACKINFO = 0,
     }
 
     public class PoolObjectLoader : MonoBehaviour
@@ -15,9 +15,9 @@ namespace ProjectEgoSword
 
             switch (objType)
             {
-                case PoolObjectType.HUMANOID_ATTACKINFO:
+                case PoolObjectType.ATTACKINFO:
                     {
-                        obj = Instantiate(Resources.Load("HumanoidAttackInfo") as GameObject);
+                        obj = Instantiate(Resources.Load("AttackInfo") as GameObject);
                         break;
                     }
             }

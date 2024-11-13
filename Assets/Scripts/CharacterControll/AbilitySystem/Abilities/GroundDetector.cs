@@ -3,18 +3,18 @@ using UnityEngine;
 
 namespace ProjectEgoSword
 {
-    [CreateAssetMenu(fileName = "StateData", menuName = "ProjectEgoSword/AbilityData/HumanoidGroundDetector")]
-    public class HumanoidGroundDetector : StateData<HumanoidController>
+    [CreateAssetMenu(fileName = "StateData", menuName = "ProjectEgoSword/AbilityData/GroundDetector")]
+    public class GroundDetector : StateData<CharacterControl>
     {
         [Range(0.01f, 1f)]
         public float checkTime;
         public float distance;
 
-        public override void OnEnter(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        public override void OnEnter(CharacterControl monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
         }
 
-        public override void UpdateAbility(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        public override void UpdateAbility(CharacterControl monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             if (stateInfo.normalizedTime >= checkTime)
             {
@@ -23,13 +23,13 @@ namespace ProjectEgoSword
             }
         }
 
-        public override void OnExit(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        public override void OnExit(CharacterControl monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
         }
 
         // -----
 
-        private bool IsGrounded(HumanoidController monoBehaviour)
+        private bool IsGrounded(CharacterControl monoBehaviour)
         {
             if (monoBehaviour.RigidbodyComponent.linearVelocity.y > -0.001f &&
                 monoBehaviour.RigidbodyComponent.linearVelocity.y <= 0f)

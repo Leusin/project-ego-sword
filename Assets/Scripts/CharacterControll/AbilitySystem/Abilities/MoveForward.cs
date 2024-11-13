@@ -2,19 +2,19 @@ using UnityEngine;
 
 namespace ProjectEgoSword
 {
-    [CreateAssetMenu(fileName = "StateData", menuName = "ProjectEgoSword/AbilityData/HumanoidMoveForward")]
-    public class HumanoidMoveForward : StateData<HumanoidController>
+    [CreateAssetMenu(fileName = "StateData", menuName = "ProjectEgoSword/AbilityData/MoveForward")]
+    public class MoveForward : StateData<CharacterControl>
     {
         public bool constant;
         public AnimationCurve speedGraph;
         public float speed;
         public float blockDistance;
 
-        public override void OnEnter(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        public override void OnEnter(CharacterControl monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
         }
 
-        public override void UpdateAbility(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        public override void UpdateAbility(CharacterControl monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             if (monoBehaviour.jump)
             {
@@ -32,13 +32,13 @@ namespace ProjectEgoSword
             }
         }
 
-        public override void OnExit(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        public override void OnExit(CharacterControl monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
         }
 
         // -----
 
-        private void ConstantMove(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo)
+        private void ConstantMove(CharacterControl monoBehaviour, Animator animator, AnimatorStateInfo stateInfo)
         {
             if (!CheckFront(monoBehaviour))
             {
@@ -46,7 +46,7 @@ namespace ProjectEgoSword
             }
         }
 
-        private void ControllMove(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo)
+        private void ControllMove(CharacterControl monoBehaviour, Animator animator, AnimatorStateInfo stateInfo)
         {
             if (monoBehaviour.move.sqrMagnitude > 0f)
             {
@@ -73,7 +73,7 @@ namespace ProjectEgoSword
             }
         }
 
-        private bool CheckFront(HumanoidController monoBehaviour)
+        private bool CheckFront(CharacterControl monoBehaviour)
         {
             if (monoBehaviour.RigidbodyComponent.linearVelocity.y < 0f)
             {
