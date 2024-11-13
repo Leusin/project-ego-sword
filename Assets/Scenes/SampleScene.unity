@@ -1862,6 +1862,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6378753144997988709, guid: b523297921991a44dba8e908382b1551, type: 3}
   m_PrefabInstance: {fileID: 367848359492084447}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &460575058 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 852262076791179439, guid: b523297921991a44dba8e908382b1551, type: 3}
+  m_PrefabInstance: {fileID: 367848359492084447}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &468953687 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3135921509060577837, guid: 0f7886ba8501fec4f90c567ba4036372, type: 3}
@@ -5269,6 +5274,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1839272828 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6951535191350745151, guid: b523297921991a44dba8e908382b1551, type: 3}
+  m_PrefabInstance: {fileID: 367848359492084447}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1855094750
 GameObject:
   m_ObjectHideFlags: 0
@@ -5355,6 +5365,33 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1855094750}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1887674809 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3476434194155820203, guid: b523297921991a44dba8e908382b1551, type: 3}
+  m_PrefabInstance: {fileID: 367848359492084447}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1887674816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887674809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1901457dbab5ed64d85bcc4c385cd3a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 0}
+  CurrentObjects:
+  - {fileID: 1839272828}
+  - {fileID: 460575058}
+  CurrentMaterials:
+  - {fileID: -840037777384891287, guid: 0f7886ba8501fec4f90c567ba4036372, type: 3}
+  - {fileID: -4565884009001823619, guid: 0f7886ba8501fec4f90c567ba4036372, type: 3}
+  NewMaterials:
+  - {fileID: 2100000, guid: 534e36d908e597142b29c1b43091edad, type: 2}
+  - {fileID: 2100000, guid: fcb28d732ac3681498102aa5ae21d40e, type: 2}
 --- !u!224 &1910178381 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224091927000801720, guid: f77f88b14a477764bb65a49d28c02d33, type: 3}
@@ -5921,10 +5958,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1010526443576394574, guid: b523297921991a44dba8e908382b1551, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fcb28d732ac3681498102aa5ae21d40e, type: 2}
     - target: {fileID: 3476434194155820203, guid: b523297921991a44dba8e908382b1551, type: 3}
       propertyPath: m_Name
       value: Humanoid
       objectReference: {fileID: 0}
+    - target: {fileID: 5573275928056998355, guid: b523297921991a44dba8e908382b1551, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 534e36d908e597142b29c1b43091edad, type: 2}
+    - target: {fileID: 6274485336423138475, guid: b523297921991a44dba8e908382b1551, type: 3}
+      propertyPath: material
+      value: 
+      objectReference: {fileID: 2100000, guid: fcb28d732ac3681498102aa5ae21d40e, type: 2}
     - target: {fileID: 6378753144997988709, guid: b523297921991a44dba8e908382b1551, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5968,7 +6017,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3476434194155820203, guid: b523297921991a44dba8e908382b1551, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1887674816}
   m_SourcePrefab: {fileID: 100100000, guid: b523297921991a44dba8e908382b1551, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
