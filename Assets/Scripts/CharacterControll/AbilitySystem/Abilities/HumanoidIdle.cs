@@ -12,29 +12,29 @@ namespace ProjectEgoSword
 
         public override void OnEnter(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            animator.SetBool(monoBehaviour.hashJump, false);
-            animator.SetBool(monoBehaviour.hashAttack, false);
+            animator.SetBool(CharacterControl.TransitionParameter.Jump.ToString(), false);
+            animator.SetBool(CharacterControl.TransitionParameter.Attack.ToString(), false);
         }
 
         public override void UpdateAbility(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             if (!animator.IsInTransition(layerIndex))
             {
-                if (monoBehaviour.attack && !animator.GetBool(monoBehaviour.hashAttack))
+                if (monoBehaviour.attack && !animator.GetBool(CharacterControl.TransitionParameter.Attack.ToString()))
                 {
-                    animator.SetBool(monoBehaviour.hashAttack, true);
+                    animator.SetBool(CharacterControl.TransitionParameter.Attack.ToString(), true);
                 }
 
-                if (monoBehaviour.jump && !animator.GetBool(monoBehaviour.hashJump))
+                if (monoBehaviour.jump && !animator.GetBool(CharacterControl.TransitionParameter.Jump.ToString()))
                 {
-                    animator.SetBool(monoBehaviour.hashJump, true);
+                    animator.SetBool(CharacterControl.TransitionParameter.Jump.ToString(), true);
                 }
 
                 Vector2 move = monoBehaviour.move;
 
                 if (move.magnitude > 0)
                 {
-                    animator.SetBool(monoBehaviour.hashMove, true);
+                    animator.SetBool(CharacterControl.TransitionParameter.Move.ToString(), true);
                 }
             }
         }

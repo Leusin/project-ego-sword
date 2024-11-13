@@ -15,8 +15,6 @@ namespace ProjectEgoSword
         public float lethalRange;
         public int maxHits;
 
-        public List<RuntimeAnimatorController> deathAnimators = new List<RuntimeAnimatorController>();
-
         // -----
 
         private List<AttackInfo> _finishedAttacks = new List<AttackInfo>();
@@ -32,7 +30,7 @@ namespace ProjectEgoSword
 
         public override void OnEnter(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            animator.SetBool(monoBehaviour.hashAttack, false);
+            animator.SetBool(CharacterControl.TransitionParameter.Attack.ToString(), false);
 
             GameObject obj = _poolManager.GetObject(PoolObjectType.HUMANOID_ATTACKINFO);
             HumanoidAttackInfo info = obj.GetComponent<HumanoidAttackInfo>();
@@ -121,12 +119,6 @@ namespace ProjectEgoSword
                     _attackManager.currentAttacks.Remove(info);
                 }
             }
-        }
-
-        public RuntimeAnimatorController GetDeathAnimator()
-        {
-            int index = Random.Range(0, deathAnimators.Count);
-            return deathAnimators[index];
         }
     }
 }

@@ -18,7 +18,7 @@ namespace ProjectEgoSword
         {
             if (monoBehaviour.jump)
             {
-                animator.SetBool(monoBehaviour.hashJump, true);
+                animator.SetBool(CharacterControl.TransitionParameter.Jump.ToString(), true);
                 return;
             }
 
@@ -69,7 +69,7 @@ namespace ProjectEgoSword
             }
             else
             {
-                animator.SetBool(monoBehaviour.hashMove, false);
+                animator.SetBool(CharacterControl.TransitionParameter.Move.ToString(), false);
             }
         }
 

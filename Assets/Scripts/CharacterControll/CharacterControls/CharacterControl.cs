@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class CharacterControl : MonoBehaviour
 {
+    public enum TransitionParameter
+    {
+        Move,
+        Jump,
+        Attack,
+        ForceTransition,
+        Grounded,
+    }
+
     [Header("Setup")]
     public Animator skinedMeshAnimator;
     public GameObject ColliderEdgePrefab;

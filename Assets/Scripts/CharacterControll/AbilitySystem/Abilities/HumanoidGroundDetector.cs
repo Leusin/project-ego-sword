@@ -19,7 +19,7 @@ namespace ProjectEgoSword
             if (stateInfo.normalizedTime >= checkTime)
             {
                 bool isGrounded = IsGrounded(monoBehaviour);
-                animator.SetBool(monoBehaviour.hashGrounded, isGrounded);
+                animator.SetBool(CharacterControl.TransitionParameter.Grounded.ToString(), isGrounded);
             }
         }
 

@@ -17,13 +17,13 @@ namespace ProjectEgoSword
         {
             if (stateInfo.normalizedTime >= transitionTiming)
             {
-                animator.SetBool(monoBehaviour.hashForceTransition, true);
+                animator.SetBool(CharacterControl.TransitionParameter.ForceTransition.ToString(), true);
             }
         }
 
         public override void OnExit(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            animator.SetBool(monoBehaviour.hashForceTransition, false);
+            animator.SetBool(CharacterControl.TransitionParameter.ForceTransition.ToString(), false);
         }
     }
 }

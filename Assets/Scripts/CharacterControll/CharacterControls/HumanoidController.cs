@@ -4,7 +4,6 @@ using UnityEngine.AI;
 
 namespace ProjectEgoSword
 {
-
     public class HumanoidController : CharacterControl
     {
         public Transform WeaponMountPosition;
@@ -37,12 +36,6 @@ namespace ProjectEgoSword
         //
         // FSM 전이 매개 변수(Transition Parameter)
         //
-
-        public readonly int hashMove = Animator.StringToHash("Move");
-        public readonly int hashJump = Animator.StringToHash("Jump");
-        public readonly int hashAttack = Animator.StringToHash("Attack");
-        public readonly int hashForceTransition = Animator.StringToHash("ForceTransition");
-        public readonly int hashGrounded = Animator.StringToHash("Grounded");
 
         // -----
 

@@ -7,8 +7,8 @@ namespace ProjectEgoSword
     {
         public override void OnEnter(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            animator.SetBool(monoBehaviour.hashJump, false);
-            animator.SetBool(monoBehaviour.hashMove, false);
+            animator.SetBool(CharacterControl.TransitionParameter.Jump.ToString(), false);
+            animator.SetBool(CharacterControl.TransitionParameter.Move.ToString(), false);
         }
 
         public override void UpdateAbility(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -16,7 +16,7 @@ namespace ProjectEgoSword
             // TEMP
             if (animator.IsInTransition(layerIndex))
             {
-                animator.SetBool(monoBehaviour.hashJump, false);
+                animator.SetBool(CharacterControl.TransitionParameter.Jump.ToString(), false);
             }
         }
 

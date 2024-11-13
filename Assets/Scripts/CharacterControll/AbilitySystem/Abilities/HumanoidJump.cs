@@ -12,7 +12,7 @@ namespace ProjectEgoSword
         public override void OnEnter(HumanoidController monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             monoBehaviour.RigidbodyComponent.AddForce(Vector3.up * jumpForce);
-            animator.SetBool(monoBehaviour.hashGrounded, false);
+            animator.SetBool(CharacterControl.TransitionParameter.Grounded.ToString(), false);
         }
 
         public override void UpdateAbility(HumanoidController monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

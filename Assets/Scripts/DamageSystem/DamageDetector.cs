@@ -8,6 +8,7 @@ namespace ProjectEgoSword
         private GeneralBodyPart _damagedPart;
 
         private AttackManager _attackManager;
+        private DeathAnimationManager _deathAnimationManager;
 
         private void Awake()
         {
@@ -17,6 +18,7 @@ namespace ProjectEgoSword
         private void Start()
         {
             _attackManager = AttackManager.Instance;
+            _deathAnimationManager = DeathAnimationManager.Instance;
         }
 
         private void Update()
@@ -92,12 +94,7 @@ namespace ProjectEgoSword
         {
             Debug.Log(info.attacker.gameObject.name + " hits: " + this.gameObject.name + "(" + _damagedPart.ToString() + ")");
 
-            HumanoidAttackInfo humanoidAttackInfo = info as HumanoidAttackInfo;
-            if (humanoidAttackInfo != null)
-            {
-                _control.skinedMeshAnimator.runtimeAnimatorController = humanoidAttackInfo.attackAbility.GetDeathAnimator();
-            }
-
+            _control.skinedMeshAnimator.runtimeAnimatorController = _deathAnimationManager.GetAnimator(_damagedPart);
             info.currentHits++;
 
             _control.GetComponent<Collider>().enabled = false;
