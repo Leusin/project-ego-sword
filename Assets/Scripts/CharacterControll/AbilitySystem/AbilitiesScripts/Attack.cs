@@ -48,6 +48,7 @@ namespace ProjectEgoSword
         {
             RegisterAttack(monoBehaviour, animator, stateInfo, layerIndex);
             DeregisterAttack(monoBehaviour, animator, stateInfo, layerIndex);
+            CheckCombo(monoBehaviour, animator, stateInfo, layerIndex);
         }
 
         public override void OnExit(CharacterControl monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -59,15 +60,14 @@ namespace ProjectEgoSword
 
         public void CheckCombo(CharacterControl monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if (stateInfo.normalizedTime >= startAttackTime + (endAttackTime - startAttackTime) / 3f)
+            if (stateInfo.normalizedTime >= startAttackTime + ((endAttackTime - startAttackTime) * 0.3f))
             {
-                if (stateInfo.normalizedTime < endAttackTime)
+                if (stateInfo.normalizedTime < endAttackTime + ((endAttackTime - startAttackTime) * 0.5f))
                 {
-                    CharacterControl control = monoBehaviour;
-
-                    if (control.attack)
+                    if (monoBehaviour.attack)
                     {
                         Debug.Log("uppercut triggered");
+                        animator.SetBool(CharacterControl.TransitionParameter.Attack.ToString(), true);
                     }
                 }
             }
@@ -113,7 +113,7 @@ namespace ProjectEgoSword
 
             foreach (AttackInfo info in _attackManager.currentAttacks)
             {
-                if (info == null || info.isFinished)
+                if (info == null || info.attackAbility == this)
                 {
                     _finishedAttacks.Add(info);
                 }

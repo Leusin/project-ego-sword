@@ -1,7 +1,7 @@
 
 namespace ProjectEgoSword
 {
-    public class HumanoidSMB : SceneLinkedSMB<HumanoidController>
+    public class CharacterSMB : SceneLinkedSMB<CharacterControl>
     {
     }
 }
