@@ -67,12 +67,22 @@ namespace ProjectEgoSword
                         TakeDamage(info);
                     }
                 }
+                else
+                {
+                    float dist = Vector3.SqrMagnitude(gameObject.transform.position - info.attacker.transform.position);
+                    Debug.Log(gameObject.name + " distance: " + dist.ToString());
+
+                    if (dist <= info.lethalRange)
+                    {
+
+                    }
+                }
             }
         }
 
         private bool IsCollided(AttacCondition info)
         {
-            foreach(TriggerDetector trigger in _control.GetAllTriggers())
+            foreach (TriggerDetector trigger in _control.GetAllTriggers())
             {
                 foreach (Collider collider in trigger.collidingParts)
                 {
@@ -92,7 +102,10 @@ namespace ProjectEgoSword
 
         private void TakeDamage(AttacCondition info)
         {
-            CameraManager.Instance.ShakeCamera(0.25f);
+            if (info.mustCollide)
+            {
+                CameraManager.Instance.ShakeCamera(0.25f);
+            }
 
             Debug.Log(info.attacker.gameObject.name + " hits: " + this.gameObject.name + "(" + _damagedPart.ToString() + ")");
 

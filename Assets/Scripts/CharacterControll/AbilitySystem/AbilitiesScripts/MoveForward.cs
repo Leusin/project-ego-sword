@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ProjectEgoSword
 {
-    [CreateAssetMenu(fileName = "StateData", menuName = "ProjectEgoSword/AbilityData/MoveForward")]
+    [CreateAssetMenu(fileName = "New State", menuName = "ProjectEgoSword/AbilityData/MoveForward")]
     public class MoveForward : StateData<CharacterControl>
     {
         public bool constant;

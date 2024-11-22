@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ProjectEgoSword
 {
-    [CreateAssetMenu(fileName = "StateData", menuName = "ProjectEgoSword/AbilityData/ForceTransition")]
+    [CreateAssetMenu(fileName = "New State", menuName = "ProjectEgoSword/AbilityData/ForceTransition")]
     public class ForceTransition : StateData<CharacterControl>
     {
         [Range(0.01f, 1f)]

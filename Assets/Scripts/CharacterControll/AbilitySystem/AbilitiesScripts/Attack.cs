@@ -70,8 +70,11 @@ namespace ProjectEgoSword
                 {
                     if (monoBehaviour.attack)
                     {
-                        Debug.Log("uppercut triggered");
                         animator.SetBool(CharacterControl.TransitionParameter.Attack.ToString(), true);
+                        if (debug)
+                        {
+                            Debug.Log("uppercut triggered");
+                        }
                     }
                 }
             }
@@ -85,7 +88,7 @@ namespace ProjectEgoSword
                 {
                     if (!info.isRegisterd && info.attackAbility == this)
                     {
-                        if(debug)
+                        if (debug)
                         {
                             Debug.Log(this.name + " registered: " + stateInfo.normalizedTime);
                         }

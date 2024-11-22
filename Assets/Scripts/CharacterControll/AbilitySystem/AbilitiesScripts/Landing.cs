@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ProjectEgoSword
 {
-    [CreateAssetMenu(fileName = "StateData", menuName = "ProjectEgoSword/AbilityData/Landing")]
+    [CreateAssetMenu(fileName = "New State", menuName = "ProjectEgoSword/AbilityData/Landing")]
     public class Landing : StateData<CharacterControl>
     {
         public override void OnEnter(CharacterControl monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

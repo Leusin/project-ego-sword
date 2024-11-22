@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ProjectEgoSword
 {
-    [CreateAssetMenu(fileName = "StateData", menuName = "ProjectEgoSword/AbilityData/CheckAttack")]
+    [CreateAssetMenu(fileName = "New State", menuName = "ProjectEgoSword/AbilityData/CheckAttack")]
     public class CheckAttack : StateData<CharacterControl>
     {
         public override void OnStart(Animator animator)

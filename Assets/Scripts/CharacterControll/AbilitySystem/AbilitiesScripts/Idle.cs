@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ProjectEgoSword
 {
-    [CreateAssetMenu(fileName = "StateData", menuName = "ProjectEgoSword/AbilityData/Idle")]
+    [CreateAssetMenu(fileName = "New State", menuName = "ProjectEgoSword/AbilityData/Idle")]
     public class Idle : StateData<CharacterControl>
     {
         public override void OnStart(Animator animator)

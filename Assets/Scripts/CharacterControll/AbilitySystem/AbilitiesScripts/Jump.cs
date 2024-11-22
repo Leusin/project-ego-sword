@@ -2,13 +2,12 @@ using UnityEngine;
 
 namespace ProjectEgoSword
 {
-    [CreateAssetMenu(fileName = "StateData", menuName = "ProjectEgoSword/AbilityData/Jump")]
+    [CreateAssetMenu(fileName = "New State", menuName = "ProjectEgoSword/AbilityData/Jump")]
     public class Jump : StateData<CharacterControl>
     {
         [Range(0f, 1f)]
         public float jumpTiming;
         public float jumpForce;
-        //public AnimationCurve gravity;
         public AnimationCurve pull;
         private bool isJumped;
 

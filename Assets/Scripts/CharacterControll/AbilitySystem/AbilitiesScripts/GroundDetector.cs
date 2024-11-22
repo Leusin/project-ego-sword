@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ProjectEgoSword
 {
-    [CreateAssetMenu(fileName = "StateData", menuName = "ProjectEgoSword/AbilityData/GroundDetector")]
+    [CreateAssetMenu(fileName = "New State", menuName = "ProjectEgoSword/AbilityData/GroundDetector")]
     public class GroundDetector : StateData<CharacterControl>
     {
         [Range(0.01f, 1f)]
