@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a603787206e660640939166f9fafa314, type: 3}
-  m_Name: Sample_ForceTransition_JumpDown
+  m_Name: Sample_JumpDown_ForceTransition
   m_EditorClassIdentifier: 
   transitionTiming: 1
