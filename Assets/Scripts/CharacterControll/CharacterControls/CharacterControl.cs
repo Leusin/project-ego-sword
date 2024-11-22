@@ -11,15 +11,21 @@ public class CharacterControl : MonoBehaviour
         Attack,
         ForceTransition,
         Grounded,
+        TransitionIndex,
     }
 
     [Header("Setup")]
     public Animator skinedMeshAnimator;
     public Material material;
-    public GameObject ColliderEdgePrefab;
+    public GameObject colliderEdgePrefab;
+    public LedgeChecker ledgeChecker;
 
     [Header("Input")]
     public Vector2 move;
+    public bool moveLeft;
+    public bool moveRight;
+    public bool moveUp;
+    public bool moveDown;
     public bool jump;
     public bool attack;
 
@@ -145,7 +151,7 @@ public class CharacterControl : MonoBehaviour
 
     public GameObject CreateEdgeSphere(Vector3 position)
     {
-        GameObject obj = Instantiate(ColliderEdgePrefab, position, Quaternion.identity);
+        GameObject obj = Instantiate(colliderEdgePrefab, position, Quaternion.identity);
         return obj;
     }
 
@@ -187,6 +193,10 @@ public class CharacterControl : MonoBehaviour
             FaceForward(false);
         }
 
+        if(!ledgeChecker)
+        {
+            ledgeChecker = GetComponentInChildren<LedgeChecker>();
+        }
     }
 
     private void Start()

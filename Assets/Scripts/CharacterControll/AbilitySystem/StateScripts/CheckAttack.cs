@@ -5,11 +5,6 @@ namespace ProjectEgoSword
     [CreateAssetMenu(fileName = "New State", menuName = "ProjectEgoSword/AbilityData/CheckAttack")]
     public class CheckAttack : StateData<CharacterControl>
     {
-        public override void OnStart(Animator animator)
-        {
-
-        }
-
         public override void OnEnter(CharacterControl monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
         }

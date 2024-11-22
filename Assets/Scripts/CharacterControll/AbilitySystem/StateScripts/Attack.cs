@@ -25,7 +25,7 @@ namespace ProjectEgoSword
         private AttackManager _attackManager;
         private PoolManager _poolManager;
 
-        public override void OnStart(Animator animator)
+        public override void OnStart(CharacterControl monobehavior, Animator animator)
         {
             _attackManager = AttackManager.Instance;
             _poolManager = PoolManager.Instance;

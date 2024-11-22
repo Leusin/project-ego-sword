@@ -41,7 +41,7 @@ namespace ProjectEgoSword
 
             foreach (StateData<TMonoBehaviour> data in abilityStateDatas)
             {
-                data.OnStart(animator);
+                data.OnStart(monoBehaviour, animator);
             }
         }
 

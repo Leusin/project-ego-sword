@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515d3574fe6131c4cbd142feab7f422a, type: 3}
   m_Name: Sample_ShakeCamera
   m_EditorClassIdentifier: 
-  shakeTiming: 0
+  shakeTiming: 0.85

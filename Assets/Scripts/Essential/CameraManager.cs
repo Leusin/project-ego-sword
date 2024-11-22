@@ -5,6 +5,8 @@ namespace ProjectEgoSword
 {
     public class CameraManager : Singleton<CameraManager>
     {
+        public Camera mainCamera;
+
         public CameraController CameraController
         {
             get
@@ -38,6 +40,14 @@ namespace ProjectEgoSword
             CameraController.TriggerCamera(CameraController.Trigger.Shake);
             yield return new WaitForSeconds(sec);
             CameraController.TriggerCamera(CameraController.Trigger.Default);
+        }
+
+        // -----
+
+        private void Awake()
+        {
+            GameObject obj = GameObject.Find("Main Camera");
+            mainCamera = obj.GetComponent<Camera>();
         }
     }
 }

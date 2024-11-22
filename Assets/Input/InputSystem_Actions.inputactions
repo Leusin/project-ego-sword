@@ -171,6 +171,24 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "MoveUp",
+                    "type": "Button",
+                    "id": "609a1728-f5d5-485b-a618-3b2fad5b3aed",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MoveDown",
+                    "type": "Button",
+                    "id": "1099c8b1-4dc2-4e58-954c-85aaec3bd93b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "ea425fcc-2e11-49a9-b162-2986974c7556",
@@ -368,7 +386,7 @@
                 },
                 {
                     "name": "",
-                    "id": "56ec118b-db6f-4740-8e0b-192d9bd01fa4",
+                    "id": "d518fac5-bd12-4b0b-8cda-32f5ad8dd353",
                     "path": "<XInputController>/buttonSouth",
                     "interactions": "",
                     "processors": "",
@@ -451,6 +469,72 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8dd485e4-5fb6-4979-aa44-0e887aab7962",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "MoveUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "efc2e8c3-4d7b-4e94-b54c-675339e597bf",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "MoveUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "56ec118b-db6f-4740-8e0b-192d9bd01fa4",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f81215ee-e16f-441d-9c7d-6651cd2cecea",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "MoveDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9033f84d-7896-4a44-9786-34596443a261",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "MoveDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3baded0a-0cd1-43e7-9b97-6b58a61a3f5a",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveDown",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

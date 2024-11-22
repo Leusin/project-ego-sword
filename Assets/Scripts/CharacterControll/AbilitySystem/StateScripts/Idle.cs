@@ -5,11 +5,6 @@ namespace ProjectEgoSword
     [CreateAssetMenu(fileName = "New State", menuName = "ProjectEgoSword/AbilityData/Idle")]
     public class Idle : StateData<CharacterControl>
     {
-        public override void OnStart(Animator animator)
-        {
-
-        }
-
         public override void OnEnter(CharacterControl monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             animator.SetBool(CharacterControl.TransitionParameter.Jump.ToString(), false);
