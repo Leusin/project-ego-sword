@@ -19,7 +19,7 @@ namespace ProjectEgoSword
             }
         }
 
-        public RuntimeAnimatorController GetAnimator(GeneralBodyPart generalBodyPart)
+        public RuntimeAnimatorController GetAnimator(GeneralBodyPart generalBodyPart, AttacCondition info)
         {
             SetupDeathAnimationLoader();
 
@@ -27,12 +27,22 @@ namespace ProjectEgoSword
 
             foreach(DeathAnimationData data in _deathAnimationLeader.DeathAnimationDataList)
             {
-                foreach(GeneralBodyPart part in data.generalBodyParts)
+                if(info.lunchIntoAir)
                 {
-                    if(part == generalBodyPart)
+                    if(data.lunchIntoAir)
                     {
                         _candidates.Add(data.animator);
-                        break;
+                    }
+                }
+                else
+                {
+                    foreach (GeneralBodyPart part in data.generalBodyParts)
+                    {
+                        if (part == generalBodyPart)
+                        {
+                            _candidates.Add(data.animator);
+                            break;
+                        }
                     }
                 }
             }

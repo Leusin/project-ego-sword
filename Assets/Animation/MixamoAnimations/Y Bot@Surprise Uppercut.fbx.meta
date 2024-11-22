@@ -31,13 +31,13 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Surprise Uppercut
+      name: Uppercut
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 30
       lastFrame: 60
       wrapMode: 0
-      orientationOffsetY: 0
+      orientationOffsetY: 30
       level: 0
       cycleOffset: 0
       loop: 0

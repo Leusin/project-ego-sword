@@ -8,6 +8,7 @@ namespace ProjectEgoSword
     {
         public List<GeneralBodyPart> generalBodyParts = new List<GeneralBodyPart>();
         public RuntimeAnimatorController animator;
+        public bool lunchIntoAir;
         public bool isFacingAttacker;
     }
 }

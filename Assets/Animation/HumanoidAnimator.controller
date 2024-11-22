@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityStateDatas:
+  - {fileID: 11400000, guid: aa8bcefd63a664c4f99222cc339beed8, type: 2}
   - {fileID: 11400000, guid: 2b2a48ae86e394046869712aac33c3cd, type: 2}
   - {fileID: 11400000, guid: e9e394772c35c2e48b5b678b1ff60e4f, type: 2}
   - {fileID: 11400000, guid: b1ba6cd2b47a4214098bf3cc54724f96, type: 2}
@@ -419,7 +420,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Humanoid Animator
+  m_Name: HumanoidAnimator
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Move
@@ -724,7 +725,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Surprise Uppercut Prep
+  m_Name: Uppercut Prep
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -880,7 +881,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Surprise Uppercut
+  m_Name: Uppercut
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:

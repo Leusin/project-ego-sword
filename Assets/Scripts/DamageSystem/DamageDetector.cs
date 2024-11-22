@@ -33,7 +33,7 @@ namespace ProjectEgoSword
 
         private void CheckAttacks()
         {
-            foreach (AttackInfo info in _attackManager.currentAttacks)
+            foreach (AttacCondition info in _attackManager.currentAttacks)
             {
                 if (info == null)
                 {
@@ -70,7 +70,7 @@ namespace ProjectEgoSword
             }
         }
 
-        private bool IsCollided(AttackInfo info)
+        private bool IsCollided(AttacCondition info)
         {
             foreach(TriggerDetector trigger in _control.GetAllTriggers())
             {
@@ -90,13 +90,13 @@ namespace ProjectEgoSword
             return false;
         }
 
-        private void TakeDamage(AttackInfo info)
+        private void TakeDamage(AttacCondition info)
         {
             CameraManager.Instance.ShakeCamera(0.25f);
 
             Debug.Log(info.attacker.gameObject.name + " hits: " + this.gameObject.name + "(" + _damagedPart.ToString() + ")");
 
-            _control.skinedMeshAnimator.runtimeAnimatorController = _deathAnimationManager.GetAnimator(_damagedPart);
+            _control.skinedMeshAnimator.runtimeAnimatorController = _deathAnimationManager.GetAnimator(_damagedPart, info);
             info.currentHits++;
 
             _control.GetComponent<Collider>().enabled = false;

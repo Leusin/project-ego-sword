@@ -6,10 +6,13 @@ namespace ProjectEgoSword
     [CreateAssetMenu(fileName = "StateData", menuName = "ProjectEgoSword/AbilityData/Attack")]
     public class Attack : StateData<CharacterControl>
     {
+        public bool debug;
+
         public float startAttackTime;
         public float endAttackTime;
         public List<string> colliderNames = new List<string>();
 
+        public bool lunchIntoAir;
         public bool mustCollide;
         public bool mustFaceAttacker;
         public float lethalRange;
@@ -17,7 +20,7 @@ namespace ProjectEgoSword
 
         // -----
 
-        private List<AttackInfo> _finishedAttacks = new List<AttackInfo>();
+        private List<AttacCondition> _finishedAttacks = new List<AttacCondition>();
 
         private AttackManager _attackManager;
         private PoolManager _poolManager;
@@ -33,7 +36,7 @@ namespace ProjectEgoSword
             animator.SetBool(CharacterControl.TransitionParameter.Attack.ToString(), false);
 
             GameObject obj = _poolManager.GetObject(PoolObjectType.ATTACKINFO);
-            AttackInfo info = obj.GetComponent<AttackInfo>();
+            AttacCondition info = obj.GetComponent<AttacCondition>();
 
             obj.SetActive(true);
             info.ResetInfo(this, monoBehaviour);
@@ -54,6 +57,7 @@ namespace ProjectEgoSword
         public override void OnExit(CharacterControl monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             ClearAttack();
+            animator.SetBool(CharacterControl.TransitionParameter.Attack.ToString(), false);
         }
 
         // ---
@@ -77,10 +81,15 @@ namespace ProjectEgoSword
         {
             if (startAttackTime <= stateInfo.normalizedTime && endAttackTime > stateInfo.normalizedTime)
             {
-                foreach (AttackInfo info in _attackManager.currentAttacks)
+                foreach (AttacCondition info in _attackManager.currentAttacks)
                 {
                     if (!info.isRegisterd && info.attackAbility == this)
                     {
+                        if(debug)
+                        {
+                            Debug.Log(this.name + " registered: " + stateInfo.normalizedTime);
+                        }
+
                         info.Register(this);
                     }
                 }
@@ -91,7 +100,7 @@ namespace ProjectEgoSword
         {
             if (stateInfo.normalizedTime >= endAttackTime)
             {
-                foreach (AttackInfo info in _attackManager.currentAttacks)
+                foreach (AttacCondition info in _attackManager.currentAttacks)
                 {
                     if (info == null)
                     {
@@ -102,6 +111,11 @@ namespace ProjectEgoSword
                     {
                         info.isFinished = true;
                         info.GetComponent<PoolObject>().TurnOff();
+
+                        if (debug)
+                        {
+                            Debug.Log(this.name + " de-registered: " + stateInfo.normalizedTime);
+                        }
                     }
                 }
             }
@@ -111,7 +125,7 @@ namespace ProjectEgoSword
         {
             _finishedAttacks.Clear();
 
-            foreach (AttackInfo info in _attackManager.currentAttacks)
+            foreach (AttacCondition info in _attackManager.currentAttacks)
             {
                 if (info == null || info.attackAbility == this)
                 {
@@ -119,7 +133,7 @@ namespace ProjectEgoSword
                 }
             }
 
-            foreach (AttackInfo info in _finishedAttacks)
+            foreach (AttacCondition info in _finishedAttacks)
             {
                 if (_attackManager.currentAttacks.Contains(info))
                 {

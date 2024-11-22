@@ -4,11 +4,12 @@ using UnityEngine;
 
 namespace ProjectEgoSword
 {
-    public class AttackInfo: MonoBehaviour
+    public class AttacCondition: MonoBehaviour
     {
         public CharacterControl attacker;
-        public List<string> colliderNames = new List<string>();
+        public Attack attackAbility;
 
+        public bool lunchIntoAir;
         public bool mustCollide;
         public bool mustFaceAttacker;
         public float lethalRange;
@@ -17,7 +18,7 @@ namespace ProjectEgoSword
         public bool isRegisterd;
         public bool isFinished;
 
-        public Attack attackAbility;
+        public List<string> colliderNames = new List<string>();
 
         public void ResetInfo(Attack attack, CharacterControl attacker)
         {
@@ -35,6 +36,7 @@ namespace ProjectEgoSword
             colliderNames = attack.colliderNames;
             mustCollide = attack.mustCollide;
             mustFaceAttacker = attack.mustFaceAttacker;
+            lunchIntoAir = attack.lunchIntoAir;
             lethalRange = attack.lethalRange;
             maxHits = attack.maxHits;
             currentHits = 0;

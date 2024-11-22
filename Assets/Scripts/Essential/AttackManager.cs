@@ -5,6 +5,6 @@ namespace ProjectEgoSword
 {
     public class AttackManager : Singleton<AttackManager>
     {
-        public List<AttackInfo> currentAttacks = new List<AttackInfo>();
+        public List<AttacCondition> currentAttacks = new List<AttacCondition>();
     }
 }

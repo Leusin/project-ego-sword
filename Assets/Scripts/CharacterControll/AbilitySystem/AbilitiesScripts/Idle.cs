@@ -41,6 +41,7 @@ namespace ProjectEgoSword
 
         public override void OnExit(CharacterControl monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            animator.SetBool(CharacterControl.TransitionParameter.Attack.ToString(), false);
         }
     }
 }
