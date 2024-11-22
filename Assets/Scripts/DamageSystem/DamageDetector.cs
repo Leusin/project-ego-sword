@@ -92,6 +92,8 @@ namespace ProjectEgoSword
 
         private void TakeDamage(AttackInfo info)
         {
+            CameraManager.Instance.ShakeCamera(0.25f);
+
             Debug.Log(info.attacker.gameObject.name + " hits: " + this.gameObject.name + "(" + _damagedPart.ToString() + ")");
 
             _control.skinedMeshAnimator.runtimeAnimatorController = _deathAnimationManager.GetAnimator(_damagedPart);
