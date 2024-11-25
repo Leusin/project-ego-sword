@@ -2,18 +2,25 @@ using UnityEngine;
 
 namespace ProjectEgoSword
 {
-    [CreateAssetMenu(fileName = "New State", menuName = "ProjectEgoSword/AbilityData/ToggleGravity")]
-    public class ToggleGravity : StateData<CharacterControl>
+    [CreateAssetMenu(fileName = "StateData", menuName = "ProjectEgoSword/AbilityData/ToggleBoxCollider")]
+    public class ToggleBoxCollider : StateData<CharacterControl>
     {
         public bool on;
         public bool onStart;
         public bool onEnd;
 
+        private BoxCollider _boxCollider;
+
+        public override void OnStart(CharacterControl monoBehaviour, Animator animator)
+        {
+            _boxCollider = monoBehaviour.GetComponent<BoxCollider>();
+        }
+
         public override void OnEnter(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if(onStart)
+            if (onStart)
             {
-                ToggleGrav(monobehaviour);
+                ToggleBoxCol(monobehaviour);
             }
         }
 
@@ -25,16 +32,15 @@ namespace ProjectEgoSword
         {
             if (onEnd)
             {
-                ToggleGrav(monobehaviour);
+                ToggleBoxCol(monobehaviour);
             }
         }
 
         // -----
 
-        private void ToggleGrav(CharacterControl monobehaviour)
+        private void ToggleBoxCol(CharacterControl monobehaviour)
         {
-            monobehaviour.RigidbodyComponent.linearVelocity = Vector3.zero;
-            monobehaviour.RigidbodyComponent.useGravity = on;
+            _boxCollider.enabled = on;
         }
     }
 }

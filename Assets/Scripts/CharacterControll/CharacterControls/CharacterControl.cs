@@ -15,7 +15,7 @@ public class CharacterControl : MonoBehaviour
     }
 
     [Header("Setup")]
-    public Animator skinedMeshAnimator;
+    public Animator skinnedMeshAnimator;
     public Material material;
     public GameObject colliderEdgePrefab;
     public LedgeChecker ledgeChecker;
@@ -160,8 +160,8 @@ public class CharacterControl : MonoBehaviour
         RigidbodyComponent.useGravity = false;
         RigidbodyComponent.linearVelocity = Vector3.zero;
         GetComponent<BoxCollider>().enabled = false;
-        skinedMeshAnimator.enabled = false;
-        skinedMeshAnimator.avatar = null;
+        skinnedMeshAnimator.enabled = false;
+        skinnedMeshAnimator.avatar = null;
 
         foreach (Collider c in ragdollParts)
         {
@@ -197,11 +197,13 @@ public class CharacterControl : MonoBehaviour
         {
             ledgeChecker = GetComponentInChildren<LedgeChecker>();
         }
+
+        RegisterCharacter();
     }
 
     private void Start()
     {
-        SceneLinkedSMB<CharacterControl>.Initialise(skinedMeshAnimator, this);
+        SceneLinkedSMB<CharacterControl>.Initialise(skinnedMeshAnimator, this);
     }
 
     private void FixedUpdate()
@@ -218,6 +220,14 @@ public class CharacterControl : MonoBehaviour
     }
 
     // -----
+
+    private void RegisterCharacter()
+    {
+        if (!CharacterManager.Instance.characters.Contains(this))
+        {
+            CharacterManager.Instance.characters.Add(this);
+        }
+    }
 
     private void SetColliderSphere()
     {

@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c7311e643f62f94f899becdc39cd198, type: 3}
-  m_Name: Sample_LedgeGrab_ToggleGravity_Off
+  m_Script: {fileID: 11500000, guid: d7c3a2199c81e114e8b56624931dfae4, type: 3}
+  m_Name: Sample_HangingIdle_Idexer_1
   m_EditorClassIdentifier: 
-  on: 0
-  onStart: 1
-  onEnd: 0
+  index: 1
+  conditions: 00000000

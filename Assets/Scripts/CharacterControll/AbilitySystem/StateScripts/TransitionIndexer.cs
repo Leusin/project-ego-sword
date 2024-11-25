@@ -35,10 +35,15 @@ namespace ProjectEgoSword
             {
                 animator.SetInteger(CharacterControl.TransitionParameter.TransitionIndex.ToString(), index);
             }
+            else
+            {
+                animator.SetInteger(CharacterControl.TransitionParameter.TransitionIndex.ToString(), 0);
+            }
         }
 
         public override void OnExit(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            animator.SetInteger(CharacterControl.TransitionParameter.TransitionIndex.ToString(), 0);
         }
 
         // -----

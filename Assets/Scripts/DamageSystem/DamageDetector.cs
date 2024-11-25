@@ -109,7 +109,7 @@ namespace ProjectEgoSword
 
             Debug.Log(info.attacker.gameObject.name + " hits: " + this.gameObject.name + "(" + _damagedPart.ToString() + ")");
 
-            _control.skinedMeshAnimator.runtimeAnimatorController = _deathAnimationManager.GetAnimator(_damagedPart, info);
+            _control.skinnedMeshAnimator.runtimeAnimatorController = _deathAnimationManager.GetAnimator(_damagedPart, info);
             info.currentHits++;
 
             _control.GetComponent<Collider>().enabled = false;

@@ -39,10 +39,5 @@ namespace ProjectEgoSword
         }
 
         // -----
-
-        private void Awake()
-        {
-            SceneLinkedSMB<HumanoidController>.Initialise(skinedMeshAnimator, this);
-        }
     }
 }

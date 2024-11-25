@@ -10,13 +10,13 @@ namespace ProjectEgoSword
         public float speed;
         public float blockDistance;
 
-        public override void OnEnter(CharacterControl monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        public override void OnEnter(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
         }
 
-        public override void UpdateAbility(CharacterControl monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        public override void UpdateAbility(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if (monoBehaviour.jump)
+            if (monobehaviour.jump)
             {
                 animator.SetBool(CharacterControl.TransitionParameter.Jump.ToString(), true);
                 return;
@@ -24,25 +24,25 @@ namespace ProjectEgoSword
 
             if (constant)
             {
-                ConstantMove(monoBehaviour, animator, stateInfo);
+                ConstantMove(monobehaviour, animator, stateInfo);
             }
             else
             {
-                ControllMove(monoBehaviour, animator, stateInfo);
+                ControllMove(monobehaviour, animator, stateInfo);
             }
         }
 
-        public override void OnExit(CharacterControl monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        public override void OnExit(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
         }
 
         // -----
 
-        private void ConstantMove(CharacterControl monoBehaviour, Animator animator, AnimatorStateInfo stateInfo)
+        private void ConstantMove(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (!CheckFront(monoBehaviour))
+            if (!CheckFront(monobehaviour))
             {
-                monoBehaviour.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
+                monobehaviour.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
             }
         }
 
@@ -85,7 +85,7 @@ namespace ProjectEgoSword
                     {
                         if (!monoBehaviour.ragdollParts.Contains(hit.collider))
                         {
-                            if (IsBodyPart(hit.collider))
+                            if (!IsBodyPart(hit.collider) && !Ledge.IsLedge(hit.collider.gameObject))
                             {
                                 return true;
                             }
