@@ -11,6 +11,8 @@ namespace ProjectEgoSword
         public float startAttackTime;
         public float endAttackTime;
         public List<string> colliderNames = new List<string>();
+        public List<AttackPartType> attackParts = new List<AttackPartType>();
+        public DeathType deathType;
 
         public bool lunchIntoAir;
         public bool mustCollide;
@@ -20,7 +22,7 @@ namespace ProjectEgoSword
 
         // -----
 
-        private List<AttacCondition> _finishedAttacks = new List<AttacCondition>();
+        private List<AttackCondition> _finishedAttacks = new List<AttackCondition>();
 
         private AttackManager _attackManager;
         private PoolManager _poolManager;
@@ -35,8 +37,8 @@ namespace ProjectEgoSword
         {
             animator.SetBool(CharacterControl.TransitionParameter.Attack.ToString(), false);
 
-            GameObject obj = _poolManager.GetObject(PoolObjectType.ATTACKINFO);
-            AttacCondition info = obj.GetComponent<AttacCondition>();
+            GameObject obj = _poolManager.GetObject(PoolObjectType.AttackInfo);
+            AttackCondition info = obj.GetComponent<AttackCondition>();
 
             obj.SetActive(true);
             info.ResetInfo(this, monoBehaviour);
@@ -84,7 +86,7 @@ namespace ProjectEgoSword
         {
             if (startAttackTime <= stateInfo.normalizedTime && endAttackTime > stateInfo.normalizedTime)
             {
-                foreach (AttacCondition info in _attackManager.currentAttacks)
+                foreach (AttackCondition info in _attackManager.currentAttacks)
                 {
                     if (!info.isRegisterd && info.attackAbility == this)
                     {
@@ -103,7 +105,7 @@ namespace ProjectEgoSword
         {
             if (stateInfo.normalizedTime >= endAttackTime)
             {
-                foreach (AttacCondition info in _attackManager.currentAttacks)
+                foreach (AttackCondition info in _attackManager.currentAttacks)
                 {
                     if (info == null)
                     {
@@ -128,7 +130,7 @@ namespace ProjectEgoSword
         {
             _finishedAttacks.Clear();
 
-            foreach (AttacCondition info in _attackManager.currentAttacks)
+            foreach (AttackCondition info in _attackManager.currentAttacks)
             {
                 if (info == null || info.attackAbility == this)
                 {
@@ -136,7 +138,7 @@ namespace ProjectEgoSword
                 }
             }
 
-            foreach (AttacCondition info in _finishedAttacks)
+            foreach (AttackCondition info in _finishedAttacks)
             {
                 if (_attackManager.currentAttacks.Contains(info))
                 {

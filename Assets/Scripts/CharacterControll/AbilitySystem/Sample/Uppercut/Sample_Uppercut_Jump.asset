@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sample_Uppercut_Jump
   m_EditorClassIdentifier: 
   jumpTiming: 0.03
-  jumpForce: 250
+  jumpForce: 200
   pull:
     serializedVersion: 2
     m_Curve:

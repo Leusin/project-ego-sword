@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e0af5338230b6488d02d7a9ba4d7ea, type: 3}
+  m_Name: Sample_MeleeAttackDown_Attack
+  m_EditorClassIdentifier: 
+  debug: 0
+  startAttackTime: 0.3
+  endAttackTime: 0.5
+  colliderNames: []
+  attackParts: 
+  deathType: 2
+  lunchIntoAir: 0
+  mustCollide: 0
+  mustFaceAttacker: 1
+  lethalRange: 5
+  maxHits: 100

@@ -19,7 +19,7 @@ namespace ProjectEgoSword
             }
         }
 
-        public RuntimeAnimatorController GetAnimator(GeneralBodyPart generalBodyPart, AttacCondition info)
+        public RuntimeAnimatorController GetAnimator(GeneralBodyPart generalBodyPart, AttackCondition info)
         {
             SetupDeathAnimationLoader();
 
@@ -27,24 +27,30 @@ namespace ProjectEgoSword
 
             foreach(DeathAnimationData data in _deathAnimationLeader.DeathAnimationDataList)
             {
-                if(info.lunchIntoAir)
+                if(info.deathType == data.deathType)
                 {
-                    if(data.lunchIntoAir)
+
+                    if (info.deathType != DeathType.NONE)
                     {
                         _candidates.Add(data.animator);
                     }
-                }
-                else
-                {
-                    foreach (GeneralBodyPart part in data.generalBodyParts)
+                    else if(!info.mustCollide)
                     {
-                        if (part == generalBodyPart)
+                        _candidates.Add(data.animator);
+                    }
+                    else
+                    {
+                        foreach (GeneralBodyPart part in data.generalBodyParts)
                         {
-                            _candidates.Add(data.animator);
-                            break;
+                            if (part == generalBodyPart)
+                            {
+                                _candidates.Add(data.animator);
+                                break;
+                            }
                         }
                     }
                 }
+                
             }
 
             return _candidates[Random.Range(0, _candidates.Count)];

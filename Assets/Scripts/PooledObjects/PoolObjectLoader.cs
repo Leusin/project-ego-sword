@@ -4,7 +4,9 @@ namespace ProjectEgoSword
 {
     public enum PoolObjectType
     {
-        ATTACKINFO = 0,
+        AttackInfo = 0,
+        Axe,
+        DustExplosion,
     }
 
     public class PoolObjectLoader : MonoBehaviour
@@ -13,14 +15,21 @@ namespace ProjectEgoSword
         {
             GameObject obj = null;
 
-            switch (objType)
-            {
-                case PoolObjectType.ATTACKINFO:
-                    {
-                        obj = Instantiate(Resources.Load("AttackInfo") as GameObject);
-                        break;
-                    }
-            }
+            obj = Instantiate(Resources.Load(objType.ToString()) as GameObject);
+
+            //switch (objType)
+            //{
+            //    case PoolObjectType.AttackInfo:
+            //        {
+            //            obj = Instantiate(Resources.Load("AttackInfo") as GameObject);
+            //            break;
+            //        }
+            //        case PoolObjectType.Axe:
+            //        {
+            //            obj = Instantiate(Resources.Load("Axe") as GameObject);
+            //            break;
+            //        }
+            //}
 
             return obj.GetComponent<PoolObject>();
         }

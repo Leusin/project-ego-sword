@@ -33,7 +33,7 @@ namespace ProjectEgoSword
 
         private void CheckAttacks()
         {
-            foreach (AttacCondition info in _attackManager.currentAttacks)
+            foreach (AttackCondition info in _attackManager.currentAttacks)
             {
                 if (info == null)
                 {
@@ -55,10 +55,19 @@ namespace ProjectEgoSword
                     continue;
                 }
 
-                //if (info.currentHits >= info.maxHits)
-                //{
-                //    continue;
-                //}
+                if (info.currentHits >= info.maxHits)
+                {
+                    continue;
+                }
+
+                if(info.mustFaceAttacker)
+                {
+                    Vector3 vec = transform.position - info.attacker.transform.position;
+                    if(vec.z * info.attacker.transform.forward.z < 0f)
+                    {
+                        continue;
+                    }
+                }
 
                 if (info.mustCollide)
                 {
@@ -74,13 +83,13 @@ namespace ProjectEgoSword
 
                     if (dist <= info.lethalRange)
                     {
-
+                        TakeDamage(info);
                     }
                 }
             }
         }
 
-        private bool IsCollided(AttacCondition info)
+        private bool IsCollided(AttackCondition info)
         {
             foreach (TriggerDetector trigger in _control.GetAllTriggers())
             {
@@ -100,7 +109,7 @@ namespace ProjectEgoSword
             return false;
         }
 
-        private void TakeDamage(AttacCondition info)
+        private void TakeDamage(AttackCondition info)
         {
             if (info.mustCollide)
             {

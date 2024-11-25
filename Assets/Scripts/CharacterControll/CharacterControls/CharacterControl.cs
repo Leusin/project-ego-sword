@@ -30,7 +30,6 @@ public class CharacterControl : MonoBehaviour
     public bool attack;
 
     public List<Collider> ragdollParts = new List<Collider>();
-    private List<TriggerDetector> _triggerDetectors = new List<TriggerDetector>();
 
     public List<GameObject> bottomSpheres = new List<GameObject>();
     public List<GameObject> frontSpheres = new List<GameObject>();
@@ -38,6 +37,10 @@ public class CharacterControl : MonoBehaviour
     [HideInInspector] public float gravityMultiplier;
     [HideInInspector] public float pullMultiplier;
 
+    private List<TriggerDetector> _triggerDetectors = new List<TriggerDetector>();
+    private Dictionary<string, GameObject> _childObjects = new Dictionary<string, GameObject>();
+
+    private Rigidbody _cachedrigidbody;
     public Rigidbody RigidbodyComponent
     {
         get
@@ -49,7 +52,6 @@ public class CharacterControl : MonoBehaviour
             return _cachedrigidbody;
         }
     }
-    private Rigidbody _cachedrigidbody;
 
     // -----
 
@@ -173,6 +175,27 @@ public class CharacterControl : MonoBehaviour
         }
     }
 
+    public GameObject GetChildObject(string name)
+    {
+        if(_childObjects.ContainsKey(name))
+        {
+            return _childObjects[name];
+        }
+
+        Transform[] arr = gameObject .GetComponentsInChildren<Transform>();
+
+        foreach (Transform t in arr)
+        {
+            if (t.gameObject.name.Equals(name))
+            {
+                _childObjects.Add(name, t.gameObject);
+                return t.gameObject;
+            }
+        }
+
+        return null;
+    }
+
     // -----
 
     private void Awake()
@@ -238,28 +261,31 @@ public class CharacterControl : MonoBehaviour
         float front = box.bounds.center.z + box.bounds.extents.z;
         float back = box.bounds.center.z - box.bounds.extents.z;
 
-        GameObject bottomFront = CreateEdgeSphere(new Vector3(0f, bottom, front));
+        GameObject bottomFrontHor = CreateEdgeSphere(new Vector3(0f, bottom, front));
+        GameObject bottomFrontVar = CreateEdgeSphere(new Vector3(0f, bottom + 0.1f, front));
         GameObject bottomBack = CreateEdgeSphere(new Vector3(0f, bottom, back));
         GameObject topFront = CreateEdgeSphere(new Vector3(0f, top, front));
 
-        bottomFront.transform.parent = transform;
+        bottomFrontHor.transform.parent = transform;
+        bottomFrontVar.transform.parent = transform;
         bottomBack.transform.parent = transform;
         topFront.transform.parent = transform;
 
-        bottomFront.transform.localPosition = transform.InverseTransformPoint(bottomFront.transform.position);
+        bottomFrontHor.transform.localPosition = transform.InverseTransformPoint(bottomFrontHor.transform.position);
+        bottomFrontVar.transform.localPosition = transform.InverseTransformPoint(bottomFrontVar.transform.position);
         bottomBack.transform.localPosition = transform.InverseTransformPoint(bottomBack.transform.position);
         topFront.transform.localPosition = transform.InverseTransformPoint(topFront.transform.position);
 
-        bottomSpheres.Add(bottomFront);
+        bottomSpheres.Add(bottomFrontHor);
         bottomSpheres.Add(bottomBack);
 
-        frontSpheres.Add(bottomFront);
+        frontSpheres.Add(bottomFrontVar);
         frontSpheres.Add(topFront);
 
-        float horizontalSection = (bottomFront.transform.position - bottomBack.transform.position).magnitude * 0.2f; // magnitude / 5f
+        float horizontalSection = (bottomFrontHor.transform.position - bottomBack.transform.position).magnitude * 0.2f; // magnitude / 5f
         CreateMiddleSpheres(bottomBack, transform.forward, horizontalSection, 4, bottomSpheres);
 
-        float varticalSection = (topFront.transform.position - bottomFront.transform.position).magnitude * 0.1f; // magnitude / 10f
-        CreateMiddleSpheres(bottomFront, transform.up, varticalSection, 9, frontSpheres);
+        float varticalSection = (topFront.transform.position - bottomFrontVar.transform.position).magnitude * 0.1f; // magnitude / 10f
+        CreateMiddleSpheres(bottomFrontVar, transform.up, varticalSection, 9, frontSpheres);
     }
 }

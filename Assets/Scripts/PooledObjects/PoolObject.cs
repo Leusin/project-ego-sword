@@ -32,6 +32,10 @@ namespace ProjectEgoSword
 
         public void TurnOff()
         {
+            transform.parent = null;
+            transform.position = Vector3.zero;
+            transform.rotation = Quaternion.identity;
+
             _poolManager.AddObject(this);
         }
 
