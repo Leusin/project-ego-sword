@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class HumanoidManualInput : ManualInput
 {
-    private HumanoidController _humanoidController;
+    private HumanoidControl _humanoidController;
 
     private void Awake()
     {
-        _humanoidController = GetComponent<HumanoidController>();
+        _humanoidController = GetComponent<HumanoidControl>();
     }
 
     void Update()

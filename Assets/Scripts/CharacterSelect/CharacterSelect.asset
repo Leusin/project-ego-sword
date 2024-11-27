@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ebf51abbdc56834294955c92c4053aa, type: 3}
-  m_Name: Death_FlyingBack_GroundShock
+  m_Script: {fileID: 11500000, guid: fed9ffb4317266a4ca2216d72e3409c6, type: 3}
+  m_Name: CharacterSelect
   m_EditorClassIdentifier: 
-  generalBodyParts: 
-  animator: {fileID: 9100000, guid: 43209a128fcf1c140b9a87fb3b83298f, type: 2}
-  deathType: 2
-  isFacingAttacker: 1
+  selectedCharacterType: 0

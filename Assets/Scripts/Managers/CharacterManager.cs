@@ -8,6 +8,19 @@ namespace ProjectEgoSword
     {
         public List<CharacterControl> characters = new List<CharacterControl>();
 
+        public CharacterControl GetCharacter(PlayableCharacterType characterType)
+        {
+            foreach(CharacterControl control in characters)
+            {
+                if (control.characterType == characterType)
+                {
+                    return control;
+                }
+            }
+
+            return null;
+        }
+
         public CharacterControl GetCharacter(Animator animator)
         {
             foreach (CharacterControl control in characters)

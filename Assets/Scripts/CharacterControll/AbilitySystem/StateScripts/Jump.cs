@@ -9,14 +9,13 @@ namespace ProjectEgoSword
         public float jumpTiming;
         public float jumpForce;
         public AnimationCurve pull;
-        private bool isJumped;
 
         public override void OnEnter(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             if (jumpTiming == 0f)
             {
                 monobehaviour.RigidbodyComponent.AddForce(Vector3.up * jumpForce);
-                isJumped = true;
+                monobehaviour.animationProgress.jumped = true;
             }
 
             animator.SetBool(CharacterControl.TransitionParameter.Grounded.ToString(), false);
@@ -26,17 +25,17 @@ namespace ProjectEgoSword
         {
             monobehaviour.pullMultiplier = pull.Evaluate(stateInfo.normalizedTime);
 
-            if (!isJumped && stateInfo.normalizedTime >= jumpTiming)
+            if (!monobehaviour.animationProgress.jumped && stateInfo.normalizedTime >= jumpTiming)
             {
                 monobehaviour.RigidbodyComponent.AddForce(Vector3.up * jumpForce);
-                isJumped = true;
+                monobehaviour.animationProgress.jumped = true;
             }
         }
 
         public override void OnExit(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             monobehaviour.pullMultiplier = 0f;
-            isJumped = false;
+            monobehaviour.animationProgress.jumped = false;
         }
     }
 }

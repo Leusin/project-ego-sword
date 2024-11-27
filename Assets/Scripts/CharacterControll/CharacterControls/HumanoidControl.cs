@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 namespace ProjectEgoSword
 {
-    public class HumanoidController : CharacterControl
+    public class HumanoidControl : CharacterControl
     {
         public Transform WeaponMountPosition;
 

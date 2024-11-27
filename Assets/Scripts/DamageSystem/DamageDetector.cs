@@ -7,6 +7,8 @@ namespace ProjectEgoSword
         private CharacterControl _control;
         private GeneralBodyPart _damagedPart;
 
+        public int damageTaken;
+
         private AttackManager _attackManager;
         private DeathAnimationManager _deathAnimationManager;
 
@@ -111,6 +113,12 @@ namespace ProjectEgoSword
 
         private void TakeDamage(AttackCondition info)
         {
+            // TODO - HP system 이 생긴다면 대체 할 것
+            if(damageTaken > 0)
+            {
+                return;
+            }
+
             if (info.mustCollide)
             {
                 CameraManager.Instance.ShakeCamera(0.25f);
@@ -123,6 +131,8 @@ namespace ProjectEgoSword
 
             _control.GetComponent<Collider>().enabled = false;
             _control.RigidbodyComponent.useGravity = false;
+
+            damageTaken++;
         }
     }
 }

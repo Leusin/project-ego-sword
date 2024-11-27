@@ -7,32 +7,31 @@ namespace ProjectEgoSword
     {
         [Range(0f, 0.99f)]
         public float shakeTiming;
-        private bool isShaken;
 
         public override void OnEnter(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             if (shakeTiming == 0f)
             {
                 CameraManager.Instance.ShakeCamera(0.2f);
-                isShaken = true;
+                monobehaviour.animationProgress.cameraShaken = true;
             }
         }
 
         public override void UpdateAbility(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if (!isShaken)
+            if (!monobehaviour.animationProgress.cameraShaken)
             {
                 if (stateInfo.normalizedTime >= shakeTiming)
                 {
                     CameraManager.Instance.ShakeCamera(0.2f);
-                    isShaken = true;
+                    monobehaviour.animationProgress.cameraShaken = true;
                 }
             }
         }
 
-        public override void OnExit(CharacterControl monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        public override void OnExit(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            isShaken = false;
+            monobehaviour.animationProgress.cameraShaken = false;
         }
     }
 }

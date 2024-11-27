@@ -99,7 +99,7 @@ namespace ProjectEgoSword
 
         private bool IsBodyPart(Collider collider)
         {
-            HumanoidController control = collider.GetComponent<HumanoidController>();
+            HumanoidControl control = collider.GetComponent<HumanoidControl>();
 
             if (control == null)
             {

@@ -114,7 +114,7 @@ namespace ProjectEgoSword
             LayerMask mask = LayerMask.GetMask("Encounter");
             if ((mask.value & (1 << collision.gameObject.layer)) != 0)
             {
-                var humanoidCtrl = collision.gameObject.GetComponent<HumanoidController>();
+                var humanoidCtrl = collision.gameObject.GetComponent<HumanoidControl>();
                 if (humanoidCtrl != null)
                 {
                     humanoidCtrl.enabled = true;

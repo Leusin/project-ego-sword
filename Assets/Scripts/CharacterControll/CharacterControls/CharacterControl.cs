@@ -14,11 +14,14 @@ public class CharacterControl : MonoBehaviour
         TransitionIndex,
     }
 
+    public PlayableCharacterType characterType;
+
     [Header("Setup")]
     public Animator skinnedMeshAnimator;
     public Material material;
     public GameObject colliderEdgePrefab;
     public LedgeChecker ledgeChecker;
+    public AnimationProgress animationProgress;
 
     [Header("Input")]
     public Vector2 move;
@@ -208,7 +211,6 @@ public class CharacterControl : MonoBehaviour
         }
 
         FaceForward(true);
-
         SetColliderSphere();
 
         if (switchBack)
@@ -216,9 +218,14 @@ public class CharacterControl : MonoBehaviour
             FaceForward(false);
         }
 
-        if(!ledgeChecker)
+        if(ledgeChecker == null)
         {
             ledgeChecker = GetComponentInChildren<LedgeChecker>();
+        }
+
+        if(animationProgress == null)
+        {
+            animationProgress = GetComponent<AnimationProgress>();
         }
 
         RegisterCharacter();

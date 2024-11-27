@@ -21,6 +21,6 @@ MonoBehaviour:
   deathType: 1
   lunchIntoAir: 1
   mustCollide: 0
-  mustFaceAttacker: 0
+  mustFaceAttacker: 1
   lethalRange: 1.5
   maxHits: 1
