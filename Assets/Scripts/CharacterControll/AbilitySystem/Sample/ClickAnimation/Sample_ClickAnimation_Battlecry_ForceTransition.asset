@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fed9ffb4317266a4ca2216d72e3409c6, type: 3}
-  m_Name: CharacterSelect
+  m_Script: {fileID: 11500000, guid: a603787206e660640939166f9fafa314, type: 3}
+  m_Name: Sample_ClickAnimation_Battlecry_ForceTransition
   m_EditorClassIdentifier: 
-  selectedCharacterType: 3
+  transitionTiming: 0.6

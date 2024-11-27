@@ -14,11 +14,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 189570499fa04f242a28d1f937adad8f, type: 2}
     - target: {fileID: 2879940037814613972, guid: b523297921991a44dba8e908382b1551, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3476434194155820203, guid: b523297921991a44dba8e908382b1551, type: 3}
       propertyPath: m_Name
-      value: CharactorR Variant
+      value: CharactorR
+      objectReference: {fileID: 0}
+    - target: {fileID: 4220089343409975716, guid: b523297921991a44dba8e908382b1551, type: 3}
+      propertyPath: faceForword
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4220089343409975716, guid: b523297921991a44dba8e908382b1551, type: 3}
       propertyPath: characterType

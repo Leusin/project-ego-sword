@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fed9ffb4317266a4ca2216d72e3409c6, type: 3}
-  m_Name: CharacterSelect
+  m_Script: {fileID: 11500000, guid: 1167c44649b4a164d89fa27df13236af, type: 3}
+  m_Name: Sample_ClickAnimation_Walk_TurnOnRootMotion
   m_EditorClassIdentifier: 
-  selectedCharacterType: 3

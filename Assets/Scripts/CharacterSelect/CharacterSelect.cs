@@ -5,9 +5,9 @@ namespace ProjectEgoSword
     public enum PlayableCharacterType
     {
         NONE,
-        RED,
-        GREEN,
-        BLUE,
+        CharacterR,
+        CharactorG,
+        CharactorB,
     }
 
     [CreateAssetMenu(fileName = "CharacterSelect", menuName = "ProjectEgoSword/CharacterSelect/CharacterSelect")]

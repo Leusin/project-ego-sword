@@ -13,7 +13,7 @@ namespace ProjectEgoSword
             {
                 if(characterSelect.selectedCharacterType != PlayableCharacterType.NONE)
                 {
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(ProjectScenes.SampleScene_CharacterSelect.ToString());
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(ProjectScenes.SampleScene.ToString());
                 }
                 else
                 {

@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fed9ffb4317266a4ca2216d72e3409c6, type: 3}
-  m_Name: CharacterSelect
+  m_Script: {fileID: 11500000, guid: 44da30cd0c01d2b438136ea26ef7905d, type: 3}
+  m_Name: General_ResetLocalPos_End
   m_EditorClassIdentifier: 
-  selectedCharacterType: 3
+  onStart: 0
+  onEnd: 1

@@ -46,7 +46,8 @@ namespace ProjectEgoSword
             if( _hoverSelectedCharacter == null)
             {
                 _hoverSelectedCharacter = _characterManager.GetCharacter(_mouseHoverSelect.selectedCharacterType);
-                transform.position = _hoverSelectedCharacter.transform.position + _hoverSelectedCharacter.transform.TransformDirection(offset);
+                transform.position = _hoverSelectedCharacter.skinnedMeshAnimator.transform.position + _hoverSelectedCharacter.transform.TransformDirection(offset);
+                transform.parent = _hoverSelectedCharacter.skinnedMeshAnimator.transform;
             }
         }
     }

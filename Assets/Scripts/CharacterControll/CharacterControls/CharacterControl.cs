@@ -12,16 +12,19 @@ public class CharacterControl : MonoBehaviour
         ForceTransition,
         Grounded,
         TransitionIndex,
+        ClickAnimation,
     }
 
     public PlayableCharacterType characterType;
 
     [Header("Setup")]
+    public bool faceForword;
     public Animator skinnedMeshAnimator;
     public Material material;
     public GameObject colliderEdgePrefab;
     public LedgeChecker ledgeChecker;
     public AnimationProgress animationProgress;
+
 
     [Header("Input")]
     public Vector2 move;
@@ -65,6 +68,11 @@ public class CharacterControl : MonoBehaviour
 
     public void FaceForward(bool forward)
     {
+        if(!faceForword)
+        {
+            return;
+        }
+
         if (forward)
         {
             transform.rotation = Quaternion.identity;
@@ -199,6 +207,16 @@ public class CharacterControl : MonoBehaviour
         return null;
     }
 
+    public Collider GetBodyPart(string name)
+    {
+        foreach(Collider c in ragdollParts)
+        {
+            return c;
+        }
+
+        return null;
+    }
+
     // -----
 
     private void Awake()
@@ -211,12 +229,13 @@ public class CharacterControl : MonoBehaviour
         }
 
         FaceForward(true);
-        SetColliderSphere();
 
         if (switchBack)
         {
             FaceForward(false);
         }
+
+        SetColliderSphere();
 
         if(ledgeChecker == null)
         {
