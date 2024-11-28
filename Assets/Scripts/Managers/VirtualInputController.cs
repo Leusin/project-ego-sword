@@ -15,10 +15,12 @@ namespace ProjectEgoSword
         [Header("Humanoid")]
 
         [SerializeField] private Vector2 _move;
-        [SerializeField] private bool _moveUp;
-        [SerializeField] private bool _moveDown;
+
         [SerializeField] private bool _jump;
         [SerializeField] private bool _attack;
+        [SerializeField] private bool _rush;
+        [SerializeField] private bool _moveUp;
+        [SerializeField] private bool _moveDown;
 
         public bool AttractInput { get { return _attract; } }
         public Vector2 LookInput { get { return _look; } }
@@ -27,6 +29,7 @@ namespace ProjectEgoSword
         public bool MoveDownInput { get { return _moveDown; } }
         public bool JumpInput { get { return _jump; } }
         public bool AttackInput { get { return _attack; } }
+        public bool RushInput { get { return _rush; } }
 
         // -----
 
@@ -148,8 +151,16 @@ namespace ProjectEgoSword
             }
         }
 
-        public void Sprint(InputAction.CallbackContext context)
+        public void Rush(InputAction.CallbackContext context)
         {
+            if (context.phase == InputActionPhase.Performed)
+            {
+                _rush = true;
+            }
+            else
+            {
+                _rush = false;
+            }
         }
 
         // -----

@@ -9,6 +9,9 @@ namespace ProjectEgoSword
         {
             animator.SetBool(CharacterControl.TransitionParameter.Jump.ToString(), false);
             animator.SetBool(CharacterControl.TransitionParameter.Attack.ToString(), false);
+            animator.SetBool(CharacterControl.TransitionParameter.Move.ToString(), false);
+
+            monoBehaviour.animationProgress.disallowEarylTurn = false;
         }
 
         public override void UpdateAbility(CharacterControl monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -25,7 +28,7 @@ namespace ProjectEgoSword
                 {
                     animator.SetBool(CharacterControl.TransitionParameter.Jump.ToString(), true);
                 }
-                else if (move.magnitude > 0)
+                if (move.magnitude > 0)
                 {
                     animator.SetBool(CharacterControl.TransitionParameter.Move.ToString(), true);
                 }

@@ -153,36 +153,18 @@
             "id": "c0e62ed4-dd78-4825-ac41-1bc8a0d80c87",
             "actions": [
                 {
-                    "name": "Move",
-                    "type": "Value",
-                    "id": "e42953c2-f3d8-47d6-881b-734e2134b9b8",
-                    "expectedControlType": "Vector2",
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "edcb1f3c-2932-44b7-ba68-d21f16a8f444",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Crouch",
                     "type": "Button",
                     "id": "2127863f-984a-481e-8f9d-37a27fd834bd",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "MoveUp",
-                    "type": "Button",
-                    "id": "609a1728-f5d5-485b-a618-3b2fad5b3aed",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "MoveDown",
-                    "type": "Button",
-                    "id": "1099c8b1-4dc2-4e58-954c-85aaec3bd93b",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -198,9 +180,36 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Attack",
+                    "name": "Rush",
                     "type": "Button",
-                    "id": "edcb1f3c-2932-44b7-ba68-d21f16a8f444",
+                    "id": "deb4034c-eee6-498b-8667-5d1c0c3c9d3a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "e42953c2-f3d8-47d6-881b-734e2134b9b8",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "MoveUp",
+                    "type": "Button",
+                    "id": "609a1728-f5d5-485b-a618-3b2fad5b3aed",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MoveDown",
+                    "type": "Button",
+                    "id": "1099c8b1-4dc2-4e58-954c-85aaec3bd93b",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -535,6 +544,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "MoveDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8bb850c9-55a1-4c58-ba53-ff8b7bae9104",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Rush",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "851ee358-bbf2-4b97-9ca6-d9d7a59a0e61",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Rush",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0933ef44-e499-4638-bccb-bae1caa3087e",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Rush",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

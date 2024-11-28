@@ -10,34 +10,43 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c42a212b912bb7340ab7d4bac8896048, type: 3}
-  m_Name: Sample_Walk_MoveForward
+  m_Name: Sample_Sprint_MoveForward
   m_EditorClassIdentifier: 
   allowEarlyTurn: 1
-  lockDriection: 0
-  constant: 0
+  lockDriection: 1
+  constant: 1
   speedGraph:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
+      time: -0.0009994507
+      value: -0.002380371
+      inSlope: 11.400103
+      outSlope: 11.400103
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.05550344
+    - serializedVersion: 3
+      time: 0.19717656
+      value: 0.9233817
+      inSlope: 0.29877397
+      outSlope: 0.29877397
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2553431
+      outWeight: 0.06983135
     - serializedVersion: 3
       time: 1
       value: 1
       inSlope: 0
       outSlope: 0
-      tangentMode: 34
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  speed: 1.8
-  blockDistance: 0.1
+  speed: 5
+  blockDistance: 0.5

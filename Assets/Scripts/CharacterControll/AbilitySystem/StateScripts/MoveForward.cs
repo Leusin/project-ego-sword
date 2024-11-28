@@ -1,10 +1,14 @@
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace ProjectEgoSword
 {
     [CreateAssetMenu(fileName = "New State", menuName = "ProjectEgoSword/AbilityData/MoveForward")]
     public class MoveForward : StateData<CharacterControl>
     {
+        public bool allowEarlyTurn;
+        public bool lockDriection;
         public bool constant;
         public AnimationCurve speedGraph;
         public float speed;
@@ -12,6 +16,19 @@ namespace ProjectEgoSword
 
         public override void OnEnter(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            if(allowEarlyTurn && !monobehaviour.animationProgress.disallowEarylTurn)
+            {
+                if(monobehaviour.moveLeft)
+                {
+                    monobehaviour.FaceForward(false);
+                }
+                else if(monobehaviour.moveRight)
+                {
+                    monobehaviour.FaceForward(true);
+                }
+            }
+
+            monobehaviour.animationProgress.disallowEarylTurn = false;
         }
 
         public override void UpdateAbility(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -46,30 +63,35 @@ namespace ProjectEgoSword
             }
         }
 
-        private void ControllMove(CharacterControl monoBehaviour, Animator animator, AnimatorStateInfo stateInfo)
+        private void ControllMove(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (monoBehaviour.move.sqrMagnitude > 0f)
+            if (monobehaviour.moveLeft || monobehaviour.moveRight)
             {
-                if (!CheckFront(monoBehaviour))
+                if (!CheckFront(monobehaviour))
                 {
-                    Quaternion rotate = Quaternion.identity;
-
-                    if (monoBehaviour.move.x > 0)
-                    {
-                        rotate = Quaternion.identity;
-                    }
-                    else if (monoBehaviour.move.x < 0)
-                    {
-                        rotate = Quaternion.Euler(0f, 180f, 0f);
-                    }
-
-                    monoBehaviour.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
-                    monoBehaviour.transform.rotation = rotate;
+                    monobehaviour.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
                 }
             }
             else
             {
                 animator.SetBool(CharacterControl.TransitionParameter.Move.ToString(), false);
+            }
+
+            CheckTurn(monobehaviour);
+        }
+
+        private void CheckTurn(CharacterControl monobehaviour)
+        {
+            if (!lockDriection)
+            {
+                if (monobehaviour.moveRight)
+                {
+                    monobehaviour.transform.rotation = Quaternion.identity;
+                }
+                else if (monobehaviour.moveLeft)
+                {
+                    monobehaviour.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+                }
             }
         }
 
@@ -85,7 +107,7 @@ namespace ProjectEgoSword
                     {
                         if (!monoBehaviour.ragdollParts.Contains(hit.collider))
                         {
-                            if (!IsBodyPart(hit.collider) && 
+                            if (!IsBodyPart(hit.collider) &&
                                 !Ledge.IsLedge(hit.collider.gameObject) &&
                                 !Ledge.IsLedgeChecker(hit.collider.gameObject))
                             {

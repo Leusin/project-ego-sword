@@ -10,9 +10,10 @@ namespace ProjectEgoSword
         public List<PoolObjectType> poolObjectList = new List<PoolObjectType> ();
         public bool attackTriggerd;
         public float maxPressTime;
+        public bool disallowEarylTurn;
 
         private CharacterControl _characterControl;
-        private float pressTime;
+        private float _pressTime;
 
         private void Awake()
         {
@@ -23,18 +24,18 @@ namespace ProjectEgoSword
         {
             if(_characterControl.attack)
             {
-                pressTime += Time.deltaTime;
+                _pressTime += Time.deltaTime;
             }
             else
             {
-                pressTime = 0f;
+                _pressTime = 0f;
             }
 
-            if (pressTime.Equals(0f))
+            if (_pressTime.Equals(0f))
             {
                 attackTriggerd = false;
             }
-            else if (pressTime > maxPressTime)
+            else if (_pressTime > maxPressTime)
             {
                 attackTriggerd = false;
             }

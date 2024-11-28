@@ -6,13 +6,16 @@ public class CharacterControl : MonoBehaviour
 {
     public enum TransitionParameter
     {
+        Dash,
         Move,
         Jump,
+        Turn,
         Attack,
-        ForceTransition,
+        Sprint,
         Grounded,
-        TransitionIndex,
         ClickAnimation,
+        TransitionIndex,
+        ForceTransition,
     }
 
     public PlayableCharacterType characterType;
@@ -34,6 +37,7 @@ public class CharacterControl : MonoBehaviour
     public bool moveDown;
     public bool jump;
     public bool attack;
+    public bool rash;
 
     public List<Collider> ragdollParts = new List<Collider>();
 
@@ -87,11 +91,11 @@ public class CharacterControl : MonoBehaviour
     {
         if (transform.forward.z > 0f)
         {
-            return false;
+            return true;
         }
         else
         {
-            return true;
+            return false;
         }
     }
 
@@ -223,7 +227,7 @@ public class CharacterControl : MonoBehaviour
     {
         bool switchBack = false;
 
-        if (IsFacingForward())
+        if (!IsFacingForward())
         {
             switchBack = true;
         }

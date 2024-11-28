@@ -1,12 +1,13 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ProjectEgoSword
 {
-    [CreateAssetMenu(fileName = "New State", menuName = "ProjectEgoSword/AbilityData/CheckAttack")]
-    public class CheckAttack : StateData<CharacterControl>
+    [CreateAssetMenu(fileName = "New State", menuName = "ProjectEgoSword/AbilityData/DisallowEarlyTurn")]
+    public class DisallowEarlyTurn : StateData<CharacterControl>
     {
         public override void OnEnter(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            monobehaviour.animationProgress.disallowEarylTurn = true;
         }
 
         public override void UpdateAbility(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
