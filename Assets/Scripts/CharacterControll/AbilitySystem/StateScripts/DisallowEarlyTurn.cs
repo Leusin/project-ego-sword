@@ -12,10 +12,6 @@ namespace ProjectEgoSword
 
         public override void UpdateAbility(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if (monobehaviour.animationProgress.attackTriggerd)
-            {
-                animator.SetBool(CharacterControl.TransitionParameter.Attack.ToString(), true);
-            }
         }
 
         public override void OnExit(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
