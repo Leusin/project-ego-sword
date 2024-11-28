@@ -15,19 +15,17 @@ namespace ProjectEgoSword
         {
             if (!animator.IsInTransition(layerIndex))
             {
+                Vector2 move = monoBehaviour.move;
+
                 if (monoBehaviour.attack && !animator.GetBool(CharacterControl.TransitionParameter.Attack.ToString()))
                 {
                     animator.SetBool(CharacterControl.TransitionParameter.Attack.ToString(), true);
                 }
-
-                if (monoBehaviour.jump && !animator.GetBool(CharacterControl.TransitionParameter.Jump.ToString()))
+                else if (monoBehaviour.jump && !animator.GetBool(CharacterControl.TransitionParameter.Jump.ToString()))
                 {
                     animator.SetBool(CharacterControl.TransitionParameter.Jump.ToString(), true);
                 }
-
-                Vector2 move = monoBehaviour.move;
-
-                if (move.magnitude > 0)
+                else if (move.magnitude > 0)
                 {
                     animator.SetBool(CharacterControl.TransitionParameter.Move.ToString(), true);
                 }
