@@ -133,6 +133,7 @@ namespace ProjectEgoSword
             info.currentHits++;
 
             _control.GetComponent<Collider>().enabled = false;
+            _control.ledgeChecker.GetComponent<Collider>().enabled = false;
             _control.RigidbodyComponent.useGravity = false;
 
             damageTaken++;

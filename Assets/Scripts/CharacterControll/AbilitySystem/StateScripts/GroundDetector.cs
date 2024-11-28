@@ -46,7 +46,9 @@ namespace ProjectEgoSword
                     RaycastHit hit;
                     if (Physics.Raycast(obj.transform.position, -Vector3.up, out hit, distance))
                     {
-                        if(!monoBehaviour.ragdollParts.Contains(hit.collider) && !Ledge.IsLedge(hit.collider.gameObject))
+                        if(!monoBehaviour.ragdollParts.Contains(hit.collider) &&
+                            !Ledge.IsLedge(hit.collider.gameObject) &&
+                            !Ledge.IsLedgeChecker(hit.collider.gameObject)) 
                         {
                             return true;
                         }

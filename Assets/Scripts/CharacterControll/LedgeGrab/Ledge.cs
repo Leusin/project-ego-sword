@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace ProjectEgoSword
 {
@@ -15,6 +14,11 @@ namespace ProjectEgoSword
                 return false;
             }
 
+            return true;
+        }
+
+        public static bool IsLedgeChecker(GameObject obj)
+        {
             return true;
         }
     }
