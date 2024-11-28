@@ -99,10 +99,13 @@ namespace ProjectEgoSword
                 {
                     foreach (string name in info.colliderNames)
                     {
-                        if (name == collider.gameObject.name)
+                        if (name.Equals(collider.gameObject.name))
                         {
-                            _damagedPart = trigger.generalBodyPart;
-                            return true;
+                            if (collider.transform.root.gameObject == info.attacker.gameObject)
+                            {
+                                _damagedPart = trigger.generalBodyPart;
+                                return true;
+                            }
                         }
                     }
                 }

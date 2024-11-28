@@ -88,7 +88,7 @@ namespace ProjectEgoSword
                         break;
                     case TransitionConditionType.ATTACK:
                         {
-                            if (!monobehaviour.attack)
+                            if (!monobehaviour.animationProgress.attackTriggerd)
                             {
                                 return false;
                             }

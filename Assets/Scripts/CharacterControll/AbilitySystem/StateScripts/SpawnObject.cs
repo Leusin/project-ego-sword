@@ -5,13 +5,12 @@ namespace ProjectEgoSword
     [CreateAssetMenu(fileName = "New State", menuName = "ProjectEgoSword/AbilityData/SpawnObject")]
     public class SpawnObject : StateData<CharacterControl>
     {
-        public PoolObjectType poolObjectType;
+        public PoolObjectType objectType;
         [Range(0f, 1f)]
         public float spwnTiming;
         public string parentObjectName = string.Empty;
         public bool stickToParent;
 
-        private bool isSpwned;
         private PoolManager _pooledManager;
 
         public override void OnStart(CharacterControl monoBehaviour, Animator animator)
@@ -24,30 +23,36 @@ namespace ProjectEgoSword
             if(spwnTiming.Equals(0f))
             {
                 SpawnObj(monobehaviour);
-                isSpwned = true;
             }
         }
 
         public override void UpdateAbility(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if(!isSpwned)
+            if (!monobehaviour.animationProgress.poolObjectList.Contains(objectType))
             {
                 if(stateInfo.normalizedTime >= spwnTiming)
                 {
                     SpawnObj(monobehaviour);
-                    isSpwned = true;
                 }
             }
         }
 
-        public override void OnExit(CharacterControl monoBehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        public override void OnExit(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            isSpwned = false;
+            if (monobehaviour.animationProgress.poolObjectList.Contains(objectType))
+            {
+                monobehaviour.animationProgress.poolObjectList.Remove(objectType);
+            }
         }
 
         private void SpawnObj(CharacterControl monobehaviour)
         {
-            GameObject obj = _pooledManager.GetObject(poolObjectType);
+            if (monobehaviour.animationProgress.poolObjectList.Contains(objectType))
+            {
+                return;
+            }
+
+            GameObject obj = _pooledManager.GetObject(objectType);
 
             if(!string.IsNullOrEmpty(parentObjectName))
             {
@@ -63,6 +68,8 @@ namespace ProjectEgoSword
             }
 
             obj.SetActive(true);
+
+            monobehaviour.animationProgress.poolObjectList.Add(objectType);
         }
     }
 }

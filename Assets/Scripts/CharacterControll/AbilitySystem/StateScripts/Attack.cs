@@ -70,12 +70,12 @@ namespace ProjectEgoSword
             {
                 if (stateInfo.normalizedTime < endAttackTime + ((endAttackTime - startAttackTime) * 0.5f))
                 {
-                    if (monoBehaviour.attack)
+                    if (monoBehaviour.animationProgress.attackTriggerd)
                     {
                         animator.SetBool(CharacterControl.TransitionParameter.Attack.ToString(), true);
                         if (debug)
                         {
-                            Debug.Log("uppercut triggered");
+                            Debug.Log("Combo triggered");
                         }
                     }
                 }

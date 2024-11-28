@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6a851b98c47aea40a89876be843e100, type: 3}
   m_Name: Sample_MeleeAttackDown_Spawn_VFX
   m_EditorClassIdentifier: 
-  poolObjectType: 2
+  objectType: 2
   spwnTiming: 0.33
   parentObjectName: MeleeAttackDown
   stickToParent: 0

@@ -218,12 +218,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterType: 0
+  faceForword: 1
   skinnedMeshAnimator: {fileID: 1126560087981157116}
   material: {fileID: 0}
   colliderEdgePrefab: {fileID: 2875485982597503087, guid: dc9bc34ef6b83844b96a8215a4db5c32, type: 3}
   ledgeChecker: {fileID: 3369293491608027828}
   animationProgress: {fileID: 4837987479059211739}
-  faceForword: 1
   move: {x: 0, y: 0}
   moveLeft: 0
   moveRight: 0
@@ -277,6 +277,8 @@ MonoBehaviour:
   jumped: 0
   cameraShaken: 0
   poolObjectList: 
+  attackTriggerd: 0
+  maxPressTime: 0.1
 --- !u!1 &7494769438811334505
 GameObject:
   m_ObjectHideFlags: 0
