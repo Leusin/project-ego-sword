@@ -231,6 +231,7 @@ MonoBehaviour:
   moveDown: 0
   jump: 0
   attack: 0
+  rash: 0
   ragdollParts: []
   bottomSpheres: []
   frontSpheres: []
@@ -279,6 +280,7 @@ MonoBehaviour:
   poolObjectList: 
   attackTriggerd: 0
   maxPressTime: 0.1
+  disallowEarylTurn: 0
 --- !u!1 &7494769438811334505
 GameObject:
   m_ObjectHideFlags: 0
