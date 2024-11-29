@@ -14,12 +14,10 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - Encounter
-  - 
-  - 
-  - 
-  - 
+  - Character
+  - Bot
+  - Ground
+  - Ragdoll
   - 
   - 
   - 
@@ -34,9 +32,11 @@ TagManager:
   - 
   - 
   - 
-  - Karl
-  - Damage Collider
-  - No Selfcollition
+  - 
+  - 
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
