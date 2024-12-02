@@ -43,7 +43,7 @@ namespace ProjectEgoSword
             foreach (CinemachineCamera c in arr)
             {
                 CharacterControl contrl = _characterManager.GetCharacter(characterSelect.selectedCharacterType);
-                Collider target = contrl.GetBodyPart("Spine1");
+                Collider target = contrl.GetBodyPart("mixamorig:Spine1");
 
                 c.LookAt = target.transform;
                 c.Follow = target.transform;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
@@ -41,6 +42,24 @@ namespace ProjectEgoSword
                 if (control.gameObject == obj)
                 {
                     return control;
+                }
+            }
+
+            return null;
+        }
+
+        public CharacterControl GetPlayerbleCharacter()
+        {
+            foreach(CharacterControl control in characters)
+            {
+                ManualInput manualInput = control.GetComponent<ManualInput>();
+
+                if (manualInput != null)
+                {
+                    if(manualInput.enabled == true)
+                    {
+                        return control;
+                    }
                 }
             }
 

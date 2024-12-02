@@ -143,11 +143,35 @@ MonoBehaviour:
     m_ActionId: edcb1f3c-2932-44b7-ba68-d21f16a8f444
     m_ActionName: 'Humanoid/Attack[/Mouse/leftButton,/Keyboard/leftCtrl,/Keyboard/z,/Keyboard/e,/Keyboard/enter,/XInputControllerWindows/buttonWest,/XInputControllerWindows/leftShoulder]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7375888854475916653}
+        m_TargetAssemblyTypeName: ProjectEgoSword.VirtualInputController, Assembly-CSharp
+        m_MethodName: MoveUP
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 609a1728-f5d5-485b-a618-3b2fad5b3aed
     m_ActionName: 'Humanoid/MoveUp[/Keyboard/w,/Keyboard/upArrow]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7375888854475916653}
+        m_TargetAssemblyTypeName: ProjectEgoSword.VirtualInputController, Assembly-CSharp
+        m_MethodName: MoveDown
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 1099c8b1-4dc2-4e58-954c-85aaec3bd93b
     m_ActionName: 'Humanoid/MoveDown[/Keyboard/s,/Keyboard/downArrow]'
   - m_PersistentCalls:
