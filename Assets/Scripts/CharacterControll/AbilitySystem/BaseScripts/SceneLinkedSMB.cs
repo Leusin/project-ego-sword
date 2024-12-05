@@ -1,9 +1,6 @@
-using NUnit.Framework;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Animations;
-
 
 namespace ProjectEgoSword
 {
@@ -53,7 +50,12 @@ namespace ProjectEgoSword
             OnSLStateEnter(animator, stateInfo, layerIndex);
             OnSLStateEnter(animator, stateInfo, layerIndex, controller);
 
-            if(_monobehaviour == null)
+            if (_monobehaviour == null)
+            {
+                _monobehaviour = animator.transform.root.GetComponent<TMonoBehaviour>();
+            }
+
+            if (_monobehaviour == null)
             {
                 return;
             }

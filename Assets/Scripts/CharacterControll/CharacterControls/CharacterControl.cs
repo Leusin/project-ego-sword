@@ -27,7 +27,7 @@ public class CharacterControl : MonoBehaviour
     public GameObject colliderEdgePrefab;
     public LedgeChecker ledgeChecker;
     public AnimationProgress animationProgress;
-
+    public AIProgress aiProgress;
 
     [Header("Input")]
     public Vector2 move;
@@ -153,6 +153,7 @@ public class CharacterControl : MonoBehaviour
             }
         }
     }
+
     public void CreateMiddleSpheres(GameObject start, Vector3 direction, float section, int interactions, List<GameObject> spheresList)
     {
         for (int i = 0; i < interactions; i++)
@@ -197,7 +198,7 @@ public class CharacterControl : MonoBehaviour
             return _childObjects[name];
         }
 
-        Transform[] arr = gameObject .GetComponentsInChildren<Transform>();
+        Transform[] arr = gameObject.GetComponentsInChildren<Transform>();
 
         foreach (Transform t in arr)
         {
@@ -251,12 +252,23 @@ public class CharacterControl : MonoBehaviour
             animationProgress = GetComponent<AnimationProgress>();
         }
 
+        if(aiProgress == null)
+        {
+            aiProgress = GetComponentInChildren<AIProgress>();
+        }
+
         RegisterCharacter();
     }
 
     private void Start()
     {
-        SceneLinkedSMB<CharacterControl>.Initialise(skinnedMeshAnimator, this);
+        Animator[] animators = GetComponentsInChildren<Animator>();
+
+        for(int i = 0; i < animators.Length; i++)
+        {
+            SceneLinkedSMB<CharacterControl>.Initialise(animators[i], this);
+        }
+        
     }
 
     private void FixedUpdate()

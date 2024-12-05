@@ -23,6 +23,7 @@ namespace ProjectEgoSword
 
         public void GoToTarget()
         {
+            _navMeshAgent.enabled = true;
             startSphere.transform.parent = null;
             endSphere.transform.parent = null;
 
