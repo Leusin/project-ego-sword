@@ -33,11 +33,15 @@ namespace ProjectEgoSword
 
         public override void UpdateAbility(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if (monobehaviour.jump)
-            {
-                animator.SetBool(CharacterControl.TransitionParameter.Jump.ToString(), true);
-                return;
-            }
+            // 2025-01-16
+            // AI 가 점프하면서 앞으로 나아가지 못해서 주석처리했다.
+            // 추후 아래 코드가 필요하지 않는다면 완전히 지울 것.
+            //
+            //if (monobehaviour.jump)
+            //{
+            //    animator.SetBool(CharacterControl.TransitionParameter.Jump.ToString(), true);
+            //    return;
+            //}
 
             if (constant)
             {

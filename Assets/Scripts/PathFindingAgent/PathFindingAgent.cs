@@ -1,5 +1,5 @@
 using System.Collections;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,23 +9,24 @@ namespace ProjectEgoSword
     {
         [Header("Debug")]
         public GameObject target;
-        public Vector3 startPosition;
-        public Vector3 endPosition;
 
         [Header("Setting")]
         public bool targetPlayebleCharacter;
         public GameObject startSphere;
         public GameObject endSphere;
+        public bool startWalk;
 
-        private Coroutine _move;
         private NavMeshAgent _navMeshAgent;
+        private List<Coroutine> _moveRoutines = new List<Coroutine>();
 
+        private float _distToTarget = 0.5f;
 
         public void GoToTarget()
         {
             _navMeshAgent.enabled = true;
             startSphere.transform.parent = null;
             endSphere.transform.parent = null;
+            startWalk = false;
 
             _navMeshAgent.isStopped = false;
 
@@ -36,12 +37,17 @@ namespace ProjectEgoSword
 
             _navMeshAgent.SetDestination(target.transform.position);
 
-            if(_move != null)
+            if(_moveRoutines.Count != 0)
             {
-                StopCoroutine(_move);
+                if(_moveRoutines[0] != null)
+                {
+                    StopCoroutine(_moveRoutines[0]);
+                }
+
+                _moveRoutines.RemoveAt(0);
             }
 
-            _move = StartCoroutine(Move());
+            _moveRoutines.Add(StartCoroutine(Move()));
         }
 
         // -----
@@ -52,25 +58,26 @@ namespace ProjectEgoSword
             {
                 if(_navMeshAgent.isOnOffMeshLink)
                 {
-                    startPosition = transform.position;
-                    startSphere.transform.position = transform.position;
+                    startSphere.transform.position = _navMeshAgent.currentOffMeshLinkData.startPos;
+                    endSphere.transform.position = _navMeshAgent.currentOffMeshLinkData.endPos;
+
                     _navMeshAgent.CompleteOffMeshLink();
 
-                    yield return new WaitForEndOfFrame();
-
-                    endPosition = transform.position;
-                    endSphere.transform.position = transform.position;
                     _navMeshAgent.isStopped = true;
+                    startWalk = true;
 
                     yield break;
                 }
 
                 Vector3 dist = transform.position - _navMeshAgent.destination;
-                if(Vector3.SqrMagnitude(dist) < 0.5f)
+                if(Vector3.SqrMagnitude(dist) < _distToTarget)
                 {
-                    startPosition = transform.position;
-                    endPosition = transform.position;
+                    startSphere.transform.position = _navMeshAgent.destination;
+                    endSphere.transform.position= _navMeshAgent.destination;
+
                     _navMeshAgent.isStopped = true;
+                    startWalk = true;
+
                     yield break;
                 }
 

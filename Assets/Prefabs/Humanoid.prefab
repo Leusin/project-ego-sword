@@ -224,6 +224,7 @@ MonoBehaviour:
   colliderEdgePrefab: {fileID: 2875485982597503087, guid: dc9bc34ef6b83844b96a8215a4db5c32, type: 3}
   ledgeChecker: {fileID: 3369293491608027828}
   animationProgress: {fileID: 4837987479059211739}
+  aiProgress: {fileID: 0}
   move: {x: 0, y: 0}
   moveLeft: 0
   moveRight: 0
@@ -310,8 +311,8 @@ Transform:
   m_GameObject: {fileID: 7494769438811334505}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.8, z: 0.2}
-  m_LocalScale: {x: 1, y: 0.8, z: 0.6}
+  m_LocalPosition: {x: 0, y: 2, z: 0.5}
+  m_LocalScale: {x: 1, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6378753144997988709}

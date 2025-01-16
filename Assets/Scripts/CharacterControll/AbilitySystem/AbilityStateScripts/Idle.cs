@@ -18,8 +18,6 @@ namespace ProjectEgoSword
         {
             if (!animator.IsInTransition(layerIndex))
             {
-                Vector2 move = monoBehaviour.move;
-
                 if (monoBehaviour.attack && !animator.GetBool(CharacterControl.TransitionParameter.Attack.ToString()))
                 {
                     animator.SetBool(CharacterControl.TransitionParameter.Attack.ToString(), true);
@@ -28,7 +26,7 @@ namespace ProjectEgoSword
                 {
                     animator.SetBool(CharacterControl.TransitionParameter.Jump.ToString(), true);
                 }
-                if (move.magnitude > 0)
+                if (monoBehaviour.moveLeft || monoBehaviour.moveRight)
                 {
                     animator.SetBool(CharacterControl.TransitionParameter.Move.ToString(), true);
                 }

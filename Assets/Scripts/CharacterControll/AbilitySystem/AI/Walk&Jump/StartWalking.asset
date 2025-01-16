@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8025b0213f0df2640a187a3cb8868b23, type: 3}
-  m_Name: General_GroundDetector
+  m_Script: {fileID: 11500000, guid: 04e0e01cf09dd86428e242498672d7dd, type: 3}
+  m_Name: StartWalking
   m_EditorClassIdentifier: 
-  checkTime: 0.1
-  distance: 0.1

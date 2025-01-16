@@ -3,6 +3,13 @@ using UnityEngine.AI;
 
 namespace ProjectEgoSword
 {
+    public enum AI_Walk_Transitions
+    {
+        StartWalk,
+        JumpPlatform,
+        FallPlatform,
+    }
+
     [CreateAssetMenu(fileName = "New State", menuName = "ProjectEgoSword/AI/SendPathfindingAgent")]
     public class SendPathfindingAgent : StateData<CharacterControl>
     {
@@ -21,10 +28,15 @@ namespace ProjectEgoSword
 
         public override void UpdateAbility(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            if(monobehaviour.aiProgress.pathFindingAgent.startWalk)
+            {
+                animator.SetBool(AI_Walk_Transitions.StartWalk.ToString(), true);
+            }
         }
 
         public override void OnExit(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            animator.SetBool(AI_Walk_Transitions.StartWalk.ToString(), false);
         }
     }
 }

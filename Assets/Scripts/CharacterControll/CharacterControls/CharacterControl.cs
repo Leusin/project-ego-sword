@@ -42,6 +42,10 @@ public class CharacterControl : MonoBehaviour
     public List<Collider> ragdollParts = new List<Collider>();
 
     public List<GameObject> bottomSpheres = new List<GameObject>();
+
+    // 초기화 순서에 따라
+    // 0 번 인덱스 맨 밑, 1 번 인덱스 맨 위
+    // 그리고 그 후엔 바닥 -> 천장 순서로 그사이에 배치되어있음
     public List<GameObject> frontSpheres = new List<GameObject>();
 
     [HideInInspector] public float gravityMultiplier;

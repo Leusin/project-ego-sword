@@ -31,7 +31,10 @@ namespace ProjectEgoSword
 
         private bool IsGrounded(CharacterControl monoBehaviour)
         {
-            if (monoBehaviour.RigidbodyComponent.linearVelocity.y > -0.001f &&
+            const float groundedVelocityThreshold = -0.001f;
+            const float raycastDistance = 0.7f;
+
+            if (monoBehaviour.RigidbodyComponent.linearVelocity.y > groundedVelocityThreshold &&
                 monoBehaviour.RigidbodyComponent.linearVelocity.y <= 0f)
             {
                 return true;
@@ -41,10 +44,9 @@ namespace ProjectEgoSword
             {
                 foreach (GameObject obj in monoBehaviour.bottomSpheres)
                 {
-                    Debug.DrawRay(obj.transform.position, -Vector3.up * 0.7f, Color.yellow);
+                    Debug.DrawRay(obj.transform.position, -Vector3.up * raycastDistance, Color.yellow);
 
-                    RaycastHit hit;
-                    if (Physics.Raycast(obj.transform.position, -Vector3.up, out hit, distance))
+                    if (Physics.Raycast(obj.transform.position, -Vector3.up, out RaycastHit hit, distance))
                     {
                         if(!monoBehaviour.ragdollParts.Contains(hit.collider) &&
                             !Ledge.IsLedge(hit.collider.gameObject) &&
