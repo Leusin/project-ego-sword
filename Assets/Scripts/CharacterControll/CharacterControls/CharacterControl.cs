@@ -173,10 +173,10 @@ public class CharacterControl : MonoBehaviour
 
     public GameObject CreateEdgeSphere(Vector3 position)
     {
-        GameObject obj = Instantiate(Resources.Load("ColliderEdge", 
-            typeof(GameObject)), 
-            position,
-            Quaternion.identity ) as GameObject;
+        GameObject obj = Instantiate(Resources.Load("ColliderEdge"
+            , typeof(GameObject))
+            , position
+            , Quaternion.identity ) as GameObject;
 
         return obj;
     }
