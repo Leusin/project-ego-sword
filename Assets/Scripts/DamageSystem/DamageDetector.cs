@@ -97,11 +97,19 @@ namespace ProjectEgoSword
             {
                 foreach (Collider collider in trigger.collidingParts)
                 {
-                    foreach (string name in info.colliderNames)
+                    foreach (AttackPartType part in info.AttackParts)
                     {
-                        if (name.Equals(collider.gameObject.name))
+                        if (part == AttackPartType.LEFT_HAND)
                         {
-                            if (collider.transform.root.gameObject == info.attacker.gameObject)
+                            if(collider.gameObject == info.attacker.leftHandAttack)
+                            {
+                                _damagedPart = trigger.generalBodyPart;
+                                return true;
+                            }
+                        }
+                        else if(part == AttackPartType.RIGHT_HAND)
+                        {
+                            if(collider.gameObject == info.attacker.rightHandAttack)
                             {
                                 _damagedPart = trigger.generalBodyPart;
                                 return true;

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,8 +7,8 @@ namespace ProjectEgoSword
     {
         public CharacterControl attacker;
         public Attack attackAbility;
+        public List<AttackPartType> AttackParts = new List<AttackPartType>();
         public DeathType deathType;
-
         public bool mustCollide;
         public bool mustFaceAttacker;
         public float lethalRange;
@@ -18,8 +17,6 @@ namespace ProjectEgoSword
         public bool isRegisterd;
         public bool isFinished;
 
-        public List<AttackPartType> AttackParts = new List<AttackPartType>();
-        public List<string> colliderNames = new List<string>();
 
         public void ResetInfo(Attack attack, CharacterControl attacker)
         {

@@ -416,7 +416,19 @@ MonoBehaviour:
     m_ActionId: e42953c2-f3d8-47d6-881b-734e2134b9b8
     m_ActionName: 'Humanoid/Move[/Keyboard/a,/Keyboard/leftArrow,/XInputControllerWindows/dpad/left,/XInputControllerWindows/leftStick/left,/Keyboard/d,/Keyboard/rightArrow,/XInputControllerWindows/dpad/right,/XInputControllerWindows/leftStick/right,/XInputControllerWindows/leftStick]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 89930865}
+        m_TargetAssemblyTypeName: ProjectEgoSword.VirtualInputController, Assembly-CSharp
+        m_MethodName: Crounch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 2127863f-984a-481e-8f9d-37a27fd834bd
     m_ActionName: 'Humanoid/Crouch[/Keyboard/s,/Keyboard/downArrow,/XInputControllerWindows/buttonEast]'
   - m_PersistentCalls:
@@ -483,6 +495,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 1099c8b1-4dc2-4e58-954c-85aaec3bd93b
     m_ActionName: 'Humanoid/MoveDown[/Keyboard/s,/Keyboard/downArrow]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 89930865}
+        m_TargetAssemblyTypeName: ProjectEgoSword.VirtualInputController, Assembly-CSharp
+        m_MethodName: Rush
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: deb4034c-eee6-498b-8667-5d1c0c3c9d3a
+    m_ActionName: 'Humanoid/Rush[/Keyboard/leftShift,/Keyboard/c]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Humanoid
@@ -5152,7 +5180,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.1
+  m_VoxelSize: 0.083333336
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 6b794d07ac41e9242a3e83560b524702, type: 2}
   m_BuildHeightMesh: 0

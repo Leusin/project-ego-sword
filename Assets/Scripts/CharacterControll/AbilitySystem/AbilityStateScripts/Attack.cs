@@ -10,11 +10,9 @@ namespace ProjectEgoSword
 
         public float startAttackTime;
         public float endAttackTime;
-        public List<string> colliderNames = new List<string>();
         public List<AttackPartType> attackParts = new List<AttackPartType>();
         public DeathType deathType;
 
-        public bool lunchIntoAir;
         public bool mustCollide;
         public bool mustFaceAttacker;
         public float lethalRange;

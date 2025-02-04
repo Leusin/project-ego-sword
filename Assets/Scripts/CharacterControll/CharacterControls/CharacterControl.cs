@@ -20,16 +20,6 @@ public class CharacterControl : MonoBehaviour
 
     public PlayableCharacterType characterType;
 
-    [Header("Setup")]
-    public bool faceForword;
-    public Animator skinnedMeshAnimator;
-    public Material material;
-    public GameObject colliderEdgePrefab;
-    public LedgeChecker ledgeChecker;
-    public AnimationProgress animationProgress;
-    public AIProgress aiProgress;
-    public DamageDetector damageDetector;
-
     [Header("Input")]
     public Vector2 move;
     public bool moveLeft;
@@ -40,17 +30,26 @@ public class CharacterControl : MonoBehaviour
     public bool attack;
     public bool rash;
 
-    public List<Collider> ragdollParts = new List<Collider>();
-
+    [Header("SubComponents")]
+    public Material material;
+    public LedgeChecker ledgeChecker;
+    public AnimationProgress animationProgress;
+    public AIProgress aiProgress;
+    public DamageDetector damageDetector;
+    public GameObject colliderEdgePrefab;
     public List<GameObject> bottomSpheres = new List<GameObject>();
-
-    // 초기화 순서에 따라
-    // 0 번 인덱스 맨 밑, 1 번 인덱스 맨 위
-    // 그리고 그 후엔 바닥 -> 천장 순서로 그사이에 배치되어있음
     public List<GameObject> frontSpheres = new List<GameObject>();
 
-    [HideInInspector] public float gravityMultiplier;
-    [HideInInspector] public float pullMultiplier;
+    [Header("Gravity")]
+    public float gravityMultiplier;
+    public float pullMultiplier;
+
+    [Header("Setup")]
+    public bool faceForword;
+    public Animator skinnedMeshAnimator;
+    public List<Collider> ragdollParts = new List<Collider>();
+    public GameObject leftHandAttack;
+    public GameObject rightHandAttack;
 
     private List<TriggerDetector> _triggerDetectors = new List<TriggerDetector>();
     private Dictionary<string, GameObject> _childObjects = new Dictionary<string, GameObject>();
@@ -315,6 +314,10 @@ public class CharacterControl : MonoBehaviour
 
         bottomSpheres.Add(bottomFrontHor);
         bottomSpheres.Add(bottomBack);
+
+        // 초기화 순서에 따라
+        // 0 번 인덱스 맨 밑, 1 번 인덱스 맨 위
+        // 그리고 그 후엔 바닥 -> 천장 순서로 그사이에 배치되어있음
 
         frontSpheres.Add(bottomFrontVar);
         frontSpheres.Add(topFront);

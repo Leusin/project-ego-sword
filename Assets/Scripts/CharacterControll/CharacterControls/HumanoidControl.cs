@@ -5,8 +5,6 @@ namespace ProjectEgoSword
 {
     public class HumanoidControl : CharacterControl
     {
-        public Transform WeaponMountPosition;
-
         public NavMeshAgent NavMeshAgentComponent
         {
             get
@@ -25,7 +23,6 @@ namespace ProjectEgoSword
 
         public void Equip(PlayerController playerController)
         {
-            playerController.transform.SetParent(WeaponMountPosition.transform);
             playerController.transform.localPosition = Vector3.zero;
             playerController.transform.localRotation = Quaternion.identity;
             _cachednavMeshAgent.enabled = false;
