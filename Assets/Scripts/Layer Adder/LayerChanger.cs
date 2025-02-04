@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roundbeargames
@@ -13,7 +12,7 @@ namespace Roundbeargames
         {
             if (!ChangeAllChildren)
             {
-                Debug.Log(gameObject.name + " changing layer: " + LayerType.ToString());
+                Debug.Log($"{gameObject.name} changing layer: {LayerType.ToString()}");
                 gameObject.layer = layerDic[LayerType.ToString()];
             }
             else
@@ -22,7 +21,7 @@ namespace Roundbeargames
 
                 foreach(Transform t in arr)
                 {
-                    Debug.Log(t.gameObject.name + " changing layer: " + LayerType.ToString());
+                    Debug.Log($"{t.gameObject.name} changing layer: {LayerType.ToString()}");
                     t.gameObject.layer = layerDic[LayerType.ToString()];
                 }
             }
