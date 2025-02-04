@@ -28,6 +28,7 @@ public class CharacterControl : MonoBehaviour
     public LedgeChecker ledgeChecker;
     public AnimationProgress animationProgress;
     public AIProgress aiProgress;
+    public DamageDetector damageDetector;
 
     [Header("Input")]
     public Vector2 move;
@@ -76,7 +77,7 @@ public class CharacterControl : MonoBehaviour
 
     public void FaceForward(bool forward)
     {
-        if(!faceForword)
+        if (!faceForword)
         {
             return;
         }
@@ -142,7 +143,7 @@ public class CharacterControl : MonoBehaviour
 
     public void ChangeMaterial()
     {
-        if(material == null)
+        if (material == null)
         {
             Debug.LogError("No material specifies");
         }
@@ -197,7 +198,7 @@ public class CharacterControl : MonoBehaviour
 
     public GameObject GetChildObject(string name)
     {
-        if(_childObjects.ContainsKey(name))
+        if (_childObjects.ContainsKey(name))
         {
             return _childObjects[name];
         }
@@ -218,7 +219,7 @@ public class CharacterControl : MonoBehaviour
 
     public Collider GetBodyPart(string name)
     {
-        foreach(Collider c in ragdollParts)
+        foreach (Collider c in ragdollParts)
         {
             return c;
         }
@@ -246,20 +247,10 @@ public class CharacterControl : MonoBehaviour
 
         SetColliderSphere();
 
-        if(ledgeChecker == null)
-        {
-            ledgeChecker = GetComponentInChildren<LedgeChecker>();
-        }
-
-        if(animationProgress == null)
-        {
-            animationProgress = GetComponent<AnimationProgress>();
-        }
-
-        if(aiProgress == null)
-        {
-            aiProgress = GetComponentInChildren<AIProgress>();
-        }
+        ledgeChecker = GetComponentInChildren<LedgeChecker>();
+        animationProgress = GetComponent<AnimationProgress>();
+        aiProgress = GetComponentInChildren<AIProgress>();
+        damageDetector = GetComponentInChildren<DamageDetector>();
 
         RegisterCharacter();
     }
@@ -268,11 +259,11 @@ public class CharacterControl : MonoBehaviour
     {
         Animator[] animators = GetComponentsInChildren<Animator>();
 
-        for(int i = 0; i < animators.Length; i++)
+        for (int i = 0; i < animators.Length; i++)
         {
             SceneLinkedSMB<CharacterControl>.Initialise(animators[i], this);
         }
-        
+
     }
 
     private void FixedUpdate()

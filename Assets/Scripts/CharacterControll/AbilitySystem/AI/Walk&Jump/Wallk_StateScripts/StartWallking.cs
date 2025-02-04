@@ -1,4 +1,5 @@
 using UnityEngine;
+using static CharacterControl;
 
 namespace ProjectEgoSword
 {
@@ -53,6 +54,28 @@ namespace ProjectEgoSword
                         animator.gameObject.SetActive(true);
                     }
                 }
+                // TAMP: 공격 AI 나중에 수정할 것.
+                else
+                {
+                    if (CharacterManager.Instance.GetPlayerbleCharacter().
+                        damageDetector.damageTaken == 0)
+                    {
+                        if (monobehaviour.IsFacingForward())
+                        {
+                            monobehaviour.moveRight = true;
+                            monobehaviour.moveLeft = false;
+                            //monobehaviour.attack = true;
+                            monobehaviour.skinnedMeshAnimator.SetInteger(CharacterControl.TransitionParameter.TransitionIndex.ToString(), 1);
+                        }
+                        else
+                        {
+                            monobehaviour.moveRight = false;
+                            monobehaviour.moveLeft = true;
+                            //monobehaviour.attack = true;
+                            monobehaviour.skinnedMeshAnimator.SetInteger(CharacterControl.TransitionParameter.TransitionIndex.ToString(), 1);
+                        }
+                    }
+                }
             }
             // Jump
             else if (monobehaviour.aiProgress.pathFindingAgent.startSphere.transform.position.y <
@@ -64,7 +87,6 @@ namespace ProjectEgoSword
                     monobehaviour.moveLeft = false;
 
                     animator.SetBool(AI_Walk_Transitions.JumpPlatform.ToString(), true);
-
                 }
             }
             // Fall
