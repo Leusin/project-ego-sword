@@ -1,5 +1,4 @@
 using UnityEngine;
-using static CharacterControl;
 
 namespace ProjectEgoSword
 {
@@ -55,6 +54,7 @@ namespace ProjectEgoSword
                     }
                 }
                 // TAMP: 공격 AI 나중에 수정할 것.
+                /*
                 else
                 {
                     if (CharacterManager.Instance.GetPlayerbleCharacter().
@@ -76,6 +76,7 @@ namespace ProjectEgoSword
                         }
                     }
                 }
+                */
             }
             // Jump
             else if (monobehaviour.aiProgress.pathFindingAgent.startSphere.transform.position.y <

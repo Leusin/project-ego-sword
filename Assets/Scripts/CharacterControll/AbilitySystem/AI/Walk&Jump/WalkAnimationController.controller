@@ -221,10 +221,16 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WalkAnimatiorController
+  m_Name: WalkAnimationController
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: StartWalk
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: StartRun
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -305,16 +311,16 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -5959416824438891131}
-    m_Position: {x: 390, y: 110, z: 0}
+    m_Position: {x: 30, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5311059077906757301}
-    m_Position: {x: 390, y: 310, z: 0}
+    m_Position: {x: 30, y: 290, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2699967186647026631}
-    m_Position: {x: 390, y: 380, z: 0}
+    m_Position: {x: 270, y: 380, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -936762849989378876}
-    m_Position: {x: 330, y: 250, z: 0}
+    m_Position: {x: 30, y: 380, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

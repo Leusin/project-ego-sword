@@ -8,6 +8,7 @@ namespace ProjectEgoSword
         StartWalk,
         JumpPlatform,
         FallPlatform,
+        StartRun,
     }
 
     [CreateAssetMenu(fileName = "New State", menuName = "ProjectEgoSword/AI/SendPathfindingAgent")]
@@ -31,12 +32,14 @@ namespace ProjectEgoSword
             if(monobehaviour.aiProgress.pathFindingAgent.startWalk)
             {
                 animator.SetBool(AI_Walk_Transitions.StartWalk.ToString(), true);
+                animator.SetBool(AI_Walk_Transitions.StartRun.ToString(), true);
             }
         }
 
         public override void OnExit(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             animator.SetBool(AI_Walk_Transitions.StartWalk.ToString(), false);
+            animator.SetBool(AI_Walk_Transitions.StartRun.ToString(), false);
         }
     }
 }
