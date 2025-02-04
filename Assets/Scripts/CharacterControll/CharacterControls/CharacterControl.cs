@@ -36,7 +36,7 @@ public class CharacterControl : MonoBehaviour
     public AnimationProgress animationProgress;
     public AIProgress aiProgress;
     public DamageDetector damageDetector;
-    public GameObject colliderEdgePrefab;
+    //public GameObject colliderEdgePrefab;
     public List<GameObject> bottomSpheres = new List<GameObject>();
     public List<GameObject> frontSpheres = new List<GameObject>();
 
@@ -173,7 +173,11 @@ public class CharacterControl : MonoBehaviour
 
     public GameObject CreateEdgeSphere(Vector3 position)
     {
-        GameObject obj = Instantiate(colliderEdgePrefab, position, Quaternion.identity);
+        GameObject obj = Instantiate(Resources.Load("ColliderEdge", 
+            typeof(GameObject)), 
+            position,
+            Quaternion.identity ) as GameObject;
+
         return obj;
     }
 
