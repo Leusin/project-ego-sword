@@ -36,9 +36,9 @@ public class CharacterControl : MonoBehaviour
     public AnimationProgress animationProgress;
     public AIProgress aiProgress;
     public DamageDetector damageDetector;
-    //public GameObject colliderEdgePrefab;
     public List<GameObject> bottomSpheres = new List<GameObject>();
     public List<GameObject> frontSpheres = new List<GameObject>();
+    public AIController aiController;
 
     [Header("Gravity")]
     public float gravityMultiplier;
@@ -254,6 +254,7 @@ public class CharacterControl : MonoBehaviour
         animationProgress = GetComponent<AnimationProgress>();
         aiProgress = GetComponentInChildren<AIProgress>();
         damageDetector = GetComponentInChildren<DamageDetector>();
+        aiController = GetComponentInChildren<AIController>();
 
         RegisterCharacter();
     }
