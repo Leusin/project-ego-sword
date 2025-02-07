@@ -18,11 +18,13 @@ namespace ProjectEgoSword
             Debug.DrawLine(startPos, currentPos, Color.yellow);
             if (dir.z > 0f)
             {
+                monobehaviour.FaceForward(true);
                 monobehaviour.moveRight = true;
                 monobehaviour.moveLeft = false;
             }
             else
             {
+                monobehaviour.FaceForward(false);
                 monobehaviour.moveRight = false;
                 monobehaviour.moveLeft = true;
             }
