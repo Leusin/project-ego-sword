@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityStateDatas:
   - {fileID: 11400000, guid: 5e2f0ba2fd7bc5a4ca2870ba07521c57, type: 2}
+  - {fileID: 11400000, guid: 9eed582a8eae78046b1b640a7be8218f, type: 2}
 --- !u!1107 &6894457879684815858
 AnimatorStateMachine:
   serializedVersion: 6

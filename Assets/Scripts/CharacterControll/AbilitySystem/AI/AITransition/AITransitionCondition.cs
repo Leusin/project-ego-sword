@@ -8,6 +8,7 @@ namespace ProjectEgoSword
         public enum AITransitionType
         {
             RunToWalk,
+            WalkToRun,
         }
 
         public AITransitionType aiTransitionCondition;
@@ -40,6 +41,17 @@ namespace ProjectEgoSword
                 Vector3 directionToStart = startPos - currentPos;
 
                 if(Vector3.SqrMagnitude(directionToStart) < runToWalckStartDistance)
+                {
+                    return true;
+                }
+            }
+            else if (aiTransitionCondition == AITransitionType.WalkToRun)
+            {
+                Vector3 startPos = monobehaviour.aiProgress.pathFindingAgent.startSphere.transform.position;
+                Vector3 currentPos = monobehaviour.transform.position;
+                Vector3 directionToStart = startPos - currentPos;
+
+                if (Vector3.SqrMagnitude(directionToStart) > runToWalckStartDistance)
                 {
                     return true;
                 }
