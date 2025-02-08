@@ -539,7 +539,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.05
+  m_TransitionDuration: 0.01
   m_TransitionOffset: 0
   m_ExitTime: 0
   m_HasExitTime: 0
@@ -1620,6 +1620,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 50a05d43125219a49885383cadc40702, type: 2}
   - {fileID: 11400000, guid: 7b606aa86cefebe48bb0e959c219df4a, type: 2}
   - {fileID: 11400000, guid: c9c0fa4924c18d94aab7489b44ce4ef0, type: 2}
+  - {fileID: 11400000, guid: 56d85ec3dcf5edc44ba42f3e6d05a401, type: 2}
 --- !u!1102 &3873096835509672819
 AnimatorState:
   serializedVersion: 6

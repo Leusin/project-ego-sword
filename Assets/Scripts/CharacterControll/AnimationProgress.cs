@@ -11,6 +11,7 @@ namespace ProjectEgoSword
         public bool attackTriggerd;
         public float maxPressTime;
         public bool disallowEarylTurn;
+        public float airMomentum;
 
         private CharacterControl _characterControl;
         private float _pressTime;

@@ -1,6 +1,4 @@
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace ProjectEgoSword
 {
@@ -14,21 +12,26 @@ namespace ProjectEgoSword
         public float speed;
         public float blockDistance;
 
+        [Header("Momentum")]
+        public bool useMomentum;
+        public float maxMomentum;
+
         public override void OnEnter(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if(allowEarlyTurn && !monobehaviour.animationProgress.disallowEarylTurn)
+            if (allowEarlyTurn && !monobehaviour.animationProgress.disallowEarylTurn)
             {
-                if(monobehaviour.moveLeft)
+                if (monobehaviour.moveLeft)
                 {
                     monobehaviour.FaceForward(false);
                 }
-                else if(monobehaviour.moveRight)
+                else if (monobehaviour.moveRight)
                 {
                     monobehaviour.FaceForward(true);
                 }
             }
 
             monobehaviour.animationProgress.disallowEarylTurn = false;
+            monobehaviour.animationProgress.airMomentum = 0f;
         }
 
         public override void UpdateAbility(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -42,22 +45,68 @@ namespace ProjectEgoSword
             //    animator.SetBool(CharacterControl.TransitionParameter.Jump.ToString(), true);
             //    return;
             //}
-
-            if (constant)
+            if (useMomentum)
             {
-                ConstantMove(monobehaviour, animator, stateInfo);
+                UpdateMomentum(monobehaviour, animator, stateInfo);
             }
             else
             {
-                ControllMove(monobehaviour, animator, stateInfo);
+                if (constant)
+                {
+                    ConstantMove(monobehaviour, animator, stateInfo);
+                }
+                else
+                {
+                    ControllMove(monobehaviour, animator, stateInfo);
+                }
             }
         }
 
         public override void OnExit(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            monobehaviour.animationProgress.airMomentum = 0f;
         }
 
         // -----
+
+        private void UpdateMomentum(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo)
+        {
+            if (monobehaviour.moveRight)
+            {
+                monobehaviour.animationProgress.airMomentum += speedGraph.Evaluate(stateInfo.normalizedTime) * Time.deltaTime;
+            }
+
+            if (monobehaviour.moveLeft)
+            {
+                monobehaviour.animationProgress.airMomentum -= speedGraph.Evaluate(stateInfo.normalizedTime) * Time.deltaTime;
+            }
+
+            if (Mathf.Abs(monobehaviour.animationProgress.airMomentum) >= maxMomentum)
+            {
+                if (monobehaviour.animationProgress.airMomentum > 0f)
+                {
+                    monobehaviour.animationProgress.airMomentum = maxMomentum;
+                }
+                else if (monobehaviour.animationProgress.airMomentum < 0f)
+                {
+                    monobehaviour.animationProgress.airMomentum = -maxMomentum;
+                }
+            }
+
+            if (monobehaviour.animationProgress.airMomentum > 0f)
+            {
+                monobehaviour.FaceForward(true);
+            }
+            else if (monobehaviour.animationProgress.airMomentum < 0f)
+            {
+                monobehaviour.FaceForward(false);
+            }
+            
+            if (!CheckFront(monobehaviour))
+            {
+                monobehaviour.MoveForward(speed, Mathf.Abs(monobehaviour.animationProgress.airMomentum));
+            }
+        }
 
         private void ConstantMove(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo)
         {
