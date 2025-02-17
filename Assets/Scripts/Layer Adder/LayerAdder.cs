@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace Roundbeargames
 {
-    public enum RB_Layers
+    public enum ProjectES_Layers
     {
         PostProcessing,
         Character,
         Bot,
         Ground,
-        Ragdoll,
+        DeadBody,
     }
 
     public class LayerAdder : MonoBehaviour

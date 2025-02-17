@@ -14,9 +14,9 @@ namespace Roundbeargames
             GUI.backgroundColor = Color.green;
             if (GUILayout.Button("Add RB Default Layers"))
             {
-                RB_Layers[] arr = System.Enum.GetValues(typeof(RB_Layers)) as RB_Layers[];
+                ProjectES_Layers[] arr = System.Enum.GetValues(typeof(ProjectES_Layers)) as ProjectES_Layers[];
 
-                foreach(RB_Layers r in arr)
+                foreach(ProjectES_Layers r in arr)
                 {
                     CreateLayer(r.ToString());
                 }
@@ -35,9 +35,9 @@ namespace Roundbeargames
                 }
 
                 Physics.IgnoreLayerCollision(dic["Default"], dic["Default"], false);
-                Physics.IgnoreLayerCollision(dic[RB_Layers.Character.ToString()], dic["Default"], false);
-                Physics.IgnoreLayerCollision(dic[RB_Layers.Ragdoll.ToString()], dic["Default"], false);
-                Physics.IgnoreLayerCollision(dic[RB_Layers.Ragdoll.ToString()], dic[RB_Layers.Ragdoll.ToString()], false);
+                Physics.IgnoreLayerCollision(dic[ProjectES_Layers.Character.ToString()], dic["Default"], false);
+                Physics.IgnoreLayerCollision(dic[ProjectES_Layers.DeadBody.ToString()], dic["Default"], false);
+                Physics.IgnoreLayerCollision(dic[ProjectES_Layers.DeadBody.ToString()], dic[ProjectES_Layers.DeadBody.ToString()], false);
 
                 Debug.Log("default collisions set");
             }

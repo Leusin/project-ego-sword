@@ -1,4 +1,5 @@
 using ProjectEgoSword;
+using Roundbeargames;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -131,10 +132,19 @@ public class CharacterControl : MonoBehaviour
                 c.isTrigger = true;
                 ragdollParts.Add(c);
 
+                c.attachedRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+                c.attachedRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+
+                CharacterJoint joint = c.GetComponent<CharacterJoint>();
+
+                if (joint != null)
+                {
+                    joint.enableProjection = true;
+                }
+
                 if (c.GetComponent<TriggerDetector>() == null)
                 {
                     c.gameObject.AddComponent<TriggerDetector>();
-
                 }
             }
         }
@@ -176,25 +186,49 @@ public class CharacterControl : MonoBehaviour
         GameObject obj = Instantiate(Resources.Load("ColliderEdge"
             , typeof(GameObject))
             , position
-            , Quaternion.identity ) as GameObject;
+            , Quaternion.identity) as GameObject;
 
         return obj;
     }
 
     public void TurnOnRagdoll()
     {
+        // Change Layers
+        Transform[] arr = GetComponentsInChildren<Transform>();
+        foreach (Transform t in arr)
+        {
+            t.gameObject.layer = LayerMask.NameToLayer(ProjectES_Layers.DeadBody.ToString());
+        }
+
+        // Save BodyPart Position
+        foreach (Collider c in ragdollParts)
+        {
+            TriggerDetector triggerDetec = c.GetComponent<TriggerDetector>();
+            triggerDetec.lastPostion = c.gameObject.transform.localPosition;
+            triggerDetec.lastRotation = c.gameObject.transform.localRotation;
+        }
+
+        // Turn off animator/avatar/etc
         RigidbodyComponent.useGravity = false;
         RigidbodyComponent.linearVelocity = Vector3.zero;
-        GetComponent<BoxCollider>().enabled = false;
+        GetComponent<Collider>().enabled = false;
         skinnedMeshAnimator.enabled = false;
         skinnedMeshAnimator.avatar = null;
 
+        // Turn on ragdoll
         foreach (Collider c in ragdollParts)
         {
             if (c.gameObject != gameObject)
             {
                 c.isTrigger = false;
-                c.attachedRigidbody.linearVelocity = Vector3.zero;
+                if (c.attachedRigidbody != null)
+                {
+                    c.attachedRigidbody.linearVelocity = Vector3.zero;
+                }
+
+                TriggerDetector triggerDetec = c.GetComponent<TriggerDetector>();
+                c.transform.localPosition = triggerDetec.lastPostion;
+                c.transform.localRotation = triggerDetec.lastRotation;
             }
         }
     }
@@ -267,7 +301,6 @@ public class CharacterControl : MonoBehaviour
         {
             SceneLinkedSMB<CharacterControl>.Initialise(animators[i], this);
         }
-
     }
 
     private void FixedUpdate()

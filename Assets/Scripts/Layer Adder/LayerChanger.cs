@@ -5,7 +5,7 @@ namespace Roundbeargames
 {
     public class LayerChanger : MonoBehaviour
     {
-        public RB_Layers LayerType;
+        public ProjectES_Layers LayerType;
         public bool ChangeAllChildren;
 
         public void ChangeLayer(Dictionary<string, int> layerDic)

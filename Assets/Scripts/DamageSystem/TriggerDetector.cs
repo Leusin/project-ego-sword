@@ -16,6 +16,9 @@ namespace ProjectEgoSword
         public GeneralBodyPart generalBodyPart;
         public List<Collider> collidingParts = new List<Collider>();
 
+        public Vector3 lastPostion;
+        public Quaternion lastRotation;
+
         private CharacterControl _owner;
 
         private void Awake()

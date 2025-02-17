@@ -9,6 +9,7 @@ namespace ProjectEgoSword
         public bool cameraShaken;
         public List<PoolObjectType> poolObjectList = new List<PoolObjectType> ();
         public bool attackTriggerd;
+        public bool ragdollTriggerd;
         public float maxPressTime;
         public bool disallowEarylTurn;
         public float airMomentum;
