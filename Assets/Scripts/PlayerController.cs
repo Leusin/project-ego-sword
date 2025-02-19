@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 
 namespace ProjectEgoSword
 {
-
     public class PlayerController : MonoBehaviour
     {
         public bool drawGizmo;

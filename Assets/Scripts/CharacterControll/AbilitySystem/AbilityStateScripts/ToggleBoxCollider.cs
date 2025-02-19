@@ -14,6 +14,9 @@ namespace ProjectEgoSword
         public bool onStart;
         public bool onEnd;
 
+        [Space(10)]
+        public bool repositionSpheres;
+
         private BoxCollider _boxCollider;
 
         public override void OnStart(CharacterControl monoBehaviour, Animator animator)
@@ -45,7 +48,14 @@ namespace ProjectEgoSword
 
         private void ToggleBoxCol(CharacterControl monobehaviour)
         {
+            monobehaviour.RigidbodyComponent.linearVelocity = Vector3.zero;
             _boxCollider.enabled = on;
+
+            if(repositionSpheres)
+            {
+                monobehaviour.RepositionFrontSpheres();
+                monobehaviour.RepositionBottomSpheres();
+            }
         }
     }
 }

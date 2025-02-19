@@ -843,9 +843,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityStateDatas:
+  - {fileID: 11400000, guid: e90c1c4c70236f046a9b5a8df34101fe, type: 2}
   - {fileID: 11400000, guid: c8726cd437be5604f941b7849f75b080, type: 2}
   - {fileID: 11400000, guid: 50a05d43125219a49885383cadc40702, type: 2}
-  - {fileID: 11400000, guid: e90c1c4c70236f046a9b5a8df34101fe, type: 2}
+  - {fileID: 11400000, guid: 28e748f2f849117439a529c087878b08, type: 2}
 --- !u!1101 &-3691835876025683134
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1687,8 +1688,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityStateDatas:
-  - {fileID: 11400000, guid: 2c941edf90a9fdd46bc48910ad3ce483, type: 2}
   - {fileID: 11400000, guid: 50a05d43125219a49885383cadc40702, type: 2}
+  - {fileID: 11400000, guid: d208d55d75089c94d8f2efd764f6e3e5, type: 2}
   - {fileID: 11400000, guid: 439b012697a098d449b42b232764a225, type: 2}
   - {fileID: 11400000, guid: c9c0fa4924c18d94aab7489b44ce4ef0, type: 2}
   - {fileID: 11400000, guid: 56d85ec3dcf5edc44ba42f3e6d05a401, type: 2}
@@ -1756,6 +1757,8 @@ MonoBehaviour:
   abilityStateDatas:
   - {fileID: 11400000, guid: 64effb655671d9d4d8c8f484b9519b8c, type: 2}
   - {fileID: 11400000, guid: 05391782ddc375948bf56e37f09e6853, type: 2}
+  - {fileID: 11400000, guid: 28e748f2f849117439a529c087878b08, type: 2}
+  - {fileID: 11400000, guid: 50a05d43125219a49885383cadc40702, type: 2}
 --- !u!1101 &4751477803176747414
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2127,6 +2130,20 @@ MonoBehaviour:
   abilityStateDatas:
   - {fileID: 11400000, guid: 86175c84e61359b41bf755f210d431ab, type: 2}
   - {fileID: 11400000, guid: f2bb3054f2e56b34286a204ff9e080a4, type: 2}
+--- !u!114 &7652657218920143965
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e15f5e4e3d7c1046978fc8b7b854675, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityStateDatas:
+  - {fileID: 11400000, guid: 28e748f2f849117439a529c087878b08, type: 2}
 --- !u!1102 &7789071089099521273
 AnimatorState:
   serializedVersion: 6
@@ -2219,7 +2236,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -3691835876025683134}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 7652657218920143965}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 1
   m_WriteDefaultValues: 1

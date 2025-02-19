@@ -14,6 +14,14 @@ namespace ProjectEgoSword
         public bool disallowEarylTurn;
         public float airMomentum;
 
+        [Header("UpdateBoxCollider")]
+        public bool updatingBoxCollider;
+        public bool updatingSpheres;
+        public Vector3 targetSize;
+        public float sizeSpeed;
+        public Vector3 targetCenter;
+        public float centerSpeed;
+
         private CharacterControl _characterControl;
         private float _pressTime;
 
