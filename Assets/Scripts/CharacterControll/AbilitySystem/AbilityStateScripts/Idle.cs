@@ -22,10 +22,19 @@ namespace ProjectEgoSword
                 {
                     animator.SetBool(CharacterControl.TransitionParameter.Attack.ToString(), true);
                 }
-                else if (monoBehaviour.jump && !animator.GetBool(CharacterControl.TransitionParameter.Jump.ToString()))
+                
+                if (monoBehaviour.jump && !animator.GetBool(CharacterControl.TransitionParameter.Jump.ToString()))
                 {
-                    animator.SetBool(CharacterControl.TransitionParameter.Jump.ToString(), true);
+                    if(!monoBehaviour.animationProgress.jumped)
+                    {
+                        animator.SetBool(CharacterControl.TransitionParameter.Jump.ToString(), true);
+                    }
                 }
+                else
+                {
+                    monoBehaviour.animationProgress.jumped = false;
+                }
+
                 if (monoBehaviour.moveLeft || monoBehaviour.moveRight)
                 {
                     animator.SetBool(CharacterControl.TransitionParameter.Move.ToString(), true);

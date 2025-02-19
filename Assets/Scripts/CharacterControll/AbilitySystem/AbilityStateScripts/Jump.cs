@@ -35,7 +35,6 @@ namespace ProjectEgoSword
         public override void OnExit(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             monobehaviour.pullMultiplier = 0f;
-            monobehaviour.animationProgress.jumped = false;
         }
     }
 }
