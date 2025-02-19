@@ -31,27 +31,41 @@ namespace ProjectEgoSword
 
         // -----
 
-        private bool IsGrounded(CharacterControl monoBehaviour)
+        private bool IsGrounded(CharacterControl monobehaviour)
         {
             const float groundedVelocityThreshold = -0.001f;
 
-            if (monoBehaviour.RigidbodyComponent.linearVelocity.y > groundedVelocityThreshold &&
-                monoBehaviour.RigidbodyComponent.linearVelocity.y <= 0f)
+            if (monobehaviour.RigidbodyComponent.linearVelocity.y > groundedVelocityThreshold &&
+                monobehaviour.RigidbodyComponent.linearVelocity.y <= 0f)
             {
+                const float groundContactTolerance = 0.01f;
+
+                foreach (ContactPoint contact in monobehaviour.contactPoints)
+                {
+                    float colliderBottom = (monobehaviour.transform.position.y + monobehaviour.boxCollider.center.y)
+                        - (monobehaviour.boxCollider.size.y / 2f);
+                    float yDifference = Mathf.Abs(contact.point.y - colliderBottom);
+
+                    if (yDifference > groundContactTolerance)
+                    {
+                        return true;
+                    }
+                }
+
                 return true;
             }
 
-            if (monoBehaviour.RigidbodyComponent.linearVelocity.y < 0f)
+            if (monobehaviour.RigidbodyComponent.linearVelocity.y < 0f)
             {
-                foreach (GameObject obj in monoBehaviour.bottomSpheres)
+                foreach (GameObject obj in monobehaviour.bottomSpheres)
                 {
                     Debug.DrawRay(obj.transform.position, -Vector3.up * distance, Color.yellow);
 
                     if (Physics.Raycast(obj.transform.position, -Vector3.up, out RaycastHit hit, distance))
                     {
-                        if(!monoBehaviour.ragdollParts.Contains(hit.collider) &&
+                        if (!monobehaviour.ragdollParts.Contains(hit.collider) &&
                             !Ledge.IsLedge(hit.collider.gameObject) &&
-                            !Ledge.IsLedgeChecker(hit.collider.gameObject)) 
+                            !Ledge.IsLedgeChecker(hit.collider.gameObject))
                         {
                             return true;
                         }

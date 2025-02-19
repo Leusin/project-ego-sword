@@ -45,20 +45,27 @@ namespace ProjectEgoSword
             //    animator.SetBool(CharacterControl.TransitionParameter.Jump.ToString(), true);
             //    return;
             //}
-            if (useMomentum)
+
+            if (monobehaviour.rash)
             {
-                UpdateMomentum(monobehaviour, animator, stateInfo);
+                animator.SetBool(CharacterControl.TransitionParameter.Sprint.ToString(), true);
             }
             else
             {
-                if (constant)
-                {
-                    ConstantMove(monobehaviour, animator, stateInfo);
-                }
-                else
-                {
-                    ControllMove(monobehaviour, animator, stateInfo);
-                }
+                animator.SetBool(CharacterControl.TransitionParameter.Sprint.ToString(), false);
+            }
+
+            if (useMomentum)
+            {
+                UpdateOnMomentum(monobehaviour, animator, stateInfo);
+            }
+            else if (constant)
+            {
+                ConstantMove(monobehaviour, animator, stateInfo);
+            }
+            else
+            {
+                ControllMove(monobehaviour, animator, stateInfo);
             }
         }
 
@@ -69,7 +76,7 @@ namespace ProjectEgoSword
 
         // -----
 
-        private void UpdateMomentum(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo)
+        private void UpdateOnMomentum(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo)
         {
             if (monobehaviour.moveRight)
             {
@@ -101,8 +108,8 @@ namespace ProjectEgoSword
             {
                 monobehaviour.FaceForward(false);
             }
-            
-            if (!CheckFront(monobehaviour))
+
+            if (!IsBlocked(monobehaviour))
             {
                 monobehaviour.MoveForward(speed, Mathf.Abs(monobehaviour.animationProgress.airMomentum));
             }
@@ -110,7 +117,7 @@ namespace ProjectEgoSword
 
         private void ConstantMove(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (!CheckFront(monobehaviour))
+            if (!IsBlocked(monobehaviour))
             {
                 monobehaviour.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
             }
@@ -120,7 +127,7 @@ namespace ProjectEgoSword
         {
             if (monobehaviour.moveLeft || monobehaviour.moveRight)
             {
-                if (!CheckFront(monobehaviour))
+                if (!IsBlocked(monobehaviour))
                 {
                     monobehaviour.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
                 }
@@ -148,7 +155,7 @@ namespace ProjectEgoSword
             }
         }
 
-        private bool CheckFront(CharacterControl monoBehaviour)
+        private bool IsBlocked(CharacterControl monoBehaviour)
         {
             if (monoBehaviour.RigidbodyComponent.linearVelocity.y < 0f)
             {

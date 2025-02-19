@@ -1,6 +1,7 @@
 using ProjectEgoSword;
 using Roundbeargames;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class CharacterControl : MonoBehaviour
@@ -45,6 +46,7 @@ public class CharacterControl : MonoBehaviour
     [Header("Gravity")]
     public float gravityMultiplier;
     public float pullMultiplier;
+    public ContactPoint[] contactPoints;
 
     [Header("Setup")]
     public bool faceForword;
@@ -276,16 +278,16 @@ public class CharacterControl : MonoBehaviour
 
     public void RepositionFrontSpheres()
     {
-        float top = boxCollider.bounds.center.y + boxCollider.bounds.extents.y;
-        float bottom = boxCollider.bounds.center.y - boxCollider.bounds.extents.y;
-        float front = boxCollider.bounds.center.z + boxCollider.bounds.extents.z;
+        float top = boxCollider.bounds.center.y + boxCollider.bounds.size.y / 2f;
+        float bottom = boxCollider.bounds.center.y - boxCollider.bounds.size.y / 2f;
+        float front = boxCollider.bounds.center.z + boxCollider.bounds.size.z / 2f;
 
         frontSpheres[0].transform.localPosition = new Vector3(0f, bottom + 0.05f, front) - transform.position;
         frontSpheres[1].transform.localPosition = new Vector3(0f, top, front) - transform.position;
 
         float interval = (top - bottom + 0.05f) / 9f;
 
-        for(int i = 2; i < frontSpheres.Count; i++)
+        for (int i = 2; i < frontSpheres.Count; i++)
         {
             frontSpheres[i].transform.localPosition = new Vector3(0f, bottom + (interval * (i - 1)), front) - transform.position;
         }
@@ -293,9 +295,9 @@ public class CharacterControl : MonoBehaviour
 
     public void RepositionBottomSpheres()
     {
-        float bottom = boxCollider.bounds.center.y - boxCollider.bounds.extents.y;
-        float front = boxCollider.bounds.center.z + boxCollider.bounds.extents.z;
-        float back = boxCollider.bounds.center.z - boxCollider.bounds.extents.z;
+        float bottom = boxCollider.bounds.center.y - boxCollider.bounds.size.y / 2f;
+        float front = boxCollider.bounds.center.z + boxCollider.bounds.size.z / 2f;
+        float back = boxCollider.bounds.center.z - boxCollider.bounds.size.z / 2f;
 
         bottomSpheres[0].transform.localPosition = new Vector3(0f, bottom, back) - transform.position;
         bottomSpheres[1].transform.localPosition = new Vector3(0f, bottom, front) - transform.position;
@@ -356,6 +358,11 @@ public class CharacterControl : MonoBehaviour
         }
     }
 
+    private void OnCollisionStay(Collision collision)
+    {
+        contactPoints = collision.contacts;
+    }
+
     // -----
 
     private void RegisterCharacter()
@@ -368,7 +375,7 @@ public class CharacterControl : MonoBehaviour
 
     private void SetColliderSphere()
     {
-        for(int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++)
         {
             GameObject obj = Instantiate(Resources.Load("ColliderEdge", typeof(GameObject)),
                 Vector3.zero, Quaternion.identity) as GameObject;
@@ -381,7 +388,7 @@ public class CharacterControl : MonoBehaviour
 
         for (int i = 0; i < 10; i++)
         {
-            GameObject obj = Instantiate(Resources.Load("ColliderEdge", typeof(GameObject)), 
+            GameObject obj = Instantiate(Resources.Load("ColliderEdge", typeof(GameObject)),
                 Vector3.zero, Quaternion.identity) as GameObject;
 
             frontSpheres.Add(obj);
