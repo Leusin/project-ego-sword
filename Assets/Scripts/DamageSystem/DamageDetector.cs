@@ -81,7 +81,7 @@ namespace ProjectEgoSword
                 else
                 {
                     float dist = Vector3.SqrMagnitude(gameObject.transform.position - info.attacker.transform.position);
-                    Debug.Log(gameObject.name + " distance: " + dist.ToString());
+                    //Debug.Log(gameObject.name + " distance: " + dist.ToString());
 
                     if (dist <= info.lethalRange)
                     {
