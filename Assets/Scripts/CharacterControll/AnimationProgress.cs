@@ -12,7 +12,10 @@ namespace ProjectEgoSword
         public bool ragdollTriggerd;
         public float maxPressTime;
         public bool disallowEarylTurn;
+
+        [Header("AirControl")]
         public float airMomentum;
+        public bool frameUpdated;
 
         [Header("UpdateBoxCollider")]
         public bool updatingBoxCollider;
@@ -53,6 +56,11 @@ namespace ProjectEgoSword
             {
                 attackTriggerd = true;
             }
+        }
+
+        private void LateUpdate()
+        {
+            frameUpdated = false;
         }
     }
 }

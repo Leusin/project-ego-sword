@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a60e534fc99b42640bbe6f8063ca9dde, type: 3}
-  m_Name: General_CheckSprintTurn
+  m_Script: {fileID: 11500000, guid: df3dbabd2316f8b4da5f49886ba381a5, type: 3}
+  m_Name: General_CheckJump
   m_EditorClassIdentifier: 
-  activationDelay: 0.4

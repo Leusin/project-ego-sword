@@ -57,5 +57,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  speed: 3.5
+  speed: 7
   blockDistance: 0.1
+  useMomentum: 0
+  maxMomentum: 0

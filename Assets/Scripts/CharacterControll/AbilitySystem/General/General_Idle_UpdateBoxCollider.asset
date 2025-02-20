@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c38704d50a4544b44aaa03fcdd9d7507, type: 3}
   m_Name: General_Idle_UpdateBoxCollider
   m_EditorClassIdentifier: 
-  targetSize: {x: 0.4, y: 1.84, z: 0.4}
-  sizeUpdateSpeed: 50
   targetCenter: {x: 0, y: 0.92, z: 0}
-  centeUpdateSpeed: 50
+  centeUpdateSpeed: 100
+  targetSize: {x: 0.4, y: 1.84, z: 0.4}
+  sizeUpdateSpeed: 100

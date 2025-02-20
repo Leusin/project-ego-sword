@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c42a212b912bb7340ab7d4bac8896048, type: 3}
   m_Name: Sample_RunToStop_MoveForward
   m_EditorClassIdentifier: 
+  allowEarlyTurn: 0
   lockDriection: 1
   constant: 1
   speedGraph:
@@ -38,5 +39,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  speed: 3
+  speed: 6
   blockDistance: 0.1
+  useMomentum: 0
+  maxMomentum: 0

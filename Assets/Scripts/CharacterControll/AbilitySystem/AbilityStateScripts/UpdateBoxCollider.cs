@@ -5,11 +5,16 @@ namespace ProjectEgoSword
     [CreateAssetMenu(fileName = "New State", menuName = "ProjectEgoSword/AbilityData/UpdateBoxCollider")]
     public class UpdateBoxCollider : StateData<CharacterControl>
     {
+        public Vector3 targetCenter;
+        public float centeUpdateSpeed;
+
+        [Space(10)]
         public Vector3 targetSize;
         public float sizeUpdateSpeed;
 
-        public Vector3 targetCenter;
-        public float centeUpdateSpeed;
+        [Space(10)]
+        public bool keepUpdating;
+
 
         public override void OnEnter(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -27,7 +32,11 @@ namespace ProjectEgoSword
 
         public override void OnExit(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            monobehaviour.animationProgress.updatingBoxCollider = false;
+            if (!keepUpdating)
+            {
+                monobehaviour.animationProgress.updatingBoxCollider = false;
+            }
+
         }
     }
 }

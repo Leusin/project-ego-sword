@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a60e534fc99b42640bbe6f8063ca9dde, type: 3}
-  m_Name: General_CheckSprintTurn
+  m_Script: {fileID: 11500000, guid: 8025b0213f0df2640a187a3cb8868b23, type: 3}
+  m_Name: Sample_RunningJump_GroundDetector
   m_EditorClassIdentifier: 
-  activationDelay: 0.4
+  distance: 0.05

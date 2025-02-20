@@ -13,8 +13,10 @@ namespace ProjectEgoSword
         public float blockDistance;
 
         [Header("Momentum")]
+        public float startingMomentum;
         public bool useMomentum;
         public float maxMomentum;
+        public bool clearMomentumOnExit;
 
         public override void OnEnter(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -31,7 +33,19 @@ namespace ProjectEgoSword
             }
 
             monobehaviour.animationProgress.disallowEarylTurn = false;
-            monobehaviour.animationProgress.airMomentum = 0f;
+
+            float tolerance = 0.001f;
+            if(startingMomentum > tolerance)
+            {
+                if(monobehaviour.IsFacingForward())
+                {
+                    monobehaviour.animationProgress.airMomentum = startingMomentum;
+                }
+                else
+                {
+                    monobehaviour.animationProgress.airMomentum = -startingMomentum;
+                }
+            }
         }
 
         public override void UpdateAbility(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -61,6 +75,7 @@ namespace ProjectEgoSword
             }
             else if (constant)
             {
+
                 ConstantMove(monobehaviour, animator, stateInfo);
             }
             else
@@ -71,21 +86,31 @@ namespace ProjectEgoSword
 
         public override void OnExit(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            monobehaviour.animationProgress.airMomentum = 0f;
+            if (clearMomentumOnExit)
+            {
+                monobehaviour.animationProgress.airMomentum = 0f;
+            }
         }
 
         // -----
 
         private void UpdateOnMomentum(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo)
         {
+            if(monobehaviour.animationProgress.frameUpdated)
+            {
+                return;
+            }
+
+            monobehaviour.animationProgress.frameUpdated = true;
+
             if (monobehaviour.moveRight)
             {
-                monobehaviour.animationProgress.airMomentum += speedGraph.Evaluate(stateInfo.normalizedTime) * Time.deltaTime;
+                monobehaviour.animationProgress.airMomentum += speedGraph.Evaluate(stateInfo.normalizedTime) * speed * Time.deltaTime;
             }
 
             if (monobehaviour.moveLeft)
             {
-                monobehaviour.animationProgress.airMomentum -= speedGraph.Evaluate(stateInfo.normalizedTime) * Time.deltaTime;
+                monobehaviour.animationProgress.airMomentum -= speedGraph.Evaluate(stateInfo.normalizedTime) * speed * Time.deltaTime;
             }
 
             if (Mathf.Abs(monobehaviour.animationProgress.airMomentum) >= maxMomentum)
