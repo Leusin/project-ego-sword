@@ -16,20 +16,23 @@ namespace ProjectEgoSword
     {
         public override void OnEnter(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if(monobehaviour.aiProgress.pathFindingAgent == null)
+            if(monobehaviour.aiProgress.pathfindingAgent == null)
             {
                 GameObject p =Instantiate(Resources.Load("PathFindingAgent", typeof(GameObject)) as GameObject);
-                monobehaviour.aiProgress.pathFindingAgent = p.GetComponent<PathFindingAgent>();
+                monobehaviour.aiProgress.pathfindingAgent = p.GetComponent<PathFindingAgent>();
             }
 
-            monobehaviour.aiProgress.pathFindingAgent.GetComponent<NavMeshAgent>().enabled = false;
-            monobehaviour.aiProgress.pathFindingAgent.transform.position = monobehaviour.transform.position;
-            monobehaviour.aiProgress.pathFindingAgent.GoToTarget();
+
+            monobehaviour.aiProgress.pathfindingAgent.owner = monobehaviour;
+            monobehaviour.aiProgress.pathfindingAgent.GetComponent<NavMeshAgent>().enabled = false;
+            monobehaviour.aiProgress.pathfindingAgent.transform.position = monobehaviour.transform.position;
+            monobehaviour.navMeshObstacle.carving = false;
+            monobehaviour.aiProgress.pathfindingAgent.GoToTarget();
         }
 
         public override void UpdateAbility(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if(monobehaviour.aiProgress.pathFindingAgent.startWalk)
+            if(monobehaviour.aiProgress.pathfindingAgent.startWalk)
             {
                 animator.SetBool(AI_Walk_Transitions.StartWalk.ToString(), true);
                 animator.SetBool(AI_Walk_Transitions.StartRun.ToString(), true);

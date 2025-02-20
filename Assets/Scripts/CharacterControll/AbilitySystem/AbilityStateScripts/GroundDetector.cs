@@ -33,26 +33,24 @@ namespace ProjectEgoSword
 
         private bool IsGrounded(CharacterControl monobehaviour)
         {
-            const float groundedVelocityThreshold = -0.001f;
-
-            if (monobehaviour.RigidbodyComponent.linearVelocity.y > groundedVelocityThreshold &&
-                monobehaviour.RigidbodyComponent.linearVelocity.y <= 0f)
+            if(monobehaviour.contactPoints != null)
             {
-                const float groundContactTolerance = 0.01f;
-
                 foreach (ContactPoint contact in monobehaviour.contactPoints)
                 {
                     float colliderBottom = (monobehaviour.transform.position.y + monobehaviour.boxCollider.center.y)
                         - (monobehaviour.boxCollider.size.y / 2f);
                     float yDifference = Mathf.Abs(contact.point.y - colliderBottom);
 
-                    if (yDifference > groundContactTolerance)
+                    const float groundContactTolerance = 0.01f;
+                    if (yDifference < groundContactTolerance)
                     {
-                        return true;
+                        const float groundedVelocityThreshold = 0.001f;
+                        if (Mathf.Abs(monobehaviour.RigidbodyComponent.linearVelocity.y) < groundedVelocityThreshold)
+                        {
+                            return true;
+                        }
                     }
                 }
-
-                return true;
             }
 
             if (monobehaviour.RigidbodyComponent.linearVelocity.y < 0f)

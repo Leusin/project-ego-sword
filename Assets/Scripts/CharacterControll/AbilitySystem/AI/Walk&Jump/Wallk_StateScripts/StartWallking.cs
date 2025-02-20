@@ -11,7 +11,7 @@ namespace ProjectEgoSword
 
         public override void OnEnter(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            Vector3 startPos = monobehaviour.aiProgress.pathFindingAgent.startSphere.transform.position;
+            Vector3 startPos = monobehaviour.aiProgress.pathfindingAgent.startSphere.transform.position;
             Vector3 currentPos = monobehaviour.transform.position;
             Vector3 dir = startPos - currentPos;
 
@@ -32,22 +32,22 @@ namespace ProjectEgoSword
 
         public override void UpdateAbility(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            Vector3 startPos = monobehaviour.aiProgress.pathFindingAgent.startSphere.transform.position;
+            Vector3 startPos = monobehaviour.aiProgress.pathfindingAgent.startSphere.transform.position;
             Vector3 currentPos = monobehaviour.transform.position;
             Vector3 directionToStart = startPos - currentPos;
 
             Debug.DrawLine(startPos, currentPos, Color.green);
 
             // Straight 직진
-            if (monobehaviour.aiProgress.pathFindingAgent.startSphere.transform.position.y ==
-                monobehaviour.aiProgress.pathFindingAgent.endSphere.transform.position.y)
+            if (monobehaviour.aiProgress.pathfindingAgent.startSphere.transform.position.y ==
+                monobehaviour.aiProgress.pathfindingAgent.endSphere.transform.position.y)
             {
                 if (Vector3.SqrMagnitude(directionToStart) < _straightDistanceThreshold)
                 {
                     monobehaviour.moveRight = false;
                     monobehaviour.moveLeft = false;
 
-                    Vector3 targetDist = currentPos - monobehaviour.aiProgress.pathFindingAgent.target.transform.position;
+                    Vector3 targetDist = currentPos - monobehaviour.aiProgress.pathfindingAgent.target.transform.position;
                     if (targetDist.sqrMagnitude > _targetDistanceThreshold)
                     {
                         // 임시 조치. 추후 변경 예정(2025-01-16)
@@ -81,8 +81,8 @@ namespace ProjectEgoSword
                 */
             }
             // Jump
-            else if (monobehaviour.aiProgress.pathFindingAgent.startSphere.transform.position.y <
-                monobehaviour.aiProgress.pathFindingAgent.endSphere.transform.position.y)
+            else if (monobehaviour.aiProgress.pathfindingAgent.startSphere.transform.position.y <
+                monobehaviour.aiProgress.pathfindingAgent.endSphere.transform.position.y)
             {
                 if (Vector3.SqrMagnitude(directionToStart) < _jumpDistanceThreshold)
                 {

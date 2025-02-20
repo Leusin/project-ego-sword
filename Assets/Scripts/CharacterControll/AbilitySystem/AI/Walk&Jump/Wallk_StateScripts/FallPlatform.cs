@@ -9,7 +9,7 @@ namespace ProjectEgoSword
         public override void OnEnter(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             Vector3 currentPos = monobehaviour.transform.position;
-            Vector3 endPos = monobehaviour.aiProgress.pathFindingAgent.endSphere.transform.position;
+            Vector3 endPos = monobehaviour.aiProgress.pathfindingAgent.endSphere.transform.position;
             if (currentPos.z < endPos.z)
             {
                 monobehaviour.FaceForward(true);
@@ -23,7 +23,7 @@ namespace ProjectEgoSword
         public override void UpdateAbility(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             Vector3 currentPos = monobehaviour.transform.position;
-            Vector3 endPos = monobehaviour.aiProgress.pathFindingAgent.endSphere.transform.position;
+            Vector3 endPos = monobehaviour.aiProgress.pathfindingAgent.endSphere.transform.position;
             if (monobehaviour.IsFacingForward())
             {
                 if (currentPos.z < endPos.z)

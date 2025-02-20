@@ -29,12 +29,12 @@ namespace ProjectEgoSword
                     if (monobehaviour.IsFacingForward())
                     {
                         monobehaviour.FaceForward(false);
-                        Debug.Log("[onStart] 왼쪽   <---");
+                        //Debug.Log("[onStart] 왼쪽   <---");
                     }
                     else
                     {
                         monobehaviour.FaceForward(true);
-                        Debug.Log("[onStart] 오른쪽   --->");
+                        //Debug.Log("[onStart] 오른쪽   --->");
                     }
                 }
             }

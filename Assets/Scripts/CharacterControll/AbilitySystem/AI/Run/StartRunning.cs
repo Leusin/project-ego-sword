@@ -11,12 +11,12 @@ namespace ProjectEgoSword
 
         public override void OnEnter(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            Vector3 startPos = monobehaviour.aiProgress.pathFindingAgent.startSphere.transform.position;
+            Vector3 startPos = monobehaviour.aiProgress.pathfindingAgent.startSphere.transform.position;
             Vector3 currentPos = monobehaviour.transform.position;
-            Vector3 dir = startPos - currentPos;
+            Vector3 directionToStart = startPos - currentPos;
 
             Debug.DrawLine(startPos, currentPos, Color.yellow);
-            if (dir.z > 0f)
+            if (directionToStart.z > 0f)
             {
                 monobehaviour.FaceForward(true);
                 monobehaviour.moveRight = true;
@@ -29,12 +29,17 @@ namespace ProjectEgoSword
                 monobehaviour.moveLeft = true;
             }
 
-            monobehaviour.rash = true;
+            float rushTriggerDistance = 2f;
+            if(Vector3.SqrMagnitude(directionToStart) > rushTriggerDistance)
+            {
+                monobehaviour.rash = true;
+
+            }
         }
 
         public override void UpdateAbility(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            Vector3 startPos = monobehaviour.aiProgress.pathFindingAgent.startSphere.transform.position;
+            Vector3 startPos = monobehaviour.aiProgress.pathfindingAgent.startSphere.transform.position;
             Vector3 currentPos = monobehaviour.transform.position;
             Vector3 directionToStart = startPos - currentPos;
 

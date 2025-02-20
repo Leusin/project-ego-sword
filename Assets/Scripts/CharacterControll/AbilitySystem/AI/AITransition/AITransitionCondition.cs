@@ -36,7 +36,7 @@ namespace ProjectEgoSword
         {
             if (aiTransitionCondition == AITransitionType.RunToWalk) 
             {
-                Vector3 startPos = monobehaviour.aiProgress.pathFindingAgent.startSphere.transform.position;
+                Vector3 startPos = monobehaviour.aiProgress.pathfindingAgent.startSphere.transform.position;
                 Vector3 currentPos = monobehaviour.transform.position;
                 Vector3 directionToStart = startPos - currentPos;
 
@@ -47,7 +47,7 @@ namespace ProjectEgoSword
             }
             else if (aiTransitionCondition == AITransitionType.WalkToRun)
             {
-                Vector3 startPos = monobehaviour.aiProgress.pathFindingAgent.startSphere.transform.position;
+                Vector3 startPos = monobehaviour.aiProgress.pathfindingAgent.startSphere.transform.position;
                 Vector3 currentPos = monobehaviour.transform.position;
                 Vector3 directionToStart = startPos - currentPos;
 

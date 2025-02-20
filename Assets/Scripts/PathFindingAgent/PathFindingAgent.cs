@@ -16,6 +16,8 @@ namespace ProjectEgoSword
         public GameObject endSphere;
         public bool startWalk;
 
+        public CharacterControl owner = null;
+
         private NavMeshAgent _navMeshAgent;
         private List<Coroutine> _moveRoutines = new List<Coroutine>();
 
@@ -30,16 +32,16 @@ namespace ProjectEgoSword
 
             _navMeshAgent.isStopped = false;
 
-            if(targetPlayebleCharacter)
+            if (targetPlayebleCharacter)
             {
                 target = CharacterManager.Instance.GetPlayerbleCharacter().gameObject;
             }
 
             _navMeshAgent.SetDestination(target.transform.position);
 
-            if(_moveRoutines.Count != 0)
+            if (_moveRoutines.Count != 0)
             {
-                if(_moveRoutines[0] != null)
+                if (_moveRoutines[0] != null)
                 {
                     StopCoroutine(_moveRoutines[0]);
                 }
@@ -54,9 +56,11 @@ namespace ProjectEgoSword
 
         IEnumerator Move()
         {
-            while(true)
+            while (true)
             {
-                if(_navMeshAgent.isOnOffMeshLink)
+                owner.navMeshObstacle.carving = true;
+
+                if (_navMeshAgent.isOnOffMeshLink)
                 {
                     startSphere.transform.position = _navMeshAgent.currentOffMeshLinkData.startPos;
                     endSphere.transform.position = _navMeshAgent.currentOffMeshLinkData.endPos;
@@ -70,10 +74,18 @@ namespace ProjectEgoSword
                 }
 
                 Vector3 dist = transform.position - _navMeshAgent.destination;
-                if(Vector3.SqrMagnitude(dist) < _distToTarget)
+                if (Vector3.SqrMagnitude(dist) < _distToTarget)
                 {
+                    float targetDistance = 1f;
+                    // if not next to the target
+                    if (Vector3.SqrMagnitude(owner.transform.position - _navMeshAgent.destination) > targetDistance)
+                    {
+                        owner.navMeshObstacle.carving = true;
+                    }
+
+
                     startSphere.transform.position = _navMeshAgent.destination;
-                    endSphere.transform.position= _navMeshAgent.destination;
+                    endSphere.transform.position = _navMeshAgent.destination;
 
                     _navMeshAgent.isStopped = true;
                     startWalk = true;
