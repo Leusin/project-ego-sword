@@ -47,7 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attacker: {fileID: 0}
   attackAbility: {fileID: 0}
-  lunchIntoAir: 0
+  AttackParts: 
+  deathType: 0
   mustCollide: 0
   mustFaceAttacker: 0
   lethalRange: 0
@@ -55,7 +56,6 @@ MonoBehaviour:
   currentHits: 0
   isRegisterd: 0
   isFinished: 0
-  colliderNames: []
 --- !u!114 &2718538369214649314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,4 +69,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolObjectType: 0
-  scheduledOffTime: 0.6
+  scheduledOffTime: 0.8

@@ -11,11 +11,15 @@ namespace ProjectEgoSword
         public bool attackTriggerd;
         public bool ragdollTriggerd;
         public float maxPressTime;
+
+        [Header("GroundMovement")]
         public bool disallowEarylTurn;
+        public bool lockDriectionNextState;
 
         [Header("AirControl")]
         public float airMomentum;
         public bool frameUpdated;
+        public bool cancelPull;
 
         [Header("UpdateBoxCollider")]
         public bool updatingBoxCollider;

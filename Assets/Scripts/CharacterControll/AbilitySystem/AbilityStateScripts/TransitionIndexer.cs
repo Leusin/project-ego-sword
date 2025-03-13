@@ -12,7 +12,8 @@ namespace ProjectEgoSword
         RIGHT,
         ATTACK,
         JUMP,
-        GRABBING_LEDGE
+        GRABBING_LEDGE,
+        LEFT_OR_RIGHT,
     }
 
     [CreateAssetMenu(fileName = "New State", menuName = "ProjectEgoSword/AbilityData/TransitionIndexer")]
@@ -105,6 +106,14 @@ namespace ProjectEgoSword
                     case TransitionConditionType.GRABBING_LEDGE:
                         {
                             if(!monobehaviour.ledgeChecker.isGrabbingLedge)
+                            {
+                                return false;
+                            }
+                        }
+                        break;
+                    case TransitionConditionType.LEFT_OR_RIGHT:
+                        {
+                            if(!monobehaviour.moveLeft && !monobehaviour.moveRight)
                             {
                                 return false;
                             }

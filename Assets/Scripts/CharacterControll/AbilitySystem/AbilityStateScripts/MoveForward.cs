@@ -7,6 +7,7 @@ namespace ProjectEgoSword
     {
         public bool allowEarlyTurn;
         public bool lockDriection;
+        public bool lockDriectionNextState;
         public bool constant;
         public AnimationCurve speedGraph;
         public float speed;
@@ -22,22 +23,29 @@ namespace ProjectEgoSword
         {
             if (allowEarlyTurn && !monobehaviour.animationProgress.disallowEarylTurn)
             {
-                if (monobehaviour.moveLeft)
+                if (!monobehaviour.animationProgress.lockDriectionNextState)
                 {
-                    monobehaviour.FaceForward(false);
+                    if (monobehaviour.moveLeft)
+                    {
+                        monobehaviour.FaceForward(false);
+                    }
+                    else if (monobehaviour.moveRight)
+                    {
+                        monobehaviour.FaceForward(true);
+                    }
                 }
-                else if (monobehaviour.moveRight)
+                else
                 {
-                    monobehaviour.FaceForward(true);
+                    monobehaviour.animationProgress.lockDriectionNextState = false;
                 }
             }
 
             monobehaviour.animationProgress.disallowEarylTurn = false;
 
             float tolerance = 0.001f;
-            if(startingMomentum > tolerance)
+            if (startingMomentum > tolerance)
             {
-                if(monobehaviour.IsFacingForward())
+                if (monobehaviour.IsFacingForward())
                 {
                     monobehaviour.animationProgress.airMomentum = startingMomentum;
                 }
@@ -50,10 +58,15 @@ namespace ProjectEgoSword
 
         public override void UpdateAbility(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            // 2025-01-16
-            // AI 가 점프하면서 앞으로 나아가지 못해서 주석처리했다.
-            // 추후 아래 코드가 필요하지 않는다면 완전히 지울 것.
-            //
+            monobehaviour.animationProgress.lockDriectionNextState = lockDriectionNextState;
+
+            if (monobehaviour.animationProgress.frameUpdated)
+            {
+                return;
+            }
+
+            monobehaviour.animationProgress.frameUpdated = true;
+
             //if (monobehaviour.jump)
             //{
             //    animator.SetBool(CharacterControl.TransitionParameter.Jump.ToString(), true);
@@ -96,13 +109,6 @@ namespace ProjectEgoSword
 
         private void UpdateOnMomentum(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if(monobehaviour.animationProgress.frameUpdated)
-            {
-                return;
-            }
-
-            monobehaviour.animationProgress.frameUpdated = true;
-
             if (monobehaviour.moveRight)
             {
                 monobehaviour.animationProgress.airMomentum += speedGraph.Evaluate(stateInfo.normalizedTime) * speed * Time.deltaTime;

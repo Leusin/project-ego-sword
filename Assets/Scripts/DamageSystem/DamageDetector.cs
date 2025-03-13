@@ -71,6 +71,7 @@ namespace ProjectEgoSword
                     }
                 }
 
+                // 이거 작동 잘 안된다
                 if (info.mustCollide)
                 {
                     if (IsCollided(info))
@@ -81,7 +82,6 @@ namespace ProjectEgoSword
                 else
                 {
                     float dist = Vector3.SqrMagnitude(gameObject.transform.position - info.attacker.transform.position);
-                    //Debug.Log(gameObject.name + " distance: " + dist.ToString());
 
                     if (dist <= info.lethalRange)
                     {
@@ -110,6 +110,22 @@ namespace ProjectEgoSword
                         else if(part == AttackPartType.RIGHT_HAND)
                         {
                             if(collider.gameObject == info.attacker.rightHandAttack)
+                            {
+                                _damagedPart = trigger.generalBodyPart;
+                                return true;
+                            }
+                        }
+                        else if(part == AttackPartType.LEFT_FOOT)
+                        {
+                            if(collider.gameObject == info.attacker.leftfootAttack)
+                            {
+                                _damagedPart = trigger.generalBodyPart;
+                                return true;
+                            }
+                        }
+                        else if(part == AttackPartType.RIGHT_FOOT)
+                        {
+                            if(collider.gameObject == info.attacker.rightfootAttack)
                             {
                                 _damagedPart = trigger.generalBodyPart;
                                 return true;

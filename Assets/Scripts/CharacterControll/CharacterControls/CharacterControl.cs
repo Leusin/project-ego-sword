@@ -56,6 +56,8 @@ namespace ProjectEgoSword
         public List<Collider> ragdollParts = new List<Collider>();
         public GameObject leftHandAttack;
         public GameObject rightHandAttack;
+        public GameObject leftfootAttack;
+        public GameObject rightfootAttack;
 
         private List<TriggerDetector> _triggerDetectors = new List<TriggerDetector>();
         private Dictionary<string, GameObject> _childObjects = new Dictionary<string, GameObject>();
@@ -83,6 +85,12 @@ namespace ProjectEgoSword
         public void FaceForward(bool forward)
         {
             if (!faceForword)
+            {
+                return;
+            }
+
+            // Meaning if Ragdoll is Turn on
+            if(!skinnedMeshAnimator.enabled)
             {
                 return;
             }
@@ -338,16 +346,19 @@ namespace ProjectEgoSword
 
         private void FixedUpdate()
         {
-            if (RigidbodyComponent.linearVelocity.y < 0f) // Player Going Down
+            if (!animationProgress.cancelPull)
             {
-                RigidbodyComponent.linearVelocity += (-Vector3.up * gravityMultiplier);
-            }
+                if (RigidbodyComponent.linearVelocity.y < 0f) // Player Going Down
+                {
+                    RigidbodyComponent.linearVelocity += (-Vector3.up * gravityMultiplier);
+                }
 
-            if (RigidbodyComponent.linearVelocity.y > 0f && jump) // Player Going Up
-            {
-                RigidbodyComponent.linearVelocity += (-Vector3.up * pullMultiplier);
+                if (RigidbodyComponent.linearVelocity.y > 0f && jump) // Player Going Up
+                {
+                    RigidbodyComponent.linearVelocity += (-Vector3.up * pullMultiplier);
+                }
             }
-
+            
             animationProgress.updatingSpheres = false;
             UpdateBoxColliderSiez();
             UpdateBoxColliderCenter();
