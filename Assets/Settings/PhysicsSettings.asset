@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38c18069e3293334bbab21432929d249, type: 3}
-  m_Name: Ragdoll_Fallingback
+  m_Script: {fileID: 11500000, guid: 6bb5a7264a249c443bd8f53cb4b81331, type: 3}
+  m_Name: PhysicsSettings
   m_EditorClassIdentifier: 
-  triggerTiming: 0.35
+  defaultSolverVelocityIterations: 2

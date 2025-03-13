@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d904fb82b2371418da5b21ff4d7284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 0.01
-  targetFPS: 0
+  frameSettings: {fileID: 11400000, guid: bb5fcfad407b9cf419d8e8cb1fbff89f, type: 2}
+  physicsSettings: {fileID: 11400000, guid: 53a7558314385ad46884adc09d7a8ccc, type: 2}

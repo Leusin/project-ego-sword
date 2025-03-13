@@ -17,8 +17,11 @@ namespace ProjectEgoSword
             {
                 if (!monobehaviour.animationProgress.ragdollTriggerd)
                 {
-                    monobehaviour.TurnOnRagdoll();
-                    monobehaviour.animationProgress.ragdollTriggerd = true;
+                    //monobehaviour.TurnOnRagdoll();
+                    if(monobehaviour.skinnedMeshAnimator.enabled)
+                    {
+                        monobehaviour.animationProgress.ragdollTriggerd = true;
+                    }
                 }
 
             }
@@ -26,7 +29,7 @@ namespace ProjectEgoSword
 
         public override void OnExit(CharacterControl monobehaviour, Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            monobehaviour.animationProgress.ragdollTriggerd = false;
+            //monobehaviour.animationProgress.ragdollTriggerd = false;
         }
     }
 }

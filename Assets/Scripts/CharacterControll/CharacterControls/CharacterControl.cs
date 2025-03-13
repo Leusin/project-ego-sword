@@ -203,14 +203,12 @@ namespace ProjectEgoSword
                 if (c.gameObject != gameObject)
                 {
                     c.isTrigger = false;
-                    if (c.attachedRigidbody != null)
-                    {
-                        c.attachedRigidbody.linearVelocity = Vector3.zero;
-                    }
 
                     TriggerDetector triggerDetec = c.GetComponent<TriggerDetector>();
                     c.transform.localPosition = triggerDetec.lastPostion;
                     c.transform.localRotation = triggerDetec.lastRotation;
+
+                    c.attachedRigidbody.linearVelocity = Vector3.zero;
                 }
             }
         }
@@ -358,6 +356,12 @@ namespace ProjectEgoSword
             {
                 RepositionFrontSpheres();
                 RepositionBottomSpheres();
+            }
+
+            if (animationProgress.ragdollTriggerd)
+            {
+                TurnOnRagdoll();
+                animationProgress.ragdollTriggerd = false;
             }
         }
 

@@ -1,16 +1,24 @@
-using ProjectEgoSword;
 using UnityEngine;
 
-public class Settings : MonoBehaviour
+
+namespace ProjectEgoSword
 {
-    public FrameSettings frameSettings;
-
-    private void Awake()
+    public class Settings : MonoBehaviour
     {
-        Debug.Log($"timeScale: {frameSettings.timeScale}");
-        Time.timeScale = frameSettings.timeScale;
+        public FrameSettings frameSettings;
+        public PhysicsSettings physicsSettings;
 
-        Debug.Log($"targetFrameRate: {frameSettings.targetFPS}");
-        Application.targetFrameRate = frameSettings.targetFPS;
+        private void Awake()
+        {
+            Debug.Log($"timeScale: {frameSettings.timeScale}");
+            Time.timeScale = frameSettings.timeScale;
+
+            Debug.Log($"targetFrameRate: {frameSettings.targetFPS}");
+            Application.targetFrameRate = frameSettings.targetFPS;
+
+            Debug.Log($"Default Solver Velocity Iterations: {physicsSettings.defaultSolverVelocityIterations}");
+            Physics.defaultContactOffset = physicsSettings.defaultSolverVelocityIterations;
+        }
     }
+
 }

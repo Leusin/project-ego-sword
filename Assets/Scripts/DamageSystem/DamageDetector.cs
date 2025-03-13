@@ -124,7 +124,7 @@ namespace ProjectEgoSword
 
         private void TakeDamage(AttackCondition info)
         {
-            // TODO - HP system ÀÌ »ý±ä´Ù¸é ´ëÃ¼ ÇÒ °Í
+            // TODO - HP system ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ ï¿½ï¿½
             if(damageTaken > 0)
             {
                 return;
@@ -143,6 +143,7 @@ namespace ProjectEgoSword
             _control.GetComponent<Collider>().enabled = false;
             _control.ledgeChecker.GetComponent<Collider>().enabled = false;
             _control.RigidbodyComponent.useGravity = false;
+            _control.navMeshObstacle.carving = false;
 
             damageTaken++;
         }
